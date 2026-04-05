@@ -4,7 +4,7 @@ Production-ready, multi-page website and quote-request marketplace for Envecopla
 
 ## Tech Stack
 
-- Next.js App Router (static export)
+- Next.js App Router (Node.js standalone)
 - Tailwind CSS
 - Framer Motion
 - Lucide React
@@ -28,12 +28,12 @@ Production-ready, multi-page website and quote-request marketplace for Envecopla
 - Dark-first, cinematic brand styling
 - Typed content architecture in lib files
 - Filterable marketplace catalog
-- Static product detail pages via generateStaticParams
+- Product detail pages with optional pre-rendering via generateStaticParams
 - Quote request links that prefill contact form
 - Client-side form submission (Formspree) with validation
 - Framer Motion section reveal animations
 - SEO metadata and Open Graph defaults
-- Static export ready for shared hosting
+- Production-ready for Spaceship Node.js app hosting
 
 ## Local Development
 
@@ -44,40 +44,37 @@ npm run dev
 
 Open http://localhost:3000.
 
-## Production Build (Static Export)
+## Production Build (Node.js Standalone)
 
-This project is configured with `output: 'export'` in `next.config.ts`.
+This project is configured with `output: 'standalone'` in `next.config.ts`.
 
 ```bash
 npm run build
 ```
 
-After build completes, deploy the contents of the `out/` directory.
+After build completes, use `.next/standalone/server.js` as your startup file in cPanel.
 
 ## Configure Formspree
 
 1. Create a free Formspree form and copy your endpoint URL.
-2. Update `formspreeEndpoint` in `lib/site.ts`.
+2. Set `NEXT_PUBLIC_FORM_ENDPOINT` in `.env.production`.
 3. Build again to include the updated endpoint in the static bundle.
 
-## Spaceship Deployment Guide (FTP/SFTP)
+## Spaceship Deployment Guide (Setup Node.js App)
 
-1. Run `npm run build`.
-2. Confirm an `out/` folder is generated.
-3. Open your Spaceship hosting panel and connect via FTP/SFTP (or File Manager).
-4. Upload all files and folders from inside `out/` to your domain root (usually `public_html`).
-5. Ensure `.htaccess` is present in deployment root:
+1. Run a clean build.
+2. Confirm `.next/standalone/server.js` exists.
+3. Copy static assets into standalone:
 
-```apache
-Options -MultiViews
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^ index.html [QSA,L]
+```bash
+cp -r .next/static .next/standalone/.next/static
+cp -r public .next/standalone/public
 ```
 
-6. Clear browser cache and reload your domain.
-7. Test core pages and a product detail route.
+4. Upload the contents of `.next/standalone/` to your Spaceship app folder.
+5. In cPanel Setup Node.js App, set startup file to `server.js`.
+6. Configure environment variables in cPanel (or via `.env.production`).
+7. Restart the Node.js app and verify routes and form submission.
 
 ## Content and Data
 

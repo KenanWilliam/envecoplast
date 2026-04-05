@@ -10,7 +10,7 @@ export const site = {
   phone: '+254 700 000 000',
   location: 'Nairobi, Kenya',
   whatsapp: '+254700000000',
-  formspreeEndpoint: 'https://formspree.io/f/xblypvvz',
+  formspreeEndpoint: process.env.NEXT_PUBLIC_FORM_ENDPOINT || 'https://formspree.io/f/xblypvvz',
   social: {
     instagram: '#',
     linkedin: '#',
