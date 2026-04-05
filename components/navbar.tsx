@@ -17,13 +17,13 @@ export function Navbar() {
           <img src="/brand/envecoplast-logo.svg" alt={`${site.name} logo`} className="h-10 w-10 rounded-full" />
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-white">{site.name}</p>
-            <p className="text-xs text-slate-400">Waste to worth construction materials</p>
+            <p className="text-xs text-slate-200">Waste to worth construction materials</p>
           </div>
         </a>
 
         <nav className="hidden items-center gap-8 lg:flex">
           {navItems.map((item) => (
-            <a key={item.href} href={item.href} className="text-sm text-slate-300 transition hover:text-white">
+            <a key={item.href} href={item.href} className="text-sm text-slate-200 transition hover:text-white">
               {item.label}
             </a>
           ))}

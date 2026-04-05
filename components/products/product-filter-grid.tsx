@@ -29,7 +29,7 @@ export function ProductFilterGrid() {
               'rounded-full border px-4 py-2 text-sm font-semibold transition',
               activeFilter === filter
                 ? 'border-[#1A6B3C] bg-[#1A6B3C] text-white'
-                : 'border-slate-300 bg-white text-slate-700 hover:border-[#1B4F8A] hover:text-[#1B4F8A]',
+                  : 'border-slate-300 bg-white text-slate-700 hover:border-[#1A6B3C] hover:text-[#1A6B3C]',
             )}
           >
             {filter}
@@ -48,21 +48,23 @@ export function ProductFilterGrid() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.04, duration: 0.35 }}
               className={cn(
-                'overflow-hidden rounded-3xl border bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg',
-                comingSoon ? 'border-slate-200 opacity-75' : 'border-slate-200',
+                'glass-card overflow-hidden rounded-3xl p-6 transition hover:-translate-y-1 hover:border-[#3f8a5b]',
+                comingSoon ? 'opacity-75' : '',
               )}
             >
-              <div className="relative mb-5 overflow-hidden rounded-2xl border border-black/10 bg-gradient-to-br from-[#1B4F8A] via-[#1A6B3C] to-[#F5C400] p-5 text-white">
-                <p className="text-xs font-semibold uppercase tracking-[0.16em]">{product.heroLabel}</p>
-                <h3 className="mt-4 text-xl font-semibold leading-tight">{product.name}</h3>
+              <div className="relative mb-5 aspect-[16/10] overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-[#edf5ef] via-[#eef4fb] to-[#ffffff] p-5 text-[#111111]">
+                <div className="absolute inset-0 bg-[linear-gradient(140deg,rgba(26,107,60,0.08),transparent_48%)]" />
+                <p className="relative text-xs font-semibold uppercase tracking-[0.16em] text-[#1A6B3C]">{product.heroLabel}</p>
+                <h3 className="relative mt-3 text-xl font-semibold leading-tight">{product.name}</h3>
+                <p className="relative mt-2 text-xs text-slate-600">{product.imageHint}</p>
               </div>
 
               <div className="mb-4 flex items-center justify-between">
-                <span className="text-sm font-medium text-slate-500">{product.category}</span>
+                <span className="text-sm font-medium text-slate-600">{product.category}</span>
                 <span
                   className={cn(
                     'rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.08em]',
-                    comingSoon ? 'bg-slate-200 text-slate-600' : 'bg-emerald-100 text-emerald-700',
+                    comingSoon ? 'bg-slate-100 text-slate-500' : 'bg-emerald-50 text-emerald-700',
                   )}
                 >
                   {product.status}
@@ -74,7 +76,7 @@ export function ProductFilterGrid() {
               <ul className="mt-4 space-y-2 text-sm text-slate-700">
                 {product.specs.slice(0, 3).map((spec) => (
                   <li key={spec} className="flex items-start gap-2">
-                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#1A6B3C]" />
+                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#F5C400]" />
                     <span>{spec}</span>
                   </li>
                 ))}
@@ -86,13 +88,13 @@ export function ProductFilterGrid() {
                   className={cn(
                     'rounded-full px-4 py-2 text-sm font-semibold transition',
                     comingSoon
-                      ? 'pointer-events-none bg-slate-200 text-slate-500'
+                      ? 'pointer-events-none bg-slate-100 text-slate-500'
                       : 'bg-[#1A6B3C] text-white hover:bg-[#14552f]',
                   )}
                 >
                   Request a Quote
                 </Link>
-                <Link href={`/products/${product.slug}`} className="text-sm font-semibold text-[#1B4F8A] hover:underline">
+                <Link href={`/products/${product.slug}`} className="text-sm font-semibold text-[#1B4F8A] hover:text-[#1A6B3C]">
                   View Product
                 </Link>
               </div>

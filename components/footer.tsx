@@ -7,10 +7,10 @@ export function Footer() {
       <Container className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-white">{site.legalName}</p>
-          <p className="mt-2 max-w-2xl text-sm text-slate-400">{site.tagline}</p>
+          <p className="mt-2 max-w-2xl text-sm text-slate-200">{site.tagline}</p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-4 text-sm text-slate-400">
+        <div className="flex flex-wrap items-center gap-4 text-sm text-slate-200">
           <a href="/privacy-policy" className="transition hover:text-white">
             Privacy Policy
           </a>

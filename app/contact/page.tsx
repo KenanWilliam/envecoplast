@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <main className="mx-auto w-full max-w-7xl px-6 py-16 lg:px-8">
+    <main className="mx-auto w-full max-w-7xl px-6 py-20 lg:px-8">
       <SectionHeading
         eyebrow="Contact"
         title="Let us discuss your project or partnership"
@@ -20,23 +20,23 @@ export default function ContactPage() {
       />
 
       <section className="mt-10 grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-        <aside className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-          <h2 className="text-xl font-semibold text-slate-900">Envecoplast Company Limited</h2>
+        <aside className="glass-card rounded-3xl p-6">
+          <h2 className="text-xl font-semibold text-[#111111]">Envecoplast Company Limited</h2>
           <div className="mt-5 space-y-4 text-sm text-slate-700">
             <p className="flex items-center gap-2">
-              <Mail className="h-4 w-4 text-[#1B4F8A]" />
+              <Mail className="h-4 w-4 text-[#1A6B3C]" />
               <a href={`mailto:${site.email}`} className="hover:underline">
                 {site.email}
               </a>
             </p>
             <p className="flex items-center gap-2">
-              <Phone className="h-4 w-4 text-[#1B4F8A]" />
+              <Phone className="h-4 w-4 text-[#1A6B3C]" />
               <a href={`tel:${site.phone.replaceAll(' ', '')}`} className="hover:underline">
                 {site.phone}
               </a>
             </p>
             <p className="flex items-center gap-2">
-              <MapPin className="h-4 w-4 text-[#1B4F8A]" />
+              <MapPin className="h-4 w-4 text-[#1A6B3C]" />
               {site.location}
             </p>
           </div>
@@ -50,13 +50,13 @@ export default function ContactPage() {
           </a>
 
           <div className="mt-6 flex items-center gap-3">
-            <a href={site.social.instagram} className="rounded-full border border-slate-300 p-2 text-slate-700">
+            <a href={site.social.instagram} className="rounded-full border border-slate-200 p-2 text-slate-600">
               <Globe className="h-4 w-4" />
             </a>
-            <a href={site.social.linkedin} className="rounded-full border border-slate-300 p-2 text-slate-700">
+            <a href={site.social.linkedin} className="rounded-full border border-slate-200 p-2 text-slate-600">
               <Send className="h-4 w-4" />
             </a>
-            <a href={site.social.facebook} className="rounded-full border border-slate-300 p-2 text-slate-700">
+            <a href={site.social.facebook} className="rounded-full border border-slate-200 p-2 text-slate-600">
               <Globe className="h-4 w-4" />
             </a>
           </div>
@@ -64,7 +64,7 @@ export default function ContactPage() {
 
         <Suspense
           fallback={
-            <div className="rounded-3xl border border-slate-200 bg-white p-6 text-sm text-slate-600 shadow-sm">
+            <div className="glass-card rounded-3xl p-6 text-sm text-slate-600">
               Loading form...
             </div>
           }

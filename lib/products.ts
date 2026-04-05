@@ -11,6 +11,7 @@ export type Product = {
   specs: string[];
   useCases: string[];
   heroLabel: string;
+  imageHint: string;
 };
 
 export const products: Product[] = [
@@ -35,6 +36,7 @@ export const products: Product[] = [
       'Institutions building affordable facilities',
     ],
     heroLabel: 'Flagship Block System',
+    imageHint: 'Interlocking block stack on active construction site',
   },
   {
     slug: 'plastic-chips',
@@ -57,6 +59,7 @@ export const products: Product[] = [
       'Circular economy projects and pilot plants',
     ],
     heroLabel: 'Industrial Input',
+    imageHint: 'Sorted recycled chips in industrial processing trays',
   },
   {
     slug: 'plastic-pellets',
@@ -79,6 +82,7 @@ export const products: Product[] = [
       'Institutional procurement for impact-led production',
     ],
     heroLabel: 'Production Grade',
+    imageHint: 'Consistent recycled pellets prepared for bulk dispatch',
   },
   {
     slug: 'plastic-pavers',
@@ -91,6 +95,7 @@ export const products: Product[] = [
     specs: ['Coming soon'],
     useCases: ['Coming soon'],
     heroLabel: 'Coming Soon',
+    imageHint: 'Future product concept placeholder',
   },
   {
     slug: 'roofing-tiles',
@@ -103,6 +108,7 @@ export const products: Product[] = [
     specs: ['Coming soon'],
     useCases: ['Coming soon'],
     heroLabel: 'Coming Soon',
+    imageHint: 'Future product concept placeholder',
   },
   {
     slug: 'plastic-lumber',
@@ -115,6 +121,7 @@ export const products: Product[] = [
     specs: ['Coming soon'],
     useCases: ['Coming soon'],
     heroLabel: 'Coming Soon',
+    imageHint: 'Future product concept placeholder',
   },
   {
     slug: 'custom-molded-products',
@@ -127,6 +134,7 @@ export const products: Product[] = [
     specs: ['Coming soon'],
     useCases: ['Coming soon'],
     heroLabel: 'Coming Soon',
+    imageHint: 'Future product concept placeholder',
   },
 ];
 

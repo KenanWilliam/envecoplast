@@ -14,12 +14,13 @@ export const metadata: Metadata = {
     template: `%s | ${site.name}`,
   },
   description: site.description,
-  metadataBase: new URL('https://envecoplast.vercel.app'),
+  metadataBase: new URL('https://envecoplast.com'),
   openGraph: {
     title: `${site.name} | Sustainable Construction Materials`,
     description: site.description,
     siteName: site.name,
     type: 'website',
+    locale: 'en_KE',
   },
   twitter: {
     card: 'summary_large_image',
@@ -31,7 +32,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${sora.variable}`}>
+      <body className={`${inter.variable} ${sora.variable} bg-[#080b09] text-white antialiased`}>
         <Navbar />
         {children}
         <Footer />

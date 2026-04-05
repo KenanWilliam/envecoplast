@@ -18,7 +18,7 @@ const teamPlaceholders = [
 
 export default function AboutPage() {
   return (
-    <main className="mx-auto w-full max-w-7xl px-6 py-16 lg:px-8">
+    <main className="mx-auto w-full max-w-7xl px-6 py-20 lg:px-8">
       <section className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-center">
         <Reveal>
           <SectionHeading
@@ -38,15 +38,15 @@ export default function AboutPage() {
         </Reveal>
 
         <Reveal delay={0.05}>
-          <div className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+          <div className="glass-card rounded-[2rem] p-6">
             <div className="grid gap-4 sm:grid-cols-2">
-              <div className="rounded-2xl bg-gradient-to-br from-[#f4f6fa] to-[#e8edf5] p-5">
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Before</p>
-                <p className="mt-2 text-xl font-semibold text-slate-800">Unmanaged plastic waste streams</p>
+              <div className="rounded-2xl border border-slate-200 bg-[#f8fafc] p-5">
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#1A6B3C]">Before</p>
+                <p className="mt-2 text-xl font-semibold text-[#111111]">Unmanaged plastic waste streams</p>
               </div>
-              <div className="rounded-2xl bg-gradient-to-br from-[#e9f8ef] to-[#dcedff] p-5">
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">After</p>
-                <p className="mt-2 text-xl font-semibold text-slate-800">Durable construction materials</p>
+              <div className="rounded-2xl border border-slate-200 bg-[#f4f8ff] p-5">
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#1B4F8A]">After</p>
+                <p className="mt-2 text-xl font-semibold text-[#111111]">Durable construction materials</p>
               </div>
             </div>
           </div>
@@ -57,8 +57,8 @@ export default function AboutPage() {
         <div className="grid gap-6 md:grid-cols-3">
           {missionValues.map((item, index) => (
             <Reveal key={item.title} delay={index * 0.05}>
-              <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-                <h3 className="text-2xl font-semibold text-slate-900">{item.title}</h3>
+              <article className="glass-card rounded-3xl p-6">
+                <h3 className="text-2xl font-semibold text-[#111111]">{item.title}</h3>
                 <p className="mt-3 text-sm leading-7 text-slate-600">{item.body}</p>
               </article>
             </Reveal>
@@ -75,9 +75,11 @@ export default function AboutPage() {
         <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {teamPlaceholders.map((member, index) => (
             <Reveal key={member.name} delay={index * 0.04}>
-              <article className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
-                <div className="aspect-[4/5] rounded-2xl bg-gradient-to-br from-[#e9edf4] to-[#dde5ef]" />
-                <h3 className="mt-4 text-lg font-semibold text-slate-900">{member.name}</h3>
+              <article className="glass-card rounded-3xl p-5">
+                <div className="relative aspect-[4/5] rounded-2xl border border-slate-200 bg-gradient-to-br from-[#eef5ef] via-[#edf3fb] to-[#f7f7f7]">
+                  <p className="absolute bottom-4 left-4 text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">Photo Placeholder</p>
+                </div>
+                <h3 className="mt-4 text-lg font-semibold text-[#111111]">{member.name}</h3>
                 <p className="text-sm text-slate-600">{member.role}</p>
               </article>
             </Reveal>

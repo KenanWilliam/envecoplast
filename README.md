@@ -1,40 +1,39 @@
 # Envecoplast Website
 
-Production-ready Next.js website for Envecoplast Company Limited with a mini quote-request marketplace.
+Production-ready, multi-page website and quote-request marketplace for Envecoplast Company Limited.
 
-## Stack
+## Tech Stack
 
-- Next.js App Router
+- Next.js App Router (static export)
 - Tailwind CSS
 - Framer Motion
 - Lucide React
 - React Hook Form + Zod
 - TypeScript
 
-## Routes
+## Project Routes
 
-- / - Homepage
-- /about - About Us
-- /products - Product Catalog
-- /products/[slug] - Product Detail
-- /how-it-works - Process Page
-- /why-us - Why Choose Envecoplast
-- /contact - Contact and Quote Form
-- /privacy-policy - Privacy Policy
-- /terms - Terms of Service
-- /api/contact - API stub for form integration
+- / (Homepage)
+- /about
+- /products
+- /products/[slug]
+- /how-it-works
+- /why-us
+- /contact
+- /privacy-policy
+- /terms
 
-## Features
+## Key Features
 
-- Responsive multi-page layout
-- Light-first branded visual system
-- SVG logo component
-- Filterable product marketplace grid
-- Product detail pages for in-stock products
-- Quote request links prefill contact form
-- Contact form validation with Zod
-- Framer Motion reveal animations
-- Page metadata and Open Graph-ready defaults
+- Dark-first, cinematic brand styling
+- Typed content architecture in lib files
+- Filterable marketplace catalog
+- Static product detail pages via generateStaticParams
+- Quote request links that prefill contact form
+- Client-side form submission (Formspree) with validation
+- Framer Motion section reveal animations
+- SEO metadata and Open Graph defaults
+- Static export ready for shared hosting
 
 ## Local Development
 
@@ -45,32 +44,55 @@ npm run dev
 
 Open http://localhost:3000.
 
-## Production Build
+## Production Build (Static Export)
+
+This project is configured with `output: 'export'` in `next.config.ts`.
 
 ```bash
 npm run build
-npm run start
 ```
 
-## Data and Content
+After build completes, deploy the contents of the `out/` directory.
 
-Structured typed content lives in:
+## Configure Formspree
 
-- lib/site.ts
-- lib/content.ts
-- lib/products.ts
+1. Create a free Formspree form and copy your endpoint URL.
+2. Update `formspreeEndpoint` in `lib/site.ts`.
+3. Build again to include the updated endpoint in the static bundle.
 
-These files are CMS-ready and can be swapped with headless content sources later.
+## Spaceship Deployment Guide (FTP/SFTP)
 
-## Deployment
+1. Run `npm run build`.
+2. Confirm an `out/` folder is generated.
+3. Open your Spaceship hosting panel and connect via FTP/SFTP (or File Manager).
+4. Upload all files and folders from inside `out/` to your domain root (usually `public_html`).
+5. Ensure `.htaccess` is present in deployment root:
 
-The project includes `vercel.json` and is ready to deploy on Vercel.
+```apache
+Options -MultiViews
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.html [QSA,L]
+```
 
-## Notes for Future Marketplace Expansion
+6. Clear browser cache and reload your domain.
+7. Test core pages and a product detail route.
 
-Current implementation is a quote-request marketplace (no cart or checkout).
-Future checkout integration can plug into:
+## Content and Data
 
-- cart state and checkout actions on product pages
-- API routes under app/api
-- payment provider integration (Stripe, Flutterwave, etc.)
+The website is content-driven and CMS-ready. Update these files without changing page component logic:
+
+- `lib/site.ts`
+- `lib/content.ts`
+- `lib/products.ts`
+
+## Future Marketplace Expansion
+
+This release is quote-request only (no cart and no checkout).
+
+Potential v2 expansion points:
+
+- Cart state and line-items on product pages
+- Payment integration (Stripe, Flutterwave, M-Pesa bridges)
+- CRM sync after inquiry submission

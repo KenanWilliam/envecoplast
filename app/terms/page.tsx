@@ -8,46 +8,46 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <main className="mx-auto w-full max-w-4xl px-6 py-16 lg:px-8">
-      <article className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm lg:p-12">
-        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#1B4F8A]">Legal</p>
-        <h1 className="mt-4 text-4xl font-semibold text-slate-900">Terms of Service</h1>
-        <div className="mt-8 space-y-6 text-sm leading-7 text-slate-700">
+    <main className="mx-auto w-full max-w-4xl px-6 py-20 lg:px-8">
+      <article className="glass-card rounded-3xl p-8 lg:p-12">
+        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#1A6B3C]">Legal</p>
+        <h1 className="mt-4 text-4xl font-semibold text-[#111111]">Terms of Service</h1>
+        <div className="mt-8 space-y-6 text-sm leading-7 text-slate-600">
           <p>
             These Terms of Service govern access and use of the website operated by {site.legalName}. By using this website, you agree to these terms.
           </p>
           <section>
-            <h2 className="text-xl font-semibold text-slate-900">Use of Website</h2>
+            <h2 className="text-xl font-semibold text-[#111111]">Use of Website</h2>
             <p className="mt-2">You agree to use this website only for lawful purposes and in a manner that does not violate rights of other users.</p>
           </section>
           <section>
-            <h2 className="text-xl font-semibold text-slate-900">Product Information</h2>
+            <h2 className="text-xl font-semibold text-[#111111]">Product Information</h2>
             <p className="mt-2">
               Product descriptions, availability, and timelines are provided for general information and may change without prior notice.
             </p>
           </section>
           <section>
-            <h2 className="text-xl font-semibold text-slate-900">Quotes and Orders</h2>
+            <h2 className="text-xl font-semibold text-[#111111]">Quotes and Orders</h2>
             <p className="mt-2">
               Submitted inquiries do not constitute a binding contract. Final commercial terms are confirmed through formal quotations and agreements.
             </p>
           </section>
           <section>
-            <h2 className="text-xl font-semibold text-slate-900">Intellectual Property</h2>
+            <h2 className="text-xl font-semibold text-[#111111]">Intellectual Property</h2>
             <p className="mt-2">All text, graphics, logos, and materials on this website are owned by or licensed to {site.legalName}.</p>
           </section>
           <section>
-            <h2 className="text-xl font-semibold text-slate-900">Limitation of Liability</h2>
+            <h2 className="text-xl font-semibold text-[#111111]">Limitation of Liability</h2>
             <p className="mt-2">
               To the maximum extent permitted by law, {site.legalName} is not liable for indirect or consequential losses from website use.
             </p>
           </section>
           <section>
-            <h2 className="text-xl font-semibold text-slate-900">Jurisdiction</h2>
+            <h2 className="text-xl font-semibold text-[#111111]">Jurisdiction</h2>
             <p className="mt-2">These terms are governed by the laws of Kenya.</p>
           </section>
           <section>
-            <h2 className="text-xl font-semibold text-slate-900">Contact</h2>
+            <h2 className="text-xl font-semibold text-[#111111]">Contact</h2>
             <p className="mt-2">
               For legal inquiries, contact us at <a href={`mailto:${site.email}`} className="text-[#1B4F8A] hover:underline">{site.email}</a>.
             </p>

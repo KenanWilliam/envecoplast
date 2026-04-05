@@ -5,6 +5,7 @@ import { useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { site } from '@/lib/site';
 
 const inquiryTypes = ['Place an Order', 'Partnership', 'Investment Inquiry', 'General Question'] as const;
 const productOptions = ['Interlocking Blocks', 'Plastic Chips', 'Plastic Pellets', 'Other'] as const;
@@ -41,6 +42,7 @@ function guessProductOptions(productName: string): FormValues['products'] {
 
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const searchParams = useSearchParams();
   const prefilledProduct = searchParams.get('product') ?? '';
   const prefilledInquiry = searchParams.get('inquiryType');
@@ -74,26 +76,38 @@ export function ContactForm() {
   const selectedProducts = watch('products');
 
   const onSubmit = async (data: FormValues) => {
-    await fetch('/api/contact', {
+    setSubmitError(null);
+
+    const response = await fetch(site.formspreeEndpoint, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({
+        fullName: data.fullName,
+        email: data.email,
+        phone: data.phone,
+        organization: data.organization,
+        inquiryType: data.inquiryType,
+        products: data.products.join(', '),
+        message: data.message,
+      }),
     });
 
-    const subject = encodeURIComponent(`Envecoplast Inquiry: ${data.inquiryType}`);
-    const body = encodeURIComponent(
-      `Name: ${data.fullName}\nEmail: ${data.email}\nPhone: ${data.phone || '-'}\nOrganization: ${data.organization || '-'}\nProducts: ${data.products.join(', ')}\n\n${data.message}`,
-    );
+    if (!response.ok) {
+      setSubmitError('We could not send your inquiry right now. Please try again or contact us on WhatsApp.');
+      return;
+    }
 
-    window.location.href = `mailto:hello@envecoplast.com?subject=${subject}&body=${body}`;
     setSubmitted(true);
   };
 
   if (submitted) {
     return (
-      <div className="rounded-3xl border border-emerald-200 bg-emerald-50 p-6">
-        <h3 className="text-xl font-semibold text-emerald-800">Inquiry Sent</h3>
-        <p className="mt-2 text-sm leading-7 text-emerald-700">
+      <div className="rounded-3xl border border-emerald-900 bg-emerald-950/40 p-6">
+        <h3 className="text-xl font-semibold text-emerald-300">Inquiry Sent</h3>
+        <p className="mt-2 text-sm leading-7 text-emerald-100/90">
           Thank you for reaching out. Our team will respond shortly with pricing and next steps.
         </p>
       </div>
@@ -101,7 +115,7 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+    <form onSubmit={handleSubmit(onSubmit)} className="glass-card space-y-5 rounded-3xl p-6">
       <div className="grid gap-5 md:grid-cols-2">
         <Field label="Full Name *" error={errors.fullName?.message}>
           <input {...register('fullName')} className="input" />
@@ -133,7 +147,7 @@ export function ContactForm() {
       <Field label="Product of Interest" error={errors.products?.message}>
         <div className="grid gap-2 sm:grid-cols-2">
           {productOptions.map((option) => (
-            <label key={option} className="flex items-center gap-2 rounded-xl border border-slate-200 px-3 py-2 text-sm text-slate-700">
+            <label key={option} className="flex items-center gap-2 rounded-xl border border-white/15 px-3 py-2 text-sm text-slate-200">
               <input
                 type="checkbox"
                 checked={selectedProducts.includes(option)}
@@ -154,6 +168,8 @@ export function ContactForm() {
       <Field label="Message / Requirements *" error={errors.message?.message}>
         <textarea {...register('message')} rows={5} className="input resize-none" />
       </Field>
+
+      {submitError ? <p className="text-sm text-red-400">{submitError}</p> : null}
 
       <button
         type="submit"
@@ -177,9 +193,9 @@ function Field({
 }) {
   return (
     <label className="block">
-      <span className="mb-2 block text-sm font-medium text-slate-700">{label}</span>
+      <span className="mb-2 block text-sm font-medium text-slate-200">{label}</span>
       {children}
-      {error ? <span className="mt-1 block text-xs text-red-600">{error}</span> : null}
+      {error ? <span className="mt-1 block text-xs text-red-400">{error}</span> : null}
     </label>
   );
 }

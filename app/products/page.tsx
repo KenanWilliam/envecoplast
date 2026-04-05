@@ -10,11 +10,11 @@ export const metadata: Metadata = {
 
 export default function ProductsPage() {
   return (
-    <main className="mx-auto w-full max-w-7xl px-6 py-16 lg:px-8">
+    <main className="mx-auto w-full max-w-7xl px-6 py-20 lg:px-8">
       <SectionHeading
         eyebrow="Mini Marketplace"
         title="Product Catalog"
-        body="Filter by category and request a quote directly from any product."
+        body="Filter by category, review key specs, and request a quote instantly."
       />
       <div className="mt-10">
         <ProductFilterGrid />

@@ -1,11 +1,11 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { navLinks } from '@/lib/content';
-import { Logo } from '@/components/logo';
 import { cn } from '@/lib/utils';
 
 export function Navbar() {
@@ -15,8 +15,15 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-black/10 bg-white/85 backdrop-blur-md">
       <div className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between px-6 lg:px-8">
-        <Link href="/" aria-label="Go to homepage">
-          <Logo />
+        <Link href="/" aria-label="Go to homepage" className="text-[#111111]">
+          <Image
+            src="/brand/envecoplast-full-vert.svg"
+            alt="Envecoplast logo"
+            width={52}
+            height={220}
+            className="h-11 w-auto"
+            priority
+          />
         </Link>
 
         <nav className="hidden items-center gap-7 lg:flex">
