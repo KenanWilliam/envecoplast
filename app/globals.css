@@ -1,15 +1,52 @@
 @import "tailwindcss";
 
 :root {
-  --background: #080b09;
-  --foreground: #f8faf9;
+  /* Surfaces */
+  --surface-bg: #ffffff;
+  --surface-card: #f8fafb;
+  --surface-input: #ffffff;
+  --surface-dark: #111111;
+  --surface-dark-card: #1a1a1a;
+
+  /* Text Colors */
+  --text-primary: #111111;
+  --text-secondary: #5a6b68;
+  --text-tertiary: #8b9995;
+  --text-inverse: #ffffff;
+  --text-inverse-secondary: #e0e0e0;
+
+  /* Brand Colors */
+  --brand-primary: #1a6b3c;
+  --brand-primary-hover: #14552f;
+  --brand-primary-light: #e8f4f0;
+  --brand-secondary: #1b4f8a;
+  --brand-secondary-hover: #163f6e;
+  --brand-secondary-light: #ebf2f9;
+
+  /* Functional Colors */
+  --color-success: #059669;
+  --color-warning: #d97706;
+  --color-error: #dc2626;
+  --color-info: #0284c7;
+
+  /* Accents */
+  --accent-gold: #f5c400;
+  --accent-gold-muted: #fdf3c7;
+
+  /* Borders */
+  --border-light: #e5e7eb;
+  --border-medium: #d1d5db;
+  --border-dark: #6b7280;
+  --border-brand: #1a6b3c;
+
+  /* Backgrounds */
+  --bg-highlight: #f9fafb;
+  --bg-hover: #f3f4f6;
+  --bg-disabled: #f3f4f6;
+
+  /* Typography */
   --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-display: Sora, Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --brand-green: #1a6b3c;
-  --brand-blue: #1b4f8a;
-  --brand-black: #111111;
-  --brand-red: #e63027;
-  --brand-yellow: #f5c400;
 }
 
 * {
@@ -22,14 +59,11 @@ html {
 
 body {
   margin: 0;
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--surface-bg);
+  color: var(--text-primary);
   font-family: var(--font-sans);
   text-rendering: optimizeLegibility;
   min-height: 100vh;
-  background-image: radial-gradient(circle at 8% -12%, rgba(26, 107, 60, 0.22), transparent 35%),
-    radial-gradient(circle at 95% 0%, rgba(27, 79, 138, 0.2), transparent 36%),
-    linear-gradient(180deg, #0d1210 0%, #090d0b 100%);
 }
 
 h1,
@@ -52,29 +86,53 @@ img {
 }
 
 ::selection {
-  background: rgba(245, 196, 0, 0.25);
-  color: #ffffff;
+  background: var(--brand-primary-light);
+  color: var(--text-primary);
+}
+
+/* Focus visible for all interactive elements */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 2px;
+}
+
+/* Semantic link styling for body links */
+.prose a,
+.content a {
+  color: var(--brand-primary);
+  text-decoration: underline;
 }
 
 .input {
   width: 100%;
   border-radius: 1rem;
-  border: 1px solid #3d4f46;
-  background: rgba(23, 32, 27, 0.92);
+  border: 1.5px solid var(--border-light);
+  background: var(--surface-input);
   padding: 0.7rem 0.85rem;
   font-size: 0.95rem;
-  color: #f5f9f6;
+  color: var(--text-primary);
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
 .input::placeholder {
-  color: #b8c7bf;
+  color: var(--text-tertiary);
+  font-weight: 400;
 }
 
 .input:focus {
-  border-color: var(--brand-green);
-  box-shadow: 0 0 0 3px rgba(26, 107, 60, 0.2);
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 3px var(--brand-primary-light);
+}
+
+.input:disabled {
+  background: var(--bg-disabled);
+  color: var(--text-tertiary);
+  cursor: not-allowed;
 }
 
 .section-shell {
@@ -83,13 +141,11 @@ img {
 }
 
 .glass-card {
-  background: linear-gradient(160deg, rgba(27, 38, 32, 0.97), rgba(14, 21, 18, 0.97));
-  border: 1px solid #3a4d43;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+  background: var(--surface-card);
+  border: 1px solid var(--border-light);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .brand-grid {
-  background-image: linear-gradient(rgba(245, 196, 0, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(245, 196, 0, 0.08) 1px, transparent 1px);
-  background-size: 40px 40px;
+  display: none;
 }

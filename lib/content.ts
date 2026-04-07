@@ -23,10 +23,10 @@ export const navLinks = [
 ] as const;
 
 export const homeStats = [
-  { label: 'Tonnes of Plastic Diverted', value: '4,200+' },
-  { label: 'Projects Completed', value: '185+' },
-  { label: 'Faster Construction Cycles', value: '35%' },
-  { label: 'Counties Served', value: '21' },
+  { label: 'Tonnes of Plastic Diverted', value: '4,200+', qualifier: 'as of Q1 2026' },
+  { label: 'Projects Completed', value: '185+', qualifier: 'as of Q1 2026' },
+  { label: 'Faster Construction Cycles', value: '35%', qualifier: 'average reduction' },
+  { label: 'Counties Served', value: '21', qualifier: 'in Kenya' },
 ] as const;
 
 export const processSteps = [
@@ -89,15 +89,24 @@ export const whyPanels = [
   },
 ] as const;
 
-export const buyerPersonas = [
+export type BuyerPersona = {
+  icon: any;
+  title: string;
+  ageRange?: string;
+  body: string;
+};
+
+export const buyerPersonas: BuyerPersona[] = [
   {
     icon: Landmark,
-    title: 'Real Estate Developer (30-70)',
+    title: 'Real Estate Developer',
+    ageRange: '30-70',
     body: 'Reduce cost, compress timelines, and increase delivery predictability across multi-unit projects.',
   },
   {
     icon: Hammer,
-    title: 'Contractor / Fundi (25-60)',
+    title: 'Contractor / Fundi',
+    ageRange: '25-60',
     body: 'Simplify site execution and build faster with fewer bottlenecks and reduced mortar dependency.',
   },
   {

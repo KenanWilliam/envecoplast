@@ -2,19 +2,13 @@ import type { Metadata } from 'next';
 import { Reveal } from '@/components/sections/reveal';
 import { SectionHeading } from '@/components/section-heading';
 import { missionValues } from '@/lib/content';
+import { ArrowRight, Trash2, Hammer, Target, Eye, Heart } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'About',
   description:
     'Learn how Envecoplast transforms plastic waste into high-quality construction materials across Kenya.',
 };
-
-const teamPlaceholders = [
-  { name: 'Team Member 1', role: 'Operations Lead' },
-  { name: 'Team Member 2', role: 'Manufacturing Lead' },
-  { name: 'Team Member 3', role: 'Commercial Lead' },
-  { name: 'Team Member 4', role: 'Sustainability Lead' },
-];
 
 export default function AboutPage() {
   return (
@@ -39,30 +33,58 @@ export default function AboutPage() {
 
         <Reveal delay={0.05}>
           <div className="glass-card rounded-[2rem] p-6">
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div className="rounded-2xl border border-slate-200 bg-[#f8fafc] p-5">
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#1A6B3C]">Before</p>
-                <p className="mt-2 text-xl font-semibold text-[#111111]">Unmanaged plastic waste streams</p>
+            <div className="grid gap-6 sm:grid-cols-2">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#1A6B3C] mb-3">Before</p>
+                <div className="relative aspect-[4/3] rounded-2xl border border-gray-200 bg-gradient-to-br from-[#edf0ed] to-[#f0f0f0] flex items-center justify-center">
+                  <div className="text-center">
+                    <Trash2 className="h-12 w-12 text-gray-400 mx-auto mb-2" />
+                    <p className="text-sm font-medium text-gray-600">Unmanaged plastic waste</p>
+                  </div>
+                </div>
               </div>
-              <div className="rounded-2xl border border-slate-200 bg-[#f4f8ff] p-5">
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#1B4F8A]">After</p>
-                <p className="mt-2 text-xl font-semibold text-[#111111]">Durable construction materials</p>
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#1B4F8A] mb-3">After</p>
+                <div className="relative aspect-[4/3] rounded-2xl border border-gray-200 bg-gradient-to-br from-[#eef5ef] to-[#f0f4ff] flex items-center justify-center">
+                  <div className="text-center">
+                    <Hammer className="h-12 w-12 text-[#1A6B3C] mx-auto mb-2" />
+                    <p className="text-sm font-medium text-gray-600">Durable construction materials</p>
+                  </div>
+                </div>
               </div>
+            </div>
+            <div className="mt-6 flex items-center justify-center gap-2">
+              <ArrowRight className="h-5 w-5 text-[#1A6B3C]" />
+              <p className="text-sm font-medium text-gray-600">Transformation through innovation</p>
             </div>
           </div>
         </Reveal>
       </section>
 
+      <section className="mt-20 rounded-3xl bg-gray-50 p-10 border border-gray-200">
+        <h2 className="text-3xl font-semibold text-gray-900">Our Story</h2>
+        <p className="mt-4 text-lg leading-8 text-gray-700 max-w-3xl">
+          Envecoplast was founded with a clear mission: to turn Kenya's mounting plastic waste challenge into a thriving circular manufacturing opportunity. Since our establishment, we've diverted over 4,200 tonnes of post-consumer plastic from landfills, completed 185+ construction projects, and partnered with contractors and developers across 21 counties. We're building the infrastructure for sustainable construction—one block, one chip, one pellet at a time.
+        </p>
+      </section>
+
       <section className="mt-20">
         <div className="grid gap-6 md:grid-cols-3">
-          {missionValues.map((item, index) => (
-            <Reveal key={item.title} delay={index * 0.05}>
-              <article className="glass-card rounded-3xl p-6">
-                <h3 className="text-2xl font-semibold text-[#111111]">{item.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-slate-600">{item.body}</p>
-              </article>
-            </Reveal>
-          ))}
+          {missionValues.map((item, index) => {
+            const icons = [Target, Eye, Heart];
+            const Icon = icons[index];
+            const colors = ['#1A6B3C', '#1B4F8A', '#DC2626'];
+
+            return (
+              <Reveal key={item.title} delay={index * 0.05}>
+                <article className="glass-card rounded-3xl p-6 border-l-4" style={{ borderLeftColor: colors[index] }}>
+                  <Icon className="h-8 w-8" style={{ color: colors[index] }} />
+                  <h3 className="mt-4 text-2xl font-semibold text-gray-900">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-gray-700">{item.body}</p>
+                </article>
+              </Reveal>
+            );
+          })}
         </div>
       </section>
 
@@ -70,20 +92,9 @@ export default function AboutPage() {
         <SectionHeading
           eyebrow="Team"
           title="People behind the impact"
-          body="Replace these placeholders with leadership and operations photos before launch."
         />
-        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {teamPlaceholders.map((member, index) => (
-            <Reveal key={member.name} delay={index * 0.04}>
-              <article className="glass-card rounded-3xl p-5">
-                <div className="relative aspect-[4/5] rounded-2xl border border-slate-200 bg-gradient-to-br from-[#eef5ef] via-[#edf3fb] to-[#f7f7f7]">
-                  <p className="absolute bottom-4 left-4 text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">Photo Placeholder</p>
-                </div>
-                <h3 className="mt-4 text-lg font-semibold text-[#111111]">{member.name}</h3>
-                <p className="text-sm text-slate-600">{member.role}</p>
-              </article>
-            </Reveal>
-          ))}
+        <div className="mt-8 rounded-2xl border border-gray-200 bg-white p-8 text-center">
+          <p className="text-gray-700">To learn more about our leadership and team, please reach out through our contact page or connect with us on LinkedIn.</p>
         </div>
       </section>
     </main>

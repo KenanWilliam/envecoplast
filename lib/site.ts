@@ -9,6 +9,7 @@ export const site = {
   email: 'hello@envecoplast.com',
   phone: '+254 700 000 000',
   location: 'Nairobi, Kenya',
+  locationDetailed: 'Industrial Area, Nairobi, Kenya',
   whatsapp: '+254700000000',
   formspreeEndpoint: process.env.NEXT_PUBLIC_FORM_ENDPOINT || 'https://formspree.io/f/xblypvvz',
   social: {

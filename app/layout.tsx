@@ -21,18 +21,27 @@ export const metadata: Metadata = {
     siteName: site.name,
     type: 'website',
     locale: 'en_KE',
+    images: [
+      {
+        url: 'https://envecoplast.com/brand/envecoplast-full-hrtl.svg',
+        width: 1200,
+        height: 627,
+        alt: 'Envecoplast - Transforming plastic waste into construction materials',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: `${site.name} | Sustainable Construction Materials`,
     description: site.description,
+    images: ['https://envecoplast.com/brand/envecoplast-full-hrtl.svg'],
   },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${sora.variable} bg-[#080b09] text-white antialiased`}>
+      <body className={`${inter.variable} ${sora.variable} bg-white text-gray-900 antialiased`}>
         <Navbar />
         {children}
         <Footer />

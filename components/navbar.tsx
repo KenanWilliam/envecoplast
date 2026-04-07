@@ -14,7 +14,7 @@ export function Navbar() {
     <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/80 backdrop-blur">
       <Container className="flex h-20 items-center justify-between gap-6">
         <a href="#top" className="flex items-center gap-3">
-          <img src="/brand/envecoplast-logo.svg" alt={`${site.name} logo`} className="h-10 w-10 rounded-full" />
+          <img src="/images/logos/envecoplast-full-hrtl.svg" alt={`${site.name} logo`} className="h-10 w-10 rounded-full" />
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-white">{site.name}</p>
             <p className="text-xs text-slate-200">Waste to worth construction materials</p>

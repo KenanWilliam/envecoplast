@@ -105,9 +105,9 @@ export function ContactForm() {
 
   if (submitted) {
     return (
-      <div className="rounded-3xl border border-emerald-900 bg-emerald-950/40 p-6">
-        <h3 className="text-xl font-semibold text-emerald-300">Inquiry Sent</h3>
-        <p className="mt-2 text-sm leading-7 text-emerald-100/90">
+      <div className="rounded-3xl border border-green-200 bg-green-50 p-6">
+        <h3 className="text-xl font-semibold text-green-900">Inquiry Sent</h3>
+        <p className="mt-2 text-sm leading-7 text-green-800">
           Thank you for reaching out. Our team will respond shortly with pricing and next steps.
         </p>
       </div>
@@ -147,7 +147,7 @@ export function ContactForm() {
       <Field label="Product of Interest" error={errors.products?.message}>
         <div className="grid gap-2 sm:grid-cols-2">
           {productOptions.map((option) => (
-            <label key={option} className="flex items-center gap-2 rounded-xl border border-white/15 px-3 py-2 text-sm text-slate-200">
+            <label key={option} className="flex items-center gap-2 rounded-xl border border-gray-300 px-3 py-2 text-sm text-gray-900 hover:bg-gray-50">
               <input
                 type="checkbox"
                 checked={selectedProducts.includes(option)}
@@ -169,12 +169,12 @@ export function ContactForm() {
         <textarea {...register('message')} rows={5} className="input resize-none" />
       </Field>
 
-      {submitError ? <p className="text-sm text-red-400">{submitError}</p> : null}
+      {submitError ? <p className="text-sm text-red-600">{submitError}</p> : null}
 
       <button
         type="submit"
         disabled={isSubmitting}
-        className="rounded-full bg-[#1A6B3C] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#14552f] disabled:opacity-70"
+        className="rounded-full bg-[#1A6B3C] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#14552f] disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {isSubmitting ? 'Sending...' : 'Send Inquiry'}
       </button>
@@ -193,9 +193,9 @@ function Field({
 }) {
   return (
     <label className="block">
-      <span className="mb-2 block text-sm font-medium text-slate-200">{label}</span>
+      <span className="mb-2 block text-sm font-medium text-gray-900">{label}</span>
       {children}
-      {error ? <span className="mt-1 block text-xs text-red-400">{error}</span> : null}
+      {error ? <span className="mt-1 block text-xs text-red-600">{error}</span> : null}
     </label>
   );
 }

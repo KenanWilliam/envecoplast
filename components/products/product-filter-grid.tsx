@@ -29,7 +29,7 @@ export function ProductFilterGrid() {
               'rounded-full border px-4 py-2 text-sm font-semibold transition',
               activeFilter === filter
                 ? 'border-[#1A6B3C] bg-[#1A6B3C] text-white'
-                  : 'border-slate-300 bg-white text-slate-700 hover:border-[#1A6B3C] hover:text-[#1A6B3C]',
+                : 'border-gray-300 bg-white text-gray-900 hover:border-[#1A6B3C] hover:text-[#1A6B3C]',
             )}
           >
             {filter}
@@ -52,28 +52,32 @@ export function ProductFilterGrid() {
                 comingSoon ? 'opacity-75' : '',
               )}
             >
-              <div className="relative mb-5 aspect-[16/10] overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-[#edf5ef] via-[#eef4fb] to-[#ffffff] p-5 text-[#111111]">
+              <div className="relative mb-5 aspect-[16/10] overflow-hidden rounded-2xl border border-gray-200 bg-gradient-to-br from-[#edf5ef] via-[#eef4fb] to-[#ffffff] p-5 text-gray-900">
                 <div className="absolute inset-0 bg-[linear-gradient(140deg,rgba(26,107,60,0.08),transparent_48%)]" />
                 <p className="relative text-xs font-semibold uppercase tracking-[0.16em] text-[#1A6B3C]">{product.heroLabel}</p>
                 <h3 className="relative mt-3 text-xl font-semibold leading-tight">{product.name}</h3>
-                <p className="relative mt-2 text-xs text-slate-600">{product.imageHint}</p>
+                <p className="relative mt-2 text-xs text-gray-700">{product.imageHint}</p>
               </div>
 
               <div className="mb-4 flex items-center justify-between">
-                <span className="text-sm font-medium text-slate-600">{product.category}</span>
+                <span className="text-sm font-medium text-gray-700">{product.category}</span>
                 <span
                   className={cn(
                     'rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.08em]',
-                    comingSoon ? 'bg-slate-100 text-slate-500' : 'bg-emerald-50 text-emerald-700',
+                    comingSoon ? 'bg-gray-100 text-gray-600' : 'bg-emerald-50 text-emerald-700',
                   )}
                 >
                   {product.status}
                 </span>
               </div>
 
-              <p className="text-sm leading-7 text-slate-600">{product.shortDescription}</p>
+              <p className="text-sm leading-7 text-gray-700">{product.shortDescription}</p>
 
-              <ul className="mt-4 space-y-2 text-sm text-slate-700">
+              <div className="mt-3 rounded-lg bg-gray-50 px-3 py-2 text-xs font-medium text-gray-700">
+                <span className="text-[#1A6B3C] font-semibold">MOQ:</span> Contact for pricing
+              </div>
+
+              <ul className="mt-4 space-y-2 text-sm text-gray-700">
                 {product.specs.slice(0, 3).map((spec) => (
                   <li key={spec} className="flex items-start gap-2">
                     <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#F5C400]" />
@@ -84,15 +88,15 @@ export function ProductFilterGrid() {
 
               <div className="mt-6 flex items-center gap-3">
                 <Link
-                  href={`/contact?product=${encodeURIComponent(product.name)}&inquiryType=Place%20an%20Order`}
+                  href={comingSoon ? '#' : `/contact?product=${encodeURIComponent(product.name)}&inquiryType=Place%20an%20Order`}
                   className={cn(
                     'rounded-full px-4 py-2 text-sm font-semibold transition',
                     comingSoon
-                      ? 'pointer-events-none bg-slate-100 text-slate-500'
+                      ? 'pointer-events-none bg-gray-100 text-gray-600'
                       : 'bg-[#1A6B3C] text-white hover:bg-[#14552f]',
                   )}
                 >
-                  Request a Quote
+                  {comingSoon ? 'Coming Soon' : 'Request a Quote'}
                 </Link>
                 <Link href={`/products/${product.slug}`} className="text-sm font-semibold text-[#1B4F8A] hover:text-[#1A6B3C]">
                   View Product

@@ -95,7 +95,7 @@ export const products: Product[] = [
     specs: ['Coming soon'],
     useCases: ['Coming soon'],
     heroLabel: 'Coming Soon',
-    imageHint: 'Future product concept placeholder',
+    imageHint: 'Product concept – launching Q3 2026',
   },
   {
     slug: 'roofing-tiles',
@@ -108,7 +108,7 @@ export const products: Product[] = [
     specs: ['Coming soon'],
     useCases: ['Coming soon'],
     heroLabel: 'Coming Soon',
-    imageHint: 'Future product concept placeholder',
+    imageHint: 'Product concept – launching Q3 2026',
   },
   {
     slug: 'plastic-lumber',
@@ -121,7 +121,7 @@ export const products: Product[] = [
     specs: ['Coming soon'],
     useCases: ['Coming soon'],
     heroLabel: 'Coming Soon',
-    imageHint: 'Future product concept placeholder',
+    imageHint: 'Product concept – launching Q3 2026',
   },
   {
     slug: 'custom-molded-products',
@@ -134,7 +134,7 @@ export const products: Product[] = [
     specs: ['Coming soon'],
     useCases: ['Coming soon'],
     heroLabel: 'Coming Soon',
-    imageHint: 'Future product concept placeholder',
+    imageHint: 'Product concept – launching Q3 2026',
   },
 ];
 

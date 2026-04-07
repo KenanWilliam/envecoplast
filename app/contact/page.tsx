@@ -21,8 +21,8 @@ export default function ContactPage() {
 
       <section className="mt-10 grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
         <aside className="glass-card rounded-3xl p-6">
-          <h2 className="text-xl font-semibold text-[#111111]">Envecoplast Company Limited</h2>
-          <div className="mt-5 space-y-4 text-sm text-slate-700">
+          <h2 className="text-xl font-semibold text-gray-900">Envecoplast Company Limited</h2>
+          <div className="mt-5 space-y-4 text-sm text-gray-700">
             <p className="flex items-center gap-2">
               <Mail className="h-4 w-4 text-[#1A6B3C]" />
               <a href={`mailto:${site.email}`} className="hover:underline">
@@ -37,7 +37,7 @@ export default function ContactPage() {
             </p>
             <p className="flex items-center gap-2">
               <MapPin className="h-4 w-4 text-[#1A6B3C]" />
-              {site.location}
+              <span>{site.locationDetailed}</span>
             </p>
           </div>
 
@@ -50,13 +50,13 @@ export default function ContactPage() {
           </a>
 
           <div className="mt-6 flex items-center gap-3">
-            <a href={site.social.instagram} className="rounded-full border border-slate-200 p-2 text-slate-600">
+            <a href={site.social.instagram} className="rounded-full border border-gray-300 p-2 text-gray-700">
               <Globe className="h-4 w-4" />
             </a>
-            <a href={site.social.linkedin} className="rounded-full border border-slate-200 p-2 text-slate-600">
+            <a href={site.social.linkedin} className="rounded-full border border-gray-300 p-2 text-gray-700">
               <Send className="h-4 w-4" />
             </a>
-            <a href={site.social.facebook} className="rounded-full border border-slate-200 p-2 text-slate-600">
+            <a href={site.social.facebook} className="rounded-full border border-gray-300 p-2 text-gray-700">
               <Globe className="h-4 w-4" />
             </a>
           </div>
@@ -64,8 +64,17 @@ export default function ContactPage() {
 
         <Suspense
           fallback={
-            <div className="glass-card rounded-3xl p-6 text-sm text-slate-600">
-              Loading form...
+            <div className="glass-card rounded-3xl p-6">
+              <h3 className="text-lg font-semibold text-gray-900">Contact Form</h3>
+              <p className="mt-3 text-sm text-gray-700">If the form doesn't load, please reach out directly:</p>
+              <div className="mt-4 space-y-2 text-sm">
+                <a href={`mailto:${site.email}`} className="block font-semibold text-[#1A6B3C] hover:underline">
+                  {site.email}
+                </a>
+                <a href={`tel:${site.phone.replaceAll(' ', '')}`} className="block font-semibold text-[#1A6B3C] hover:underline">
+                  {site.phone}
+                </a>
+              </div>
             </div>
           }
         >
