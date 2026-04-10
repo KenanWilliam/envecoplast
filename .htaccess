@@ -1,8 +1,15 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
+
+  # Don't rewrite if it's a real file or directory
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule ^(.*)$ /server.js [QSA,L]
+
+  # Proxy all requests to Node.js app on port 3000
+  RewriteRule ^(.*)$ http://localhost:3000/$1 [P,L]
 </IfModule>
 
+<IfModule mod_proxy.c>
+  ProxyPreserveHost On
+</IfModule>

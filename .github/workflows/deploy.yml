@@ -22,10 +22,20 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Copy static assets into standalone
+      - name: Prepare deployment package
         run: |
+          # Copy static assets into standalone
           cp -r .next/static .next/standalone/.next/static
           cp -r public .next/standalone/public
+
+          # Copy node_modules for runtime dependencies
+          cp -r node_modules .next/standalone/node_modules
+
+          # Copy server.js
+          cp server.js .next/standalone/server.js
+
+          # Copy package.json for reference
+          cp package.json .next/standalone/package.json
 
       - name: Deploy to Spaceship via rsync
         env:
@@ -45,9 +55,14 @@ jobs:
           # Add host to known_hosts
           ssh-keyscan -p ${{ secrets.SPACESHIP_SSH_PORT }} ${{ secrets.SPACESHIP_HOST }} >> ~/.ssh/known_hosts 2>/dev/null || true
 
-          # Deploy via rsync
+          # Deploy via rsync (excluding .git and other unnecessary files)
           echo "🚀 Starting rsync deployment..."
-          rsync -avz --delete -e "ssh -p ${{ secrets.SPACESHIP_SSH_PORT }} -o StrictHostKeyChecking=no" \
+          rsync -avz --delete \
+            --exclude '.git' \
+            --exclude '.gitignore' \
+            --exclude '.env*' \
+            --exclude 'README.md' \
+            -e "ssh -p ${{ secrets.SPACESHIP_SSH_PORT }} -o StrictHostKeyChecking=no" \
             .next/standalone/ ${{ secrets.SPACESHIP_USERNAME }}@${{ secrets.SPACESHIP_HOST }}:${{ secrets.SPACESHIP_APP_PATH }}/
 
           # Cleanup
@@ -72,11 +87,13 @@ jobs:
           # Add host to known_hosts
           ssh-keyscan -p ${{ secrets.SPACESHIP_SSH_PORT }} ${{ secrets.SPACESHIP_HOST }} >> ~/.ssh/known_hosts 2>/dev/null || true
 
-          # SSH and restart app
+          # SSH and restart app using cPanel's Node.js app manager
           echo "🔄 Restarting Node.js app..."
           ssh -p ${{ secrets.SPACESHIP_SSH_PORT }} -o StrictHostKeyChecking=no ${{ secrets.SPACESHIP_USERNAME }}@${{ secrets.SPACESHIP_HOST }} << 'EOF'
+          # Touch the restart file for cPanel Node.js app manager to detect changes
           mkdir -p ${{ secrets.SPACESHIP_APP_PATH }}/tmp
           touch ${{ secrets.SPACESHIP_APP_PATH }}/tmp/restart.txt
+          echo "✅ App restart initiated"
           EOF
 
           # Cleanup

@@ -1,0 +1,43 @@
+# cPanel Deployment Configuration
+# This file helps cPanel understand how to deploy the application
+
+---
+deployment:
+  # Application name in cPanel
+  env: production
+
+  # Repository details
+  repository: # GitHub repository URL (will be filled by cPanel)
+  branch: main
+
+  # Build configuration
+  build_command: npm ci && npm run build
+  start_script: server.js
+
+  # Node.js version requirement
+  nodejs_version: 20
+
+  # Application settings
+  app:
+    port: 3000
+    max_memory: 512M
+
+  # Files to ignore during deployment
+  ignore:
+    - .git
+    - .github
+    - .gitignore
+    - node_modules (deployed separately)
+    - .env.development
+    - .env.local
+    - README.md
+    - docs
+    - .next/cache
+
+# For manual setup on cPanel:
+# 1. Create Node.js application in cPanel
+# 2. Set application root to: /public_html (or your deployment path)
+# 3. Set application start file to: server.js
+# 4. Set Node.js version to: 20.x or latest
+# 5. Port: 3000 (can be auto-assigned)
+# 6. Ensure .htaccess allows proxying to the Node.js app
