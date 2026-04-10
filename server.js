@@ -2,6 +2,7 @@ const { createServer } = require('http');
 const { parse } = require('url');
 const next = require('next');
 
+// Next.js app instance
 const app = next({ dev: false });
 const handle = app.getRequestHandler();
 
