@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { MessageCircle, Globe, Mail } from 'lucide-react';
 import { site } from '@/lib/site';
 import { liveProducts } from '@/lib/products';
 
@@ -22,9 +21,9 @@ export function Footer() {
             <Image
               src="/brand/envecoplast-full-vert.svg"
               alt="Envecoplast logo"
-              width={160}
-              height={200}
-              className="h-auto w-48"
+              width={220}
+              height={270}
+              className="h-auto w-64"
             />
           </div>
           <p className="mt-4 max-w-sm text-sm font-semibold leading-relaxed text-[#1A6B3C]">{site.tagline}</p>
@@ -60,25 +59,11 @@ export function Footer() {
           <h3 className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-900">Contact</h3>
           <div className="mt-4 space-y-2 text-sm text-gray-600">
             <p>{site.location}</p>
-            <a href={`mailto:${site.email}`} className="block transition hover:text-[#1B4F8A]">
-              {site.email}
+            <a href={`mailto:${site.contact.email}`} className="block transition hover:text-[#1B4F8A]">
+              {site.contact.email}
             </a>
-            <a href={`tel:${site.phone.replaceAll(' ', '')}`} className="block transition hover:text-[#1B4F8A]">
-              {site.phone}
-            </a>
-          </div>
-          <div className="mt-4 flex items-center gap-3 text-gray-700">
-            <a href={site.social.linkedin} aria-label="LinkedIn" className="rounded-full border border-gray-300 p-2 hover:border-[#1B4F8A] hover:text-[#1B4F8A] transition" title="LinkedIn">
-              <Mail className="h-4 w-4" />
-            </a>
-            <a href={site.social.instagram} aria-label="Instagram" className="rounded-full border border-gray-300 p-2 hover:border-[#0284C7] hover:text-[#0284C7] transition" title="Instagram">
-              <Globe className="h-4 w-4" />
-            </a>
-            <a href={site.social.facebook} aria-label="Facebook" className="rounded-full border border-gray-300 p-2 hover:border-gray-900 hover:text-gray-900 transition" title="Facebook">
-              <Globe className="h-4 w-4" />
-            </a>
-            <a href={site.social.whatsapp} aria-label="WhatsApp" className="rounded-full border border-gray-300 p-2 hover:border-[#1A6B3C] hover:text-[#1A6B3C] transition">
-              <MessageCircle className="h-4 w-4" />
+            <a href={`tel:${site.contact.phone.replaceAll(' ', '')}`} className="block transition hover:text-[#1B4F8A]">
+              {site.contact.phone}
             </a>
           </div>
         </div>

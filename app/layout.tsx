@@ -15,6 +15,11 @@ export const metadata: Metadata = {
   },
   description: site.description,
   metadataBase: new URL('https://envecoplast.com'),
+  icons: {
+    icon: '/brand/envecoplast-logo.svg',
+    shortcut: '/brand/envecoplast-logo.svg',
+    apple: '/brand/envecoplast-logo.svg',
+  },
   openGraph: {
     title: `${site.name} | Sustainable Construction Materials`,
     description: site.description,

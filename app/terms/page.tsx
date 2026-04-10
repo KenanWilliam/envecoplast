@@ -49,7 +49,7 @@ export default function TermsPage() {
           <section>
             <h2 className="text-xl font-semibold text-gray-900">Contact</h2>
             <p className="mt-2">
-              For legal inquiries, contact us at <a href={`mailto:${site.email}`} className="text-[#1B4F8A] hover:underline">{site.email}</a>.
+              For legal inquiries, contact us at <a href={`mailto:${site.contact.email}`} className="text-[#1B4F8A] hover:underline">{site.contact.email}</a>.
             </p>
           </section>
         </div>

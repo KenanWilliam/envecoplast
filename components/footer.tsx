@@ -17,8 +17,8 @@ export function Footer() {
           <a href="/terms/" className="transition hover:text-white">
             Terms of Service
           </a>
-          <a href={`mailto:${site.email}`} className="transition hover:text-white">
-            {site.email}
+          <a href={`mailto:${site.contact.email}`} className="transition hover:text-white">
+            {site.contact.email}
           </a>
         </div>
       </Container>

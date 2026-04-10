@@ -32,7 +32,7 @@ export const homeStats = [
 export const processSteps = [
   {
     icon: Truck,
-    title: 'Plastic Waste Collection',
+    title: 'Waste Collection',
     summary:
       'Community, industrial, and post-consumer streams are aggregated through traceable intake partnerships across Kenya.',
   },

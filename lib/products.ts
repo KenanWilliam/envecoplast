@@ -16,8 +16,8 @@ export type Product = {
 
 export const products: Product[] = [
   {
-    slug: 'interlocking-plastic-construction-block',
-    name: 'Interlocking Plastic Construction Block',
+    slug: 'interlocking-construction-block',
+    name: 'Interlocking Construction Block',
     tagline: 'Fast-build blocks for resilient projects',
     shortDescription: 'No mortar required, weather resistant, and designed for rapid construction.',
     description:
@@ -39,12 +39,12 @@ export const products: Product[] = [
     imageHint: 'Interlocking block stack on active construction site',
   },
   {
-    slug: 'plastic-chips',
-    name: 'Plastic Chips',
-    tagline: 'Sorted and graded feedstock from post-consumer plastic',
+    slug: 'chips',
+    name: 'Chips',
+    tagline: 'Sorted and graded feedstock from post-consumer materials',
     shortDescription: 'Post-consumer sourced chips, sorted and graded for manufacturing reuse.',
     description:
-      'Our plastic chips are produced from responsibly sourced post-consumer materials and processed through strict sorting and grading workflows. They provide a dependable raw material stream for industrial users focused on circular production.',
+      'Our chips are produced from responsibly sourced post-consumer materials and processed through strict sorting and grading workflows. They provide a dependable raw material stream for industrial users focused on circular production.',
     category: 'Raw Materials',
     status: 'In Stock',
     specs: [
@@ -62,8 +62,8 @@ export const products: Product[] = [
     imageHint: 'Sorted recycled chips in industrial processing trays',
   },
   {
-    slug: 'plastic-pellets',
-    name: 'Plastic Pellets',
+    slug: 'pellets',
+    name: 'Pellets',
     tagline: 'Consistent-grade recycled pellets for scalable production',
     shortDescription: 'Processed pellets with consistent grade and bulk availability.',
     description:
@@ -78,15 +78,15 @@ export const products: Product[] = [
     ],
     useCases: [
       'Factories seeking repeatable recycled inputs',
-      'Fabricators building plastic-based products',
+      'Fabricators building material-based products',
       'Institutional procurement for impact-led production',
     ],
     heroLabel: 'Production Grade',
     imageHint: 'Consistent recycled pellets prepared for bulk dispatch',
   },
   {
-    slug: 'plastic-pavers',
-    name: 'Plastic Pavers',
+    slug: 'pavers',
+    name: 'Pavers',
     tagline: 'Durable paving systems from recycled polymers',
     shortDescription: 'Road and compound paving options currently in development.',
     description: 'Coming soon product line.',
@@ -111,8 +111,8 @@ export const products: Product[] = [
     imageHint: 'Product concept – launching Q3 2026',
   },
   {
-    slug: 'plastic-lumber',
-    name: 'Plastic Lumber',
+    slug: 'lumber',
+    name: 'Lumber',
     tagline: 'Engineered polymer lumber for durable builds',
     shortDescription: 'Low-maintenance structural profiles in development.',
     description: 'Coming soon product line.',
