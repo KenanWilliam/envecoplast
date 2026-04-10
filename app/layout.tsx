@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
   },
   verification: {
-    google: 'REPLACE_WITH_GOOGLE_SEARCH_CONSOLE_TOKEN',
+    google: 'google-site-verification=AcVnGNOMCNCq-2UxFrZ_dDWL8qk4DvXWUfEx7q7RxR0',
   },
   icons: {
     icon: '/brand/envecoplast-logo.svg',
