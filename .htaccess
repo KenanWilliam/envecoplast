@@ -1,3 +1,9 @@
+# This is for cPanel's Node.js handler (Passenger)
+# If your cPanel username is different from what's below, you'll need to manually edit this on the server
+PassengerEnabled on
+PassengerAppType node
+PassengerStartupFile server.js
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
