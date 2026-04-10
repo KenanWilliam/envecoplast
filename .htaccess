@@ -1,21 +1,22 @@
+# 1. DISABLE DIRECTORY INDEXING
 Options -Indexes
+DirectoryIndex server.js
 
-# 1. CPANEL NODEJS HANDLER (Passenger)
+# 2. CPANEL NODEJS HANDLER (Passenger)
 PassengerEnabled on
 PassengerAppType node
 PassengerStartupFile server.js
 PassengerAppRoot "/home/dufoopqjnr/envecoplast.com"
+PassengerBaseURI "/"
 
-# 2. STATIC ASSETS MAPPING
-# Map /_next requests to the hidden .next folder so Apache can serve CSS/JS
+# 3. STATIC ASSETS & ROUTING
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  RewriteBase /
 
-  # Serve the static files from the .next folder directly
-  RewriteRule ^_next/(.*)$ .next/$1 [L]
-  
-  # If a file exists in public/, serve it
-  RewriteCond %{DOCUMENT_ROOT}/public/$1 -f
+  # Map /_next/static requests to the physical .next/static folder
+  RewriteRule ^_next/static/(.*)$ .next/static/$1 [L]
+
+  # If the requested file exists in the public/ folder, serve it directly
+  RewriteCond %{DOCUMENT_ROOT}/public%{REQUEST_URI} -f
   RewriteRule ^(.*)$ public/$1 [L]
 </IfModule>
