@@ -28,12 +28,6 @@ jobs:
           cp -r .next/static .next/standalone/.next/static
           cp -r public .next/standalone/public
 
-          # Copy node_modules for runtime dependencies
-          cp -r node_modules .next/standalone/node_modules
-
-          # Copy server.js
-          cp server.js .next/standalone/server.js
-
           # Copy package.json for reference
           cp package.json .next/standalone/package.json
 
