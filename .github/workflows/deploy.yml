@@ -63,6 +63,7 @@ jobs:
           echo "🔄 Restarting Node.js app..."
           ssh -p ${{ secrets.SPACESHIP_SSH_PORT }} -o StrictHostKeyChecking=no ${{ secrets.SPACESHIP_USERNAME }}@${{ secrets.SPACESHIP_HOST }} << 'EOF'
           cd ${{ secrets.SPACESHIP_APP_PATH }}
+          mkdir -p tmp
           npm ci --production
           touch tmp/restart.txt
           EOF
