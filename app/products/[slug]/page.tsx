@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getProductBySlug, liveProducts } from '@/lib/products';
+import { ProductJsonLd } from '@/components/seo/json-ld';
 
 export function generateStaticParams() {
   return liveProducts.map((product) => ({ slug: product.slug }));
@@ -15,9 +16,31 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     return { title: 'Product Not Found' };
   }
 
+  const title = `${product.name} — Recycled Construction Material | Kenya`;
+  const description = `${product.shortDescription} Available from Envecoplast Ltd, Kenya. Request a quote today.`;
+  const url = `https://www.envecoplast.com/products/${product.slug}`;
+
   return {
-    title: product.name,
-    description: product.shortDescription,
+    title,
+    description,
+    keywords: [
+      product.name,
+      `${product.name} Kenya`,
+      `buy ${product.name}`,
+      `${product.name} price`,
+      `recycled ${product.name} supplier`,
+      'Envecoplast',
+      'recycled plastic construction materials Kenya',
+    ],
+    openGraph: {
+      title,
+      description,
+      url,
+      type: 'website',
+    },
+    alternates: {
+      canonical: url,
+    },
   };
 }
 
@@ -33,6 +56,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
   return (
     <main className="mx-auto grid w-full max-w-7xl gap-10 px-6 py-20 lg:grid-cols-[1fr_320px] lg:px-8">
+      <ProductJsonLd product={product} />
       <div>
         <section className="glass-card rounded-[2rem] p-6">
           <div className="relative overflow-hidden rounded-3xl border border-gray-200 bg-gradient-to-br from-[#eef5ef] via-[#eef4fb] to-[#ffffff] p-8 text-gray-900">

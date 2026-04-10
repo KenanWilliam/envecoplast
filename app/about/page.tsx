@@ -5,9 +5,12 @@ import { missionValues } from '@/lib/content';
 import { ArrowRight, Trash2, Hammer, Target, Eye, Heart } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'About',
+  title: 'About Envecoplast — Plastic Recycling & Construction Materials',
   description:
-    'Learn how Envecoplast transforms plastic waste into high-quality construction materials across Kenya.',
+    'Envecoplast Ltd transforms post-consumer plastic waste into durable construction materials. Learn about our mission, process, and impact across Kenya.',
+  alternates: {
+    canonical: 'https://www.envecoplast.com/about',
+  },
 };
 
 export default function AboutPage() {

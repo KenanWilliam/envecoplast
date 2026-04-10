@@ -6,9 +6,12 @@ import { SectionHeading } from '@/components/section-heading';
 import { processSteps } from '@/lib/content';
 
 export const metadata: Metadata = {
-  title: 'How It Works',
+  title: 'How It Works — From Plastic Waste to Construction Materials',
   description:
-    'Follow Envecoplast process from plastic collection to quality-tested construction materials.',
+    'Discover how Envecoplast collects, sorts, and transforms plastic waste into certified recycled construction materials — chips, pellets, and interlocking blocks.',
+  alternates: {
+    canonical: 'https://www.envecoplast.com/how-it-works',
+  },
 };
 
 export default function HowItWorksPage() {

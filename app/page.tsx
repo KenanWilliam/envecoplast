@@ -9,7 +9,11 @@ import { site } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Home',
-  description: site.description,
+  description:
+    'Buy traceable recycled plastic chips, pellets, and interlocking construction blocks from Envecoplast Ltd, Kenya\'s leading plastic recycling and construction materials company.',
+  alternates: {
+    canonical: 'https://www.envecoplast.com',
+  },
 };
 
 export default function HomePage() {

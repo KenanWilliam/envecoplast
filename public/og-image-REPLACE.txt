@@ -1,0 +1,14 @@
+Replace this file with a 1200x630 PNG for social sharing previews.
+
+The OG image should:
+- Have dimensions of 1200x630 pixels
+- Use the Envecoplast brand colors (green #1A6B3C)
+- Display "Envecoplast Ltd" branding
+- Include text: "Recycled Plastic Construction Materials | Kenya"
+- Use white text on a green background for maximum contrast
+
+You can create this using:
+- Figma
+- Vercel's OG image generation
+- A design tool like Canva
+- Node.js with the "sharp" library

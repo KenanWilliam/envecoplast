@@ -6,8 +6,12 @@ import { SectionHeading } from '@/components/section-heading';
 import { site } from '@/lib/site';
 
 export const metadata: Metadata = {
-  title: 'Contact',
-  description: 'Send project requirements, request a quote, or discuss partnerships with Envecoplast.',
+  title: 'Contact — Request a Quote or Order',
+  description:
+    'Contact Envecoplast to request a quote for recycled plastic chips, pellets, or construction blocks. Fast response. Bulk orders welcome.',
+  alternates: {
+    canonical: 'https://www.envecoplast.com/contact',
+  },
 };
 
 export default function ContactPage() {

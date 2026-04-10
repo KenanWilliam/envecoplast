@@ -5,9 +5,12 @@ import { SectionHeading } from '@/components/section-heading';
 import { buyerPersonas, whyPanels } from '@/lib/content';
 
 export const metadata: Metadata = {
-  title: 'Why Us',
+  title: 'Why Choose Envecoplast — Quality, Speed & Sustainability',
   description:
-    'Discover why developers, contractors, institutions, and partners choose Envecoplast solutions.',
+    'Lower costs, faster build timelines, and certified recycled materials. See why contractors and developers across Kenya choose Envecoplast.',
+  alternates: {
+    canonical: 'https://www.envecoplast.com/why-us',
+  },
 };
 
 export default function WhyUsPage() {

@@ -4,42 +4,73 @@ import './globals.css';
 import { site } from '@/lib/site';
 import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
+import { OrganizationJsonLd } from '@/components/seo/json-ld';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 const sora = Sora({ subsets: ['latin'], variable: '--font-display' });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.envecoplast.com'),
   title: {
-    default: `${site.name} | Sustainable Construction Materials`,
-    template: `%s | ${site.name}`,
+    default: 'Envecoplast Ltd — Recycled Plastic Construction Materials | Kenya',
+    template: '%s | Envecoplast Ltd',
   },
-  description: site.description,
-  metadataBase: new URL('https://envecoplast.com'),
-  icons: {
-    icon: '/brand/envecoplast-logo.svg',
-    shortcut: '/brand/envecoplast-logo.svg',
-    apple: '/brand/envecoplast-logo.svg',
-  },
+  description:
+    'Envecoplast Ltd sells traceable pre-processed recycled plastics and manufactures eco-friendly interlocking construction blocks. Serving developers, contractors, and manufacturers across Kenya.',
+  keywords: [
+    'recycled plastic construction materials Kenya',
+    'interlocking building blocks Kenya',
+    'plastic recycling company Nairobi',
+    'eco-friendly construction blocks',
+    'recycled plastic chips pellets Kenya',
+    'sustainable building materials Africa',
+    'plastic waste recycling Nairobi',
+    'construction blocks from recycled plastic',
+    'buy plastic pellets Kenya',
+    'green building materials Kenya',
+    'Envecoplast',
+    'recycled plastic blocks for sale',
+    'circular economy construction Africa',
+  ],
   openGraph: {
-    title: `${site.name} | Sustainable Construction Materials`,
-    description: site.description,
-    siteName: site.name,
     type: 'website',
     locale: 'en_KE',
+    url: 'https://www.envecoplast.com',
+    siteName: 'Envecoplast Ltd',
+    title: 'Envecoplast Ltd — Recycled Plastic Construction Materials | Kenya',
+    description:
+      'Traceable recycled plastics and high-quality interlocking construction blocks manufactured in Kenya.',
     images: [
       {
-        url: 'https://envecoplast.com/brand/envecoplast-full-hrtl.svg',
+        url: '/og-image.png',
         width: 1200,
-        height: 627,
-        alt: 'Envecoplast - Transforming plastic waste into construction materials',
+        height: 630,
+        alt: 'Envecoplast Ltd — Recycled Plastic Construction Materials',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${site.name} | Sustainable Construction Materials`,
-    description: site.description,
-    images: ['https://envecoplast.com/brand/envecoplast-full-hrtl.svg'],
+    title: 'Envecoplast Ltd — Recycled Construction Materials | Kenya',
+    description:
+      'Recycled plastic chips, pellets, and interlocking blocks for fast, affordable, sustainable construction.',
+    images: ['/og-image.png'],
+  },
+  alternates: {
+    canonical: 'https://www.envecoplast.com',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
+  },
+  verification: {
+    google: 'REPLACE_WITH_GOOGLE_SEARCH_CONSOLE_TOKEN',
+  },
+  icons: {
+    icon: '/brand/envecoplast-logo.svg',
+    shortcut: '/brand/envecoplast-logo.svg',
+    apple: '/brand/envecoplast-logo.svg',
   },
 };
 
@@ -47,6 +78,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={`${inter.variable} ${sora.variable} bg-white text-gray-900 antialiased`}>
+        <OrganizationJsonLd />
         <Navbar />
         {children}
         <Footer />
