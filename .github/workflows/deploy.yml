@@ -28,6 +28,9 @@ jobs:
           cp -r .next/static .next/standalone/.next/static
           cp -r public .next/standalone/public
 
+          # Rename server.js to app.js to avoid naming conflicts
+          mv .next/standalone/server.js .next/standalone/app.js
+
           # Copy package.json for reference
           cp package.json .next/standalone/package.json
 

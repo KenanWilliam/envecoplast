@@ -1,17 +1,13 @@
-# 1. FORCE NODEJS EXECUTION
-<Files "server.js">
-  SetHandler application/x-httpd-php-source
-</Files>
+# 1. DISABLE DIRECTORY INDEXING
+Options -Indexes
+DirectoryIndex app.js
 
+# 2. CPANEL NODEJS HANDLER (Passenger)
 PassengerEnabled on
 PassengerAppType node
-PassengerStartupFile server.js
+PassengerStartupFile app.js
 PassengerAppRoot "/home/dufoopqjnr/envecoplast.com"
 PassengerBaseURI "/"
-
-# 2. CORE SERVER SETTINGS
-Options -Indexes
-DirectoryIndex server.js
 
 # 3. STATIC ASSETS & ROUTING
 <IfModule mod_rewrite.c>
