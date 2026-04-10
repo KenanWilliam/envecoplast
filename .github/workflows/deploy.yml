@@ -35,32 +35,41 @@ jobs:
           cp package.json deploy/
           cp package-lock.json deploy/
 
-      - name: Setup SSH with passphrase
+      - name: Setup SSH, Deploy, and Restart
         env:
           DEPLOY_KEY: ${{ secrets.SPACESHIP_SSH_KEY }}
           SSH_PASSPHRASE: ${{ secrets.SPACESHIP_SSH_PASSPHRASE }}
         run: |
+          # Setup SSH directory and key
           mkdir -p ~/.ssh
           cat > ~/.ssh/deploy_key << 'KEYEOF'
           ${{ secrets.SPACESHIP_SSH_KEY }}
           KEYEOF
           chmod 600 ~/.ssh/deploy_key
+
+          # Start ssh-agent and add key
           eval "$(ssh-agent -s)"
           echo "$SSH_PASSPHRASE" | ssh-add ~/.ssh/deploy_key
+
+          # Add host to known_hosts
           ssh-keyscan -p ${{ secrets.SPACESHIP_SSH_PORT }} ${{ secrets.SPACESHIP_HOST }} >> ~/.ssh/known_hosts 2>/dev/null || true
 
-      - name: Deploy to Spaceship via rsync
-        run: |
+          # Deploy via rsync
+          echo "🚀 Starting rsync deployment..."
           rsync -avz --delete -e "ssh -p ${{ secrets.SPACESHIP_SSH_PORT }} -o StrictHostKeyChecking=no" \
             ./deploy/ ${{ secrets.SPACESHIP_USERNAME }}@${{ secrets.SPACESHIP_HOST }}:${{ secrets.SPACESHIP_APP_PATH }}/
 
-      - name: Restart Node.js app on Spaceship
-        run: |
+          # SSH and restart app
+          echo "🔄 Restarting Node.js app..."
           ssh -p ${{ secrets.SPACESHIP_SSH_PORT }} -o StrictHostKeyChecking=no ${{ secrets.SPACESHIP_USERNAME }}@${{ secrets.SPACESHIP_HOST }} << 'EOF'
           cd ${{ secrets.SPACESHIP_APP_PATH }}
           npm ci --production
           touch tmp/restart.txt
           EOF
+
+          # Cleanup
+          rm -f ~/.ssh/deploy_key
+          ssh-agent -k
 
       - name: Deployment success
         run: echo "✅ Deployment to Spaceship completed successfully"
