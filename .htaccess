@@ -1,24 +1,21 @@
 Options -Indexes
 
-# This is for cPanel's Node.js handler (Passenger)
-# If your cPanel username is different from what's below, you'll need to manually edit this on the server
+# 1. CPANEL NODEJS HANDLER (Passenger)
 PassengerEnabled on
 PassengerAppType node
 PassengerStartupFile server.js
 PassengerAppRoot "/home/dufoopqjnr/envecoplast.com"
 
+# 2. STATIC ASSETS MAPPING
+# Map /_next requests to the hidden .next folder so Apache can serve CSS/JS
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
 
-  # Don't rewrite if it's a real file or directory
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-
-  # Proxy all requests to Node.js app on port 3000
-  RewriteRule ^(.*)$ http://localhost:3000/$1 [P,L]
-</IfModule>
-
-<IfModule mod_proxy.c>
-  ProxyPreserveHost On
+  # Serve the static files from the .next folder directly
+  RewriteRule ^_next/(.*)$ .next/$1 [L]
+  
+  # If a file exists in public/, serve it
+  RewriteCond %{DOCUMENT_ROOT}/public/$1 -f
+  RewriteRule ^(.*)$ public/$1 [L]
 </IfModule>
