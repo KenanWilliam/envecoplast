@@ -31,6 +31,9 @@ jobs:
           # Copy package.json for reference
           cp package.json .next/standalone/package.json
 
+          # Copy .htaccess to standalone root
+          cp .htaccess .next/standalone/.htaccess
+
       - name: Deploy to Spaceship via rsync
         env:
           SSH_PASSPHRASE: ${{ secrets.SPACESHIP_SSH_PASSPHRASE }}
