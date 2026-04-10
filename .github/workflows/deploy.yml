@@ -1,75 +1,51 @@
-name: Deploy to Spaceship
+name: Build & Deploy to Spaceship
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: 20
           cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Build Next.js
+      - name: Build
         run: npm run build
 
-      - name: Prepare deployment package
+      - name: Copy static assets into standalone
         run: |
-          mkdir -p deploy
-          cp -r .next deploy/
-          cp -r public deploy/
-          cp server.js deploy/
-          cp package.json deploy/
-          cp package-lock.json deploy/
-          cp .htaccess deploy/
+          cp -r .next/static .next/standalone/.next/static
+          cp -r public .next/standalone/public
 
-      - name: Setup SSH, Deploy, and Restart
-        env:
-          DEPLOY_KEY: ${{ secrets.SPACESHIP_SSH_KEY }}
-          SSH_PASSPHRASE: ${{ secrets.SPACESHIP_SSH_PASSPHRASE }}
-        run: |
-          # Setup SSH directory and key
-          mkdir -p ~/.ssh
-          cat > ~/.ssh/deploy_key << 'KEYEOF'
-          ${{ secrets.SPACESHIP_SSH_KEY }}
-          KEYEOF
-          chmod 600 ~/.ssh/deploy_key
+      - name: Deploy to Spaceship via rsync
+        uses: burnett01/rsync-deployments@7.0.1
+        with:
+          switches: -avzr --delete
+          path: .next/standalone/
+          remote_path: ${{ secrets.SPACESHIP_APP_PATH }}
+          remote_host: ${{ secrets.SPACESHIP_HOST }}
+          remote_port: ${{ secrets.SPACESHIP_SSH_PORT }}
+          remote_user: ${{ secrets.SPACESHIP_USERNAME }}
+          remote_key: ${{ secrets.SPACESHIP_SSH_KEY }}
 
-          # Start ssh-agent and add key
-          eval "$(ssh-agent -s)"
-          echo "$SSH_PASSPHRASE" | ssh-add ~/.ssh/deploy_key
-
-          # Add host to known_hosts
-          ssh-keyscan -p ${{ secrets.SPACESHIP_SSH_PORT }} ${{ secrets.SPACESHIP_HOST }} >> ~/.ssh/known_hosts 2>/dev/null || true
-
-          # Deploy via rsync
-          echo "🚀 Starting rsync deployment..."
-          rsync -avz --delete -e "ssh -p ${{ secrets.SPACESHIP_SSH_PORT }} -o StrictHostKeyChecking=no" \
-            ./deploy/ ${{ secrets.SPACESHIP_USERNAME }}@${{ secrets.SPACESHIP_HOST }}:${{ secrets.SPACESHIP_APP_PATH }}/
-
-          # SSH and restart app
-          echo "🔄 Restarting Node.js app..."
-          ssh -p ${{ secrets.SPACESHIP_SSH_PORT }} -o StrictHostKeyChecking=no ${{ secrets.SPACESHIP_USERNAME }}@${{ secrets.SPACESHIP_HOST }} << 'EOF'
-          cd ${{ secrets.SPACESHIP_APP_PATH }}
-          mkdir -p tmp
-          touch tmp/restart.txt
-          EOF
-
-          # Cleanup
-          rm -f ~/.ssh/deploy_key
-          ssh-agent -k
-
-      - name: Deployment success
-        run: echo "✅ Deployment to Spaceship completed successfully"
+      - name: Restart Node.js app
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.SPACESHIP_HOST }}
+          port: ${{ secrets.SPACESHIP_SSH_PORT }}
+          username: ${{ secrets.SPACESHIP_USERNAME }}
+          key: ${{ secrets.SPACESHIP_SSH_KEY }}
+          passphrase: ${{ secrets.SPACESHIP_SSH_PASSPHRASE }}
+          script: |
+            mkdir -p ${{ secrets.SPACESHIP_APP_PATH }}/tmp
+            touch ${{ secrets.SPACESHIP_APP_PATH }}/tmp/restart.txt
