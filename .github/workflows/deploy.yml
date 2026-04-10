@@ -35,35 +35,32 @@ jobs:
           cp package.json deploy/
           cp package-lock.json deploy/
 
-      - name: Deploy to Spaceship via rsync
+      - name: Setup SSH with passphrase
         env:
           DEPLOY_KEY: ${{ secrets.SPACESHIP_SSH_KEY }}
+          SSH_PASSPHRASE: ${{ secrets.SPACESHIP_SSH_PASSPHRASE }}
         run: |
           mkdir -p ~/.ssh
           cat > ~/.ssh/deploy_key << 'KEYEOF'
           ${{ secrets.SPACESHIP_SSH_KEY }}
           KEYEOF
           chmod 600 ~/.ssh/deploy_key
+          eval "$(ssh-agent -s)"
+          echo "$SSH_PASSPHRASE" | ssh-add ~/.ssh/deploy_key
           ssh-keyscan -p ${{ secrets.SPACESHIP_SSH_PORT }} ${{ secrets.SPACESHIP_HOST }} >> ~/.ssh/known_hosts 2>/dev/null || true
-          rsync -avz --delete -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.SPACESHIP_SSH_PORT }} -o StrictHostKeyChecking=no" \
+
+      - name: Deploy to Spaceship via rsync
+        run: |
+          rsync -avz --delete -e "ssh -p ${{ secrets.SPACESHIP_SSH_PORT }} -o StrictHostKeyChecking=no" \
             ./deploy/ ${{ secrets.SPACESHIP_USERNAME }}@${{ secrets.SPACESHIP_HOST }}:${{ secrets.SPACESHIP_APP_PATH }}/
-          rm -f ~/.ssh/deploy_key
 
       - name: Restart Node.js app on Spaceship
-        env:
-          DEPLOY_KEY: ${{ secrets.SPACESHIP_SSH_KEY }}
         run: |
-          mkdir -p ~/.ssh
-          cat > ~/.ssh/deploy_key << 'KEYEOF'
-          ${{ secrets.SPACESHIP_SSH_KEY }}
-          KEYEOF
-          chmod 600 ~/.ssh/deploy_key
-          ssh -i ~/.ssh/deploy_key -p ${{ secrets.SPACESHIP_SSH_PORT }} -o StrictHostKeyChecking=no ${{ secrets.SPACESHIP_USERNAME }}@${{ secrets.SPACESHIP_HOST }} << 'EOF'
+          ssh -p ${{ secrets.SPACESHIP_SSH_PORT }} -o StrictHostKeyChecking=no ${{ secrets.SPACESHIP_USERNAME }}@${{ secrets.SPACESHIP_HOST }} << 'EOF'
           cd ${{ secrets.SPACESHIP_APP_PATH }}
           npm ci --production
           touch tmp/restart.txt
           EOF
-          rm -f ~/.ssh/deploy_key
 
       - name: Deployment success
         run: echo "✅ Deployment to Spaceship completed successfully"
