@@ -267,7 +267,7 @@ Before adding secrets, collect these values:
 - **SPACESHIP_HOST:** Your server IP (from step 4.5) — e.g., `209.74.76.3`
 - **SPACESHIP_USERNAME:** Your cPanel username (top-right in cPanel) — e.g., `dufoopqjnr`
 - **SPACESHIP_SSH_PORT:** Your SSH port (from cPanel SSH Access) — e.g., `21098`
-- **SPACESHIP_APP_PATH:** `/home/{username}/envecoplast` (from step 3.5) — e.g., `/home/dufoopqjnr/envecoplast`
+- **SPACESHIP_APP_PATH:** `/home/{username}/public_html` — e.g., `/home/dufoopqjnr/public_html`
 - **SPACESHIP_SSH_KEY:** Your private key (from `~/.ssh/id_rsa`)
 
 ### Step 5.2: Add SSH Key Secret
@@ -321,8 +321,8 @@ Click **New repository secret** again.
 
 **Add Secret 5:**
 - **Name:** `SPACESHIP_APP_PATH`
-- **Value:** `/home/{cPanel_username}/envecoplast`
-  - Example: `/home/dufoopqjnr/envecoplast`
+- **Value:** `/home/{cPanel_username}/public_html`
+  - Example: `/home/dufoopqjnr/public_html`
 
 Click **Add secret**
 
