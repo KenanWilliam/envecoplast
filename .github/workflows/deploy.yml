@@ -30,6 +30,7 @@ jobs:
 
           # Rename server.js to app.js to avoid naming conflicts
           mv .next/standalone/server.js .next/standalone/app.js
+          chmod 755 .next/standalone/app.js
 
           # Copy package.json for reference
           cp package.json .next/standalone/package.json
@@ -90,7 +91,8 @@ jobs:
           # SSH and restart app using cPanel's Node.js app manager
           echo "🔄 Restarting Node.js app..."
           ssh -p ${{ secrets.SPACESHIP_SSH_PORT }} -o StrictHostKeyChecking=no ${{ secrets.SPACESHIP_USERNAME }}@${{ secrets.SPACESHIP_HOST }} << 'EOF'
-          # Touch the restart file for cPanel Node.js app manager to detect changes
+          # Clear the tmp folder to force a clean restart
+          rm -rf ${{ secrets.SPACESHIP_APP_PATH }}/tmp/*
           mkdir -p ${{ secrets.SPACESHIP_APP_PATH }}/tmp
           touch ${{ secrets.SPACESHIP_APP_PATH }}/tmp/restart.txt
           echo "✅ App restart initiated"
