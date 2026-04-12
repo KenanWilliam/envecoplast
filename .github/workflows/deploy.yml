@@ -61,6 +61,8 @@ jobs:
           rm -f ${{ secrets.SPACESHIP_APP_PATH }}/index.html ${{ secrets.SPACESHIP_APP_PATH }}/index.php
           rm -f /home/dufoopqjnr/public_html/index.html /home/dufoopqjnr/public_html/index.php
           rm -rf ${{ secrets.SPACESHIP_APP_PATH }}/.next
+          # CloudLinux demands node_modules be a symlink, so we must never have a physical folder there
+          rm -rf ${{ secrets.SPACESHIP_APP_PATH }}/node_modules
           EOF
 
           # Deploy via rsync (excluding .git and other unnecessary files)
@@ -70,6 +72,7 @@ jobs:
             --exclude '.gitignore' \
             --exclude '.env*' \
             --exclude 'README.md' \
+            --exclude 'node_modules' \
             -e "ssh -p ${{ secrets.SPACESHIP_SSH_PORT }} -o StrictHostKeyChecking=no" \
             .next/standalone/ ${{ secrets.SPACESHIP_USERNAME }}@${{ secrets.SPACESHIP_HOST }}:${{ secrets.SPACESHIP_APP_PATH }}/
 
