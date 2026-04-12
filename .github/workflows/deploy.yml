@@ -28,8 +28,8 @@ jobs:
           cp -r .next/static .next/standalone/.next/static
           cp -r public .next/standalone/public
 
-          # Ensure server.js is executable
-          chmod 755 .next/standalone/server.js
+          # Ensure app.js is executable
+          chmod 755 .next/standalone/app.js
 
           # Copy package.json for reference
           cp package.json .next/standalone/package.json
@@ -58,14 +58,20 @@ jobs:
           # AGGRESSIVE CLEANUP: Remove cPanel default files and conflicting folders
           echo "🧹 Cleaning up potential conflicting files and folders..."
           ssh -p ${{ secrets.SPACESHIP_SSH_PORT }} -o StrictHostKeyChecking=no ${{ secrets.SPACESHIP_USERNAME }}@${{ secrets.SPACESHIP_HOST }} << 'EOF'
-          rm -f ${{ secrets.SPACESHIP_APP_PATH }}/index.html ${{ secrets.SPACESHIP_APP_PATH }}/index.php
+          rm -f /home/dufoopqjnr/envecoplast/index.html /home/dufoopqjnr/envecoplast/index.php
+          rm -f /home/dufoopqjnr/envecoplast.com/index.html /home/dufoopqjnr/envecoplast.com/index.php
           rm -f /home/dufoopqjnr/public_html/index.html /home/dufoopqjnr/public_html/index.php
-          rm -rf ${{ secrets.SPACESHIP_APP_PATH }}/.next
-          # CloudLinux demands node_modules be a symlink, so we must never have a physical folder there
-          rm -rf ${{ secrets.SPACESHIP_APP_PATH }}/node_modules
+          
+          # Force delete old .next folders
+          rm -rf /home/dufoopqjnr/envecoplast/.next
+          rm -rf /home/dufoopqjnr/envecoplast.com/.next
+          
+          # CloudLinux demands node_modules be a symlink
+          rm -rf /home/dufoopqjnr/envecoplast/node_modules
+          rm -rf /home/dufoopqjnr/envecoplast.com/node_modules
           EOF
 
-          # Deploy via rsync (excluding .git and other unnecessary files)
+          # Deploy via rsync (excluding .git and node_modules)
           echo "🚀 Starting rsync deployment..."
           rsync -avz --delete \
             --exclude '.git' \
@@ -75,6 +81,9 @@ jobs:
             --exclude 'node_modules' \
             -e "ssh -p ${{ secrets.SPACESHIP_SSH_PORT }} -o StrictHostKeyChecking=no" \
             .next/standalone/ ${{ secrets.SPACESHIP_USERNAME }}@${{ secrets.SPACESHIP_HOST }}:${{ secrets.SPACESHIP_APP_PATH }}/
+
+          # CRITICAL: Copy .htaccess to public_html so Apache finds the app
+          ssh -p ${{ secrets.SPACESHIP_SSH_PORT }} -o StrictHostKeyChecking=no ${{ secrets.SPACESHIP_USERNAME }}@${{ secrets.SPACESHIP_HOST }} "cp ${{ secrets.SPACESHIP_APP_PATH }}/.htaccess /home/dufoopqjnr/public_html/.htaccess"
 
           # Cleanup
           rm -f ~/.ssh/deploy_key
