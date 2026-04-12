@@ -1,22 +1,23 @@
 # 1. DISABLE DIRECTORY INDEXING
 Options -Indexes
-DirectoryIndex app.js
 
 # 2. CPANEL NODEJS HANDLER (Passenger)
+# These lines are required by cPanel to run Node.js
 PassengerEnabled on
 PassengerAppType node
-PassengerStartupFile app.js
+PassengerStartupFile server.js
 PassengerAppRoot "/home/dufoopqjnr/envecoplast.com"
-PassengerBaseURI "/"
 
-# 3. STATIC ASSETS & ROUTING
+# 3. STATIC FILES REDIRECT
+# This allows styles and images to work
 <IfModule mod_rewrite.c>
   RewriteEngine On
+  RewriteBase /
 
-  # Map /_next/static requests to the physical .next/static folder
+  # Serve styles from .next folder
   RewriteRule ^_next/static/(.*)$ .next/static/$1 [L]
-
-  # If the requested file exists in the public/ folder, serve it directly
+  
+  # Serve images from public folder
   RewriteCond %{DOCUMENT_ROOT}/public%{REQUEST_URI} -f
   RewriteRule ^(.*)$ public/$1 [L]
 </IfModule>

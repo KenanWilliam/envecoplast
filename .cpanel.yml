@@ -12,7 +12,7 @@ deployment:
 
   # Build configuration
   build_command: npm ci && npm run build
-  start_script: app.js
+  start_script: server.js
 
   # Node.js version requirement
   nodejs_version: 20
