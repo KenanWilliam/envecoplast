@@ -28,7 +28,8 @@ jobs:
           cp -r .next/static .next/standalone/.next/static
           cp -r public .next/standalone/public
 
-          # Ensure app.js is executable
+          # Rename server.js to app.js within standalone for cPanel
+          mv .next/standalone/server.js .next/standalone/app.js
           chmod 755 .next/standalone/app.js
 
           # Copy package.json for reference
