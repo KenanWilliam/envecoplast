@@ -28,9 +28,8 @@ jobs:
           cp -r .next/static .next/standalone/.next/static
           cp -r public .next/standalone/public
 
-          # Rename server.js to app.js to avoid naming conflicts
-          mv .next/standalone/server.js .next/standalone/app.js
-          chmod 755 .next/standalone/app.js
+          # Ensure server.js is executable
+          chmod 755 .next/standalone/server.js
 
           # Copy package.json for reference
           cp package.json .next/standalone/package.json
@@ -55,6 +54,14 @@ jobs:
 
           # Add host to known_hosts
           ssh-keyscan -p ${{ secrets.SPACESHIP_SSH_PORT }} ${{ secrets.SPACESHIP_HOST }} >> ~/.ssh/known_hosts 2>/dev/null || true
+
+          # AGGRESSIVE CLEANUP: Remove cPanel default files and conflicting folders
+          echo "🧹 Cleaning up potential conflicting files and folders..."
+          ssh -p ${{ secrets.SPACESHIP_SSH_PORT }} -o StrictHostKeyChecking=no ${{ secrets.SPACESHIP_USERNAME }}@${{ secrets.SPACESHIP_HOST }} << 'EOF'
+          rm -f ${{ secrets.SPACESHIP_APP_PATH }}/index.html ${{ secrets.SPACESHIP_APP_PATH }}/index.php
+          rm -f /home/dufoopqjnr/public_html/index.html /home/dufoopqjnr/public_html/index.php
+          rm -rf ${{ secrets.SPACESHIP_APP_PATH }}/.next
+          EOF
 
           # Deploy via rsync (excluding .git and other unnecessary files)
           echo "🚀 Starting rsync deployment..."
@@ -95,6 +102,11 @@ jobs:
           rm -rf ${{ secrets.SPACESHIP_APP_PATH }}/tmp/*
           mkdir -p ${{ secrets.SPACESHIP_APP_PATH }}/tmp
           touch ${{ secrets.SPACESHIP_APP_PATH }}/tmp/restart.txt
+          
+          # Force clean public_html again just in case
+          rm -f /home/dufoopqjnr/public_html/index.html
+          rm -f /home/dufoopqjnr/public_html/index.php
+          
           echo "✅ App restart initiated"
           EOF
 
