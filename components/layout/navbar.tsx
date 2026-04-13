@@ -10,11 +10,9 @@ import { Logo } from '@/components/logo';
 import { cn } from '@/lib/utils';
 
 /**
- * Option 13A — The Glass Dock (Refined)
+ * Option 13A — The Glass Dock (Static Refined)
  * A floating pill-shaped nav that sits 20px from the top. 
- * On scroll, it shrinks and becomes more transparent while increasing the backdrop-blur. 
- * The active link is indicated by a "blob" that slides behind the text.
- * Refinement: Font scales down in sync with the container compression.
+ * Refinement: Removed shrinking/compression on scroll per user request.
  */
 export function Navbar() {
   const pathname = usePathname();
@@ -33,18 +31,13 @@ export function Navbar() {
     <div className="fixed top-0 z-50 flex w-full justify-center px-6 pt-5 transition-all duration-500">
       <header
         className={cn(
-          'relative flex items-center justify-between rounded-full border border-gray-200 bg-white/80 px-6 backdrop-blur-md transition-all duration-500',
-          scrolled 
-            ? 'h-12 max-w-2xl bg-white/70 shadow-apple lg:h-12 lg:px-6' 
-            : 'h-14 max-w-7xl bg-white/95 shadow-none lg:h-16 lg:px-8'
+          'relative flex h-16 w-full max-w-7xl items-center justify-between rounded-full border border-gray-200 bg-white/95 px-6 backdrop-blur-md transition-all duration-500 lg:h-20 lg:px-8',
+          scrolled ? 'bg-white/80 shadow-apple' : 'shadow-none'
         )}
       >
-        <Logo className={cn(
-          "transition-all duration-500",
-          scrolled ? "h-6 lg:h-7" : "h-8 lg:h-10"
-        )} />
+        <Logo className="h-10 lg:h-12" />
 
-        <nav className="hidden items-center gap-1 lg:flex">
+        <nav className="hidden items-center gap-2 lg:flex">
           {navLinks.map((link) => {
             const active = pathname === link.href;
             return (
@@ -52,8 +45,7 @@ export function Navbar() {
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  'relative rounded-full px-4 py-2 font-medium transition-all duration-500',
-                  scrolled ? 'text-[13px]' : 'text-sm',
+                  'relative rounded-full px-5 py-2 text-sm font-medium transition-all duration-300',
                   active ? 'text-[#1A6B3C]' : 'text-gray-600 hover:text-gray-900'
                 )}
               >
@@ -73,23 +65,17 @@ export function Navbar() {
         <div className="flex items-center gap-3">
           <Link
             href="/contact?inquiryType=Place%20an%20Order"
-            className={cn(
-              "hidden rounded-full bg-[#1A6B3C] font-bold text-white transition-all hover:bg-[#14552f] hover:shadow-apple-hover md:inline-flex items-center justify-center",
-              scrolled ? "px-4 py-1.5 text-[12px]" : "px-5 py-2.5 text-sm"
-            )}
+            className="hidden rounded-full bg-[#1A6B3C] px-6 py-3 text-sm font-bold text-white transition-all hover:bg-[#14552f] hover:shadow-apple-hover md:inline-flex items-center justify-center"
           >
             Order Now
           </Link>
           <button
-            className={cn(
-              "inline-flex items-center justify-center rounded-full border border-gray-300 text-gray-600 lg:hidden transition-all duration-500",
-              scrolled ? "h-8 w-8" : "h-10 w-10"
-            )}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-300 text-gray-600 lg:hidden"
             type="button"
             onClick={() => setOpen((state) => !state)}
             aria-label={open ? 'Close menu' : 'Open menu'}
           >
-            {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
 
@@ -101,15 +87,15 @@ export function Navbar() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: -20 }}
               transition={{ type: 'spring', duration: 0.5 }}
-              className="absolute top-20 left-0 right-0 overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-apple-hover lg:hidden"
+              className="absolute top-24 left-0 right-0 overflow-hidden rounded-[2.5rem] border border-gray-200 bg-white shadow-apple-hover lg:hidden"
             >
-              <nav className="flex flex-col p-6">
+              <nav className="flex flex-col p-8">
                 {navLinks.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
                     onClick={() => setOpen(false)}
-                    className="rounded-xl px-4 py-3 text-lg font-medium text-gray-900 transition hover:bg-gray-50 hover:text-[#1A6B3C]"
+                    className="rounded-2xl px-5 py-4 text-xl font-medium text-gray-900 transition hover:bg-gray-50 hover:text-[#1A6B3C]"
                   >
                     {link.label}
                   </Link>
@@ -117,7 +103,7 @@ export function Navbar() {
                 <Link
                   href="/contact?inquiryType=Place%20an%20Order"
                   onClick={() => setOpen(false)}
-                  className="mt-4 flex justify-center rounded-full bg-[#1A6B3C] py-4 text-base font-semibold text-white shadow-apple"
+                  className="mt-6 flex justify-center rounded-full bg-[#1A6B3C] py-5 text-lg font-bold text-white shadow-apple"
                 >
                   Order Now
                 </Link>

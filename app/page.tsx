@@ -54,13 +54,13 @@ export default function HomePage() {
     offset: ["start start", "end start"]
   });
 
-  // Sequential fade logic: individual elements react to different scroll ranges
-  const eybrowOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-  const headingOpacity = useTransform(scrollYProgress, [0.1, 0.4], [1, 0]);
-  const subOpacity = useTransform(scrollYProgress, [0.2, 0.6], [1, 0]);
-  const buttonsOpacity = useTransform(scrollYProgress, [0.3, 0.8], [1, 0]);
+  // Refined Sequential Fade: Slower and more visible
+  const eybrowOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
+  const headingOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const subOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+  const buttonsOpacity = useTransform(scrollYProgress, [0, 0.9], [1, 0]);
   
-  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.95]);
+  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.98]);
 
   return (
     <main className="bg-white">
@@ -76,7 +76,7 @@ export default function HomePage() {
       </motion.div>
 
       {/* Hero Section - Option 2B Refined */}
-      <section ref={heroRef} className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pt-32 lg:px-8 lg:pt-40">
+      <section ref={heroRef} className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pt-20 lg:px-8">
         <motion.div 
           style={{ scale: heroScale }}
           className="relative z-10 flex flex-col items-center text-center"
@@ -87,10 +87,9 @@ export default function HomePage() {
             </Reveal>
           </motion.div>
           
-          <motion.div style={{ opacity: headingOpacity }}>
+          <motion.div style={{ opacity: headingOpacity }} className="min-h-[35vh] flex items-center justify-center">
             <Reveal delay={0.2}>
-              {/* Swapped content: Headline is now site.description, Subtitle is site.headline */}
-              <h1 className="mt-8 max-w-5xl text-5xl font-bold leading-[1.1] tracking-tight text-gray-900 md:text-7xl lg:text-[5.5rem]">
+              <h1 className="max-w-6xl text-5xl font-bold leading-[1.1] tracking-tight text-gray-900 md:text-7xl lg:text-[6.5rem]">
                 {site.description}
               </h1>
             </Reveal>
@@ -98,7 +97,7 @@ export default function HomePage() {
 
           <motion.div style={{ opacity: subOpacity }}>
             <Reveal delay={0.3}>
-              <p className="mt-10 max-w-2xl text-lg leading-relaxed text-gray-600 md:text-xl">
+              <p className="mt-8 max-w-2xl text-lg leading-relaxed text-gray-600 md:text-xl">
                 {site.headline}
               </p>
             </Reveal>
@@ -267,10 +266,10 @@ export default function HomePage() {
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 rounded-full bg-white px-10 py-5 text-lg font-bold text-gray-900 shadow-apple transition-all hover:bg-gray-100"
+                  className="inline-flex items-center gap-2 rounded-full bg-white px-10 py-5 text-lg font-bold text-[#1A6B3C] shadow-apple transition-all hover:bg-gray-100"
                 >
                   Get In Touch
-                  <ArrowRight className="h-5 w-5" />
+                  <ArrowRight className="h-5 w-5 text-[#1A6B3C]" />
                 </Link>
               </motion.div>
             </div>
