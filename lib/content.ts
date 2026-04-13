@@ -65,33 +65,33 @@ export const processSteps = [
 export const whyPanels = [
   {
     icon: ShieldCheck,
-    title: 'Best Quality Materials',
-    body: 'Recycled chips, pellets, and interlocking blocks produced to dependable standards for modern construction.',
+    title: 'High-Purity Recycled Input',
+    body: 'Our chips and pellets are precision-sorted and processed to provide high-quality recycled feedstock for manufacturing.',
   },
   {
     icon: Wallet,
-    title: 'Lower Construction Costs',
-    body: 'Cut material and labor spend compared to traditional methods while keeping project quality high.',
-  },
-  {
-    icon: Timer,
-    title: 'Faster Project Completion',
-    body: 'Interlocking systems remove mortar delays and help teams finish shell works in fewer site days.',
-  },
-  {
-    icon: Leaf,
-    title: 'Sustainable Building Solution',
-    body: 'Every order diverts post-consumer plastic from landfill and open dumping into useful building value.',
-  },
-  {
-    icon: Building2,
-    title: 'Strong and Long-Lasting',
-    body: 'Engineered for weather resistance and dependable structural performance in demanding conditions.',
+    title: 'Industrial Supply Stability',
+    body: 'Access a dependable stream of recycled plastic materials to replace virgin polymers and reduce production costs.',
   },
   {
     icon: Recycle,
-    title: 'Circular Economy Champion',
-    body: 'Closing the loop from waste to worth across Kenya\'s construction and manufacturing ecosystems.',
+    title: 'Circular Economy Partner',
+    body: 'We help manufacturers close the loop by providing production-ready recycled materials for scalable impact.',
+  },
+  {
+    icon: Leaf,
+    title: 'Sustainable Resource Recovery',
+    body: 'Every tonne of chips and pellets supplied diverts post-consumer plastic from landfills into useful value.',
+  },
+  {
+    icon: Factory,
+    title: 'Engineered for Industry',
+    body: 'Optimized for extrusion and molding, our recycled pellets integrate seamlessly into existing production lines.',
+  },
+  {
+    icon: Building2,
+    title: 'Durable Circular Products',
+    body: 'Beyond raw materials, our interlocking blocks offer a structural application for recovered plastic waste.',
   },
 ] as const;
 
@@ -130,7 +130,7 @@ export const buyerPersonas: BuyerPersona[] = [
 export const missionValues = [
   {
     title: 'Mission',
-    body: 'Transform plastic waste into practical construction solutions that cut costs and protect the environment.',
+    body: 'To transform traceable post-consumer plastic waste from landfills into high performance, certified materials bridging the gap between environmental responsibility and industrial excellence.',
   },
   {
     title: 'Vision',

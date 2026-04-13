@@ -37,26 +37,49 @@ export default function AboutPage() {
                 <Reveal>
                    <h2 className="text-4xl font-bold tracking-tight md:text-5xl">Our Mission</h2>
                    <p className="mt-8 text-xl leading-relaxed text-gray-400">
-                     To transform post-consumer plastic waste into high-performance, certified construction materials, bridging the gap between environmental responsibility and industrial excellence.
+                     To transform traceable post-consumer plastic waste from landfills into high performance, certified materials bridging the gap between environmental responsibility and industrial excellence.
                    </p>
                 </Reveal>
              </motion.div>
 
-             {/* Staggered Bento Tiles */}
-             {whyPanels.map((item, index) => (
-               <Reveal key={item.title} delay={index * 0.1}>
-                 <motion.div 
-                   whileHover={{ scale: 1.02 }}
-                   className="flex h-full flex-col justify-between rounded-[2.5rem] border border-gray-100 bg-white p-10 shadow-apple"
-                 >
-                    <item.icon className="h-8 w-8 text-[#1A6B3C]" />
-                    <div className="mt-8">
-                      <h3 className="text-xl font-bold text-gray-900">{item.title}</h3>
-                      <p className="mt-3 text-sm leading-relaxed text-gray-500">{item.body}</p>
+             {/* Team Cards - Replaced whyPanels */}
+             <div className="md:col-span-2 md:row-span-2 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-1">
+                <Reveal delay={0.1}>
+                  <motion.div 
+                    whileHover={{ scale: 1.02 }}
+                    className="flex flex-col h-full rounded-[2.5rem] border border-gray-100 bg-white p-8 shadow-apple"
+                  >
+                    <div className="h-32 w-32 rounded-3xl bg-gray-100 mb-6 flex items-center justify-center overflow-hidden">
+                      <span className="text-gray-400 font-bold">GA</span>
                     </div>
-                 </motion.div>
-               </Reveal>
-             ))}
+                    <div>
+                      <h3 className="text-2xl font-bold text-gray-900">Grace Adera</h3>
+                      <p className="text-[#1A6B3C] font-bold text-sm mb-4">Partner</p>
+                      <p className="text-gray-500 text-sm leading-relaxed">
+                        Grace Adera is a co-founder at Envecoplast, leading strategic partnerships and circular economy initiatives. Her focus is on scaling environmental impact through traceable waste-to-worth systems.
+                      </p>
+                    </div>
+                  </motion.div>
+                </Reveal>
+
+                <Reveal delay={0.2}>
+                  <motion.div 
+                    whileHover={{ scale: 1.02 }}
+                    className="flex flex-col h-full rounded-[2.5rem] border border-gray-100 bg-white p-8 shadow-apple"
+                  >
+                    <div className="h-32 w-32 rounded-3xl bg-gray-100 mb-6 flex items-center justify-center overflow-hidden">
+                      <span className="text-gray-400 font-bold">TS</span>
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold text-gray-900">Ted Surname</h3>
+                      <p className="text-[#1A6B3C] font-bold text-sm mb-4">Partner</p>
+                      <p className="text-gray-500 text-sm leading-relaxed">
+                        Ted is a co-founder at Envecoplast, overseeing industrial excellence and manufacturing operations. He ensures that every material produced meets rigorous certification and performance standards.
+                      </p>
+                    </div>
+                  </motion.div>
+                </Reveal>
+             </div>
           </div>
         </div>
       </section>

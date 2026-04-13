@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     template: '%s | Envecoplast Ltd',
   },
   description:
-    'Envecoplast Ltd sells traceable pre-processed recycled plastics and manufactures eco-friendly interlocking construction blocks. Serving developers, contractors, and manufacturers across Kenya.',
+    'Envecoplast Ltd provides high-purity recycled plastic chips and pellets for industrial manufacturing. We transform post-consumer waste into high-quality feedstock and sustainable construction materials in Kenya.',
   keywords: [
     'recycled plastic construction materials Kenya',
     'interlocking building blocks Kenya',
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     siteName: 'Envecoplast Ltd',
     title: 'Envecoplast Ltd — Recycled Plastic Construction Materials | Kenya',
     description:
-      'Traceable recycled plastics and high-quality interlocking construction blocks manufactured in Kenya.',
+      'High-purity recycled plastic chips and pellets for industrial manufacturing. Transforming waste into value with sustainable raw materials and circular building solutions.',
     images: [
       {
         url: '/og-image.png',
@@ -82,6 +82,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Navbar />
         {children}
         <Footer />
+      </body>
+    </html>
+  );
+}
+  <Footer />
       </body>
     </html>
   );
