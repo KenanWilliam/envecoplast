@@ -31,8 +31,11 @@ jobs:
           # Rename server.js to app.js (The primary startup file)
           mv .next/standalone/server.js .next/standalone/app.js
           
-          # Add shebang to the top of app.js
-          sed -i '1i #!/usr/bin/env node' .next/standalone/app.js
+          # Add shebang and basic env setup to app.js
+          echo "#!/usr/bin/env node" > .next/standalone/temp_app.js
+          echo "process.env.PORT = process.env.PORT || 3000;" >> .next/standalone/temp_app.js
+          cat .next/standalone/app.js >> .next/standalone/temp_app.js
+          mv .next/standalone/temp_app.js .next/standalone/app.js
           
           chmod 755 .next/standalone/app.js
 
@@ -60,20 +63,18 @@ jobs:
           # Add host to known_hosts
           ssh-keyscan -p ${{ secrets.SPACESHIP_SSH_PORT }} ${{ secrets.SPACESHIP_HOST }} >> ~/.ssh/known_hosts 2>/dev/null || true
 
-          # AGGRESSIVE CLEANUP: Remove cPanel default files and conflicting folders
-          echo "🧹 Cleaning up potential conflicting files and folders..."
+          # AGGRESSIVE CLEANUP & PERMISSIONS: Fix 403 issues at the source
+          echo "🧹 Cleaning up and fixing permissions..."
           ssh -p ${{ secrets.SPACESHIP_SSH_PORT }} -o StrictHostKeyChecking=no ${{ secrets.SPACESHIP_USERNAME }}@${{ secrets.SPACESHIP_HOST }} << 'EOF'
-          cd ~
-          ROOT_DIR=$(dirname ${{ secrets.SPACESHIP_APP_PATH }})
-          
-          # Ensure home directory is searchable by Apache (Fixes some 403s)
+          # CRITICAL: Fix home directory permissions so Apache can enter
           chmod 711 ~
           
+          # Remove conflicting index files in app path and public_html
           rm -f ${{ secrets.SPACESHIP_APP_PATH }}/index.html ${{ secrets.SPACESHIP_APP_PATH }}/index.php
-          rm -f $ROOT_DIR/public_html/index.html $ROOT_DIR/public_html/index.php
-          rm -f $ROOT_DIR/public_html/default.php $ROOT_DIR/public_html/DefaultHome.php
+          rm -f ~/public_html/index.html ~/public_html/index.php
+          rm -f ~/public_html/default.php ~/public_html/DefaultHome.php
           
-          # Force delete old .next folders (but we will rsync new ones)
+          # Force delete old .next folders
           rm -rf ${{ secrets.SPACESHIP_APP_PATH }}/.next
           EOF
 
@@ -90,20 +91,22 @@ jobs:
           # FINAL CONFIG: Setup permissions and symlinks
           echo "⚙️ Finalizing server configuration..."
           ssh -p ${{ secrets.SPACESHIP_SSH_PORT }} -o StrictHostKeyChecking=no ${{ secrets.SPACESHIP_USERNAME }}@${{ secrets.SPACESHIP_HOST }} << 'EOF'
-          ROOT_DIR=$(dirname ${{ secrets.SPACESHIP_APP_PATH }})
-          
           # Ensure directories and scripts are accessible/executable
           chmod 755 ${{ secrets.SPACESHIP_APP_PATH }}
           chmod 755 ${{ secrets.SPACESHIP_APP_PATH }}/app.js
           
-          # Copy .htaccess to public_html and ensure it's readable
-          cp ${{ secrets.SPACESHIP_APP_PATH }}/.htaccess $ROOT_DIR/public_html/.htaccess
-          chmod 644 $ROOT_DIR/public_html/.htaccess
+          # Copy .htaccess to public_html as the main entry point
+          cp ${{ secrets.SPACESHIP_APP_PATH }}/.htaccess ~/public_html/.htaccess
+          chmod 644 ~/public_html/.htaccess
           
-          # Create symlinks for static assets
-          mkdir -p $ROOT_DIR/public_html/_next
-          ln -sfn ${{ secrets.SPACESHIP_APP_PATH }}/.next/static $ROOT_DIR/public_html/_next/static
-          ln -sfn ${{ secrets.SPACESHIP_APP_PATH }}/public $ROOT_DIR/public_html/public
+          # Create symlinks for static assets in public_html
+          mkdir -p ~/public_html/_next
+          ln -sfn ${{ secrets.SPACESHIP_APP_PATH }}/.next/static ~/public_html/_next/static
+          ln -sfn ${{ secrets.SPACESHIP_APP_PATH }}/public ~/public_html/public
+          
+          # Also symlink app.js and node_modules if public_html is the document root
+          ln -sfn ${{ secrets.SPACESHIP_APP_PATH }}/app.js ~/public_html/app.js
+          ln -sfn ${{ secrets.SPACESHIP_APP_PATH }}/node_modules ~/public_html/node_modules
           EOF
 
           # Cleanup
