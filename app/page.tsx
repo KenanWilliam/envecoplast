@@ -15,7 +15,6 @@ import { cn } from '@/lib/utils';
  * Counter Component for Option 3A
  */
 function Counter({ value, label, qualifier, isLast }: { value: string, label: string, qualifier?: string, isLast: boolean }) {
-  const countRef = useRef(null);
   const numericValue = parseInt(value.replace(/[^0-9]/g, ''));
   const suffix = value.replace(/[0-9]/g, '');
   const count = useMotionValue(0);
@@ -39,11 +38,11 @@ function Counter({ value, label, qualifier, isLast }: { value: string, label: st
         !isLast && "border-r border-gray-100"
       )}
     >
-      <p className="text-5xl font-bold tracking-tighter text-[#1A6B3C]">
+      <p className="text-4xl font-bold tracking-tighter text-[#1A6B3C] md:text-5xl">
         {displayValue}{suffix}
       </p>
-      <p className="mt-2 text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">{label}</p>
-      {qualifier && <p className="mt-1 text-[10px] text-gray-400">{qualifier}</p>}
+      <p className="mt-2 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500">{label}</p>
+      {qualifier && <p className="mt-1 text-[9px] text-gray-400">{qualifier}</p>}
     </motion.div>
   );
 }
@@ -55,9 +54,13 @@ export default function HomePage() {
     offset: ["start start", "end start"]
   });
 
-  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-  const progressHeight = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
+  // Sequential fade logic: individual elements react to different scroll ranges
+  const eybrowOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+  const headingOpacity = useTransform(scrollYProgress, [0.1, 0.4], [1, 0]);
+  const subOpacity = useTransform(scrollYProgress, [0.2, 0.6], [1, 0]);
+  const buttonsOpacity = useTransform(scrollYProgress, [0.3, 0.8], [1, 0]);
+  
+  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.95]);
 
   return (
     <main className="bg-white">
@@ -72,49 +75,58 @@ export default function HomePage() {
         />
       </motion.div>
 
-      {/* Hero Section - Option 2B */}
-      <section ref={heroRef} className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pt-20 lg:px-8">
+      {/* Hero Section - Option 2B Refined */}
+      <section ref={heroRef} className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pt-32 lg:px-8 lg:pt-40">
         <motion.div 
-          style={{ scale: heroScale, opacity: heroOpacity }}
+          style={{ scale: heroScale }}
           className="relative z-10 flex flex-col items-center text-center"
         >
-          <Reveal delay={0.1}>
-            <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#1A6B3C]">Envecoplast Company Limited</p>
-          </Reveal>
+          <motion.div style={{ opacity: eybrowOpacity }}>
+            <Reveal delay={0.1}>
+              <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#1A6B3C]">Envecoplast Company Limited</p>
+            </Reveal>
+          </motion.div>
           
-          <Reveal delay={0.2}>
-            <h1 className="mt-8 max-w-5xl text-6xl font-bold leading-[1.05] tracking-tight text-gray-900 md:text-8xl lg:text-[7rem]">
-              {site.headline}
-            </h1>
-          </Reveal>
+          <motion.div style={{ opacity: headingOpacity }}>
+            <Reveal delay={0.2}>
+              {/* Swapped content: Headline is now site.description, Subtitle is site.headline */}
+              <h1 className="mt-8 max-w-5xl text-5xl font-bold leading-[1.1] tracking-tight text-gray-900 md:text-7xl lg:text-[5.5rem]">
+                {site.description}
+              </h1>
+            </Reveal>
+          </motion.div>
 
-          <Reveal delay={0.3}>
-            <p className="mt-10 max-w-2xl text-xl leading-relaxed text-gray-600">
-              {site.description}
-            </p>
-          </Reveal>
+          <motion.div style={{ opacity: subOpacity }}>
+            <Reveal delay={0.3}>
+              <p className="mt-10 max-w-2xl text-lg leading-relaxed text-gray-600 md:text-xl">
+                {site.headline}
+              </p>
+            </Reveal>
+          </motion.div>
 
-          <Reveal delay={0.4}>
-            <div className="mt-12 flex flex-wrap justify-center gap-5">
-              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}>
-                <Link
-                  href="/contact?inquiryType=Place%20an%20Order"
-                  className="btn-shimmer relative inline-flex items-center gap-2 rounded-full bg-[#1A6B3C] px-10 py-4 text-sm font-bold text-white shadow-apple transition-all hover:bg-[#14552f] hover:shadow-apple-hover"
-                >
-                  Order Now
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </motion.div>
-              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}>
-                <Link
-                  href="/how-it-works"
-                  className="inline-flex items-center rounded-full border border-gray-200 bg-white px-10 py-4 text-sm font-bold text-gray-900 shadow-apple transition-all hover:border-gray-300 hover:bg-gray-50"
-                >
-                  Learn How It Works
-                </Link>
-              </motion.div>
-            </div>
-          </Reveal>
+          <motion.div style={{ opacity: buttonsOpacity }}>
+            <Reveal delay={0.4}>
+              <div className="mt-12 flex flex-wrap justify-center gap-5">
+                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}>
+                  <Link
+                    href="/contact?inquiryType=Place%20an%20Order"
+                    className="btn-shimmer relative inline-flex items-center gap-2 rounded-full bg-[#1A6B3C] px-10 py-4 text-sm font-bold text-white shadow-apple transition-all hover:bg-[#14552f] hover:shadow-apple-hover"
+                  >
+                    Order Now
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </motion.div>
+                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}>
+                  <Link
+                    href="/how-it-works"
+                    className="inline-flex items-center rounded-full border border-gray-200 bg-white px-10 py-4 text-sm font-bold text-gray-900 shadow-apple transition-all hover:border-gray-300 hover:bg-gray-50"
+                  >
+                    Learn How It Works
+                  </Link>
+                </motion.div>
+              </div>
+            </Reveal>
+          </motion.div>
         </motion.div>
 
         {/* High-Fidelity Focal - Option 2B */}
@@ -123,7 +135,7 @@ export default function HomePage() {
         </div>
 
         <motion.div 
-          style={{ opacity: heroOpacity }}
+          style={{ opacity: eybrowOpacity }}
           className="absolute bottom-10 left-1/2 -translate-x-1/2"
         >
           <ChevronDown className="h-6 w-6 animate-bounce text-gray-400" />
@@ -165,7 +177,7 @@ export default function HomePage() {
               <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 opacity-0 transition-opacity group-hover:opacity-100" />
               <div className="flex h-full flex-col p-10">
                 <p className="text-xs font-bold uppercase tracking-widest text-[#1A6B3C]">{product.heroLabel}</p>
-                <h3 className="mt-4 text-4xl font-bold tracking-tight text-gray-900 group-hover:text-white transition-colors">{product.name}</h3>
+                <h3 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 group-hover:text-white transition-colors">{product.name}</h3>
                 
                 <div className="mt-auto flex flex-col opacity-0 transition-all translate-y-4 group-hover:opacity-100 group-hover:translate-y-0">
                   <p className="text-sm leading-relaxed text-white/80">{product.shortDescription}</p>
@@ -237,7 +249,7 @@ export default function HomePage() {
         <div className="mx-auto w-full max-w-5xl px-6 text-center lg:px-8">
           <Reveal>
             <p className="text-xs font-bold uppercase tracking-[0.3em] text-gray-400 mb-8">Our Manifesto</p>
-            <h2 className="text-4xl font-bold leading-tight tracking-tight md:text-7xl">We are not just recycling — we are redefining construction.</h2>
+            <h2 className="text-4xl font-bold leading-tight tracking-tight md:text-6xl">We are not just recycling — we are redefining construction.</h2>
             <p className="mt-10 text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">By transforming post-consumer plastic waste into certified construction materials, we're proving that sustainability and performance are not trade-offs.</p>
           </Reveal>
         </div>
@@ -249,7 +261,7 @@ export default function HomePage() {
           <div className="relative overflow-hidden rounded-[3rem] bg-gradient-to-r from-[#1A6B3C] to-[#1B4F8A] px-10 py-20 text-white md:px-20 md:py-24">
             <div className="relative z-10 flex flex-col items-start gap-8 md:flex-row md:items-center md:justify-between">
               <div>
-                <h2 className="text-4xl font-bold leading-tight md:text-6xl tracking-tight">Build Smarter.<br/>Build Sustainably.</h2>
+                <h2 className="text-4xl font-bold leading-tight md:text-5xl tracking-tight">Build Smarter.<br/>Build Sustainably.</h2>
                 <p className="mt-6 max-w-lg text-lg text-white/80 font-medium">Contact us today to partner or place an order for market-ready recycled materials.</p>
               </div>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
