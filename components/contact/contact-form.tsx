@@ -8,7 +8,7 @@ import { z } from 'zod';
 import { site } from '@/lib/site';
 
 const inquiryTypes = ['Place an Order', 'Partnership', 'Investment Inquiry', 'General Question'] as const;
-const productOptions = ['Recycled Interlocking Blocks', 'Plastic Chips', 'Plastic Pellets', 'Other'] as const;
+const productOptions = ['Interlocking Blocks', 'Plastic Chips', 'Plastic Pellets', 'Other'] as const;
 
 const schema = z.object({
   fullName: z.string().min(2, 'Full name is required'),
@@ -26,7 +26,7 @@ function guessProductOptions(productName: string): FormValues['products'] {
   const lowered = productName.toLowerCase();
 
   if (lowered.includes('block')) {
-    return ['Recycled Interlocking Blocks'];
+    return ['Interlocking Blocks'];
   }
 
   if (lowered.includes('chip')) {
@@ -54,7 +54,7 @@ export function ContactForm() {
       phone: '',
       organization: '',
       inquiryType: (prefilledInquiry as FormValues['inquiryType']) || 'Place an Order',
-      products: prefilledProduct ? guessProductOptions(prefilledProduct) : ['Recycled Interlocking Blocks'],
+      products: prefilledProduct ? guessProductOptions(prefilledProduct) : ['Interlocking Blocks'],
       message: prefilledProduct
         ? `I would like a quote for ${prefilledProduct}. Please share pricing, minimum order quantity, and lead time.`
         : '',

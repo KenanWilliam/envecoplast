@@ -3,9 +3,9 @@ export const site = {
   legalName: 'Envecoplast Company Limited',
   tagline: 'Turning waste into worth - building a greener future',
   description:
-    'Envecoplast Ltd is a circular manufacturing company transforming plastic waste into high-performance construction materials. We produce 100% recycled interlocking blocks, chips, and pellets for sustainable building.',
+    'Envecoplast Ltd is a forward-thinking plastic recycling and manufacturing company that sells traceable pre-processed, recycled plastics from the environment and further transforms it into high-quality construction materials.',
   headline:
-    'Envecoplast Ltd transforms post-consumer plastic waste into high-quality recycled interlocking blocks, chips, and pellets for sustainable construction',
+    'Envecoplast Ltd sells traceable pre-processed recycled plastics from the land fills and transforms them into high quality plastic chips and pellets',
   location: 'Nairobi, Kenya',
   locationDetailed: 'P.O. Box 12559-00100, Njiru Area, Nairobi, Kenya',
   formspreeEndpoint: process.env.NEXT_PUBLIC_FORM_ENDPOINT || 'https://formspree.io/f/xblypvvz',

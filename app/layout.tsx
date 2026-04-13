@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     template: '%s | Envecoplast Ltd',
   },
   description:
-    'Envecoplast Ltd manufactures 100% recycled plastic interlocking blocks and high-quality pellets. We divert plastic waste into sustainable, fast, and affordable construction solutions in Kenya.',
+    'Envecoplast Ltd sells traceable pre-processed recycled plastics and manufactures eco-friendly interlocking construction blocks. Serving developers, contractors, and manufacturers across Kenya.',
   keywords: [
     'recycled plastic construction materials Kenya',
     'interlocking building blocks Kenya',
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     siteName: 'Envecoplast Ltd',
     title: 'Envecoplast Ltd — Recycled Plastic Construction Materials | Kenya',
     description:
-      'High-performance 100% recycled plastic interlocking blocks and raw materials. Building a circular economy for construction in Kenya.',
+      'Traceable recycled plastics and high-quality interlocking construction blocks manufactured in Kenya.',
     images: [
       {
         url: '/og-image.png',
