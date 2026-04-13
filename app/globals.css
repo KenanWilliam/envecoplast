@@ -3,7 +3,7 @@
 :root {
   /* Surfaces */
   --surface-bg: #ffffff;
-  --surface-card: #ffffff; /* Apple favors pure white cards */
+  --surface-card: #ffffff;
   --surface-input: #ffffff;
   --surface-dark: #111111;
   --surface-dark-card: #1a1a1a;
@@ -34,7 +34,7 @@
   --accent-gold-muted: #fdf3c7;
 
   /* Borders */
-  --border-light: #f3f4f6; /* Hairline gray-100/200 style */
+  --border-light: #f3f4f6;
   --border-medium: #e5e7eb;
   --border-dark: #6b7280;
   --border-brand: #1a6b3c;
@@ -48,9 +48,20 @@
   --font-sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
   
+  /* FLUID DESIGN TOKENS (The "Everything Responsive" Core) */
   /* Spacing */
-  --section-padding-desktop: 10rem;
-  --section-padding-mobile: 5rem;
+  --section-padding: clamp(4rem, 12vh, 10rem);
+  --container-gap: clamp(2rem, 5vw, 5rem);
+  
+  /* Fluid Font Sizes */
+  --font-xs: clamp(0.65rem, 0.8vw, 0.75rem);
+  --font-sm: clamp(0.8rem, 1vw, 0.875rem);
+  --font-base: clamp(0.95rem, 1.2vw, 1.125rem);
+  --font-lg: clamp(1.1rem, 1.5vw, 1.25rem);
+  --font-xl: clamp(1.25rem, 2vw, 1.5rem);
+  --font-2xl: clamp(1.5rem, 3vw, 2rem);
+  --font-3xl: clamp(2rem, 5vw, 3.5rem);
+  --font-huge: clamp(2.5rem, 8vh, 6rem);
 }
 
 * {
@@ -61,6 +72,7 @@
 
 html {
   scroll-behavior: smooth;
+  font-size: 16px; /* Base for rem */
 }
 
 body {
@@ -68,19 +80,22 @@ body {
   background: var(--surface-bg);
   color: var(--text-primary);
   font-family: var(--font-sans);
-  line-height: 1.75; /* Relaxed editorial line-height (Option 1B) */
+  line-height: 1.75;
   text-rendering: optimizeLegibility;
   min-height: 100vh;
+  font-size: var(--font-base);
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
-  letter-spacing: -0.02em; /* Tighter tracking for headings */
+  letter-spacing: -0.02em;
   font-weight: 700;
+  line-height: 1.1;
 }
 
-/* Reduced heading scales for refinement */
-h1 { letter-spacing: -0.04em; } 
+h1 { letter-spacing: -0.04em; font-size: var(--font-huge); }
+h2 { font-size: var(--font-3xl); }
+h3 { font-size: var(--font-2xl); }
 
 a {
   color: inherit;
@@ -93,40 +108,17 @@ img {
   max-width: 100%;
 }
 
-::selection {
-  background: var(--brand-primary-light);
-  color: var(--text-primary);
-}
-
-/* Focus visible for all interactive elements */
-button:focus-visible,
-a:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible {
-  outline: 2px solid var(--brand-primary);
-  outline-offset: 2px;
-}
-
 .section-shell {
-  padding-top: var(--section-padding-mobile);
-  padding-bottom: var(--section-padding-mobile);
-}
-
-@media (min-width: 1024px) {
-  .section-shell {
-    padding-top: var(--section-padding-desktop);
-    padding-bottom: var(--section-padding-desktop);
-  }
+  padding-top: var(--section-padding);
+  padding-bottom: var(--section-padding);
 }
 
 .glass-card {
   background: var(--surface-card);
   border: 1px solid var(--border-light);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Utility for Apple-style shadows */
 .shadow-apple {
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
 }
@@ -135,17 +127,15 @@ textarea:focus-visible {
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
 }
 
-/* Input Styles - Option 12A */
 .input {
   width: 100%;
   border-radius: 0.75rem;
   border: 1px solid var(--border-medium);
   background: var(--surface-input);
-  padding: 0.8rem 1rem;
-  font-size: 1rem;
-  color: var(--text-primary);
+  padding: clamp(0.6rem, 1vh, 1rem) clamp(0.8rem, 1.5vw, 1.2rem);
+  font-size: var(--font-sm);
   outline: none;
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); /* Elastic feel */
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .input:focus {
@@ -153,7 +143,6 @@ textarea:focus-visible {
   transform: scale(1.01);
 }
 
-/* Button Shimmer - Option 15B */
 .btn-shimmer {
   position: relative;
   overflow: hidden;

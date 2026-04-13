@@ -10,9 +10,7 @@ import { cn } from '@/lib/utils';
 import { ArrowRight } from 'lucide-react';
 
 /**
- * Option 7A — The Segmented Control
- * An Apple-style horizontal pill switcher with a sliding background highlight. 
- * Card designs feature 1px borders that glow green on hover.
+ * Option 7A — The Segmented Control (Fluid Refined)
  */
 export default function ProductsPage() {
   const [activeFilter, setActiveFilter] = useState('All');
@@ -30,13 +28,13 @@ export default function ProductsPage() {
       <section className="px-6 pt-32 lg:px-8">
         <div className="mx-auto max-w-7xl">
            <Reveal>
-            <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#1A6B3C]">Our Catalog</p>
-            <h1 className="mt-8 max-w-5xl text-5xl font-bold leading-tight tracking-tight text-gray-900 md:text-8xl">
+            <p className="text-[var(--font-xs)] font-bold uppercase tracking-[0.3em] text-[#1A6B3C]">Our Catalog</p>
+            <h1 className="mt-8 text-gray-900">
               Engineered for Sustainability.
             </h1>
           </Reveal>
 
-          {/* Segmented Control - Option 7A */}
+          {/* Segmented Control - Fluid Sizing */}
           <div className="mt-20 flex justify-center">
             <div className="relative flex rounded-full bg-gray-50 p-1">
               {filters.map((filter) => (
@@ -44,7 +42,7 @@ export default function ProductsPage() {
                   key={filter}
                   onClick={() => setActiveFilter(filter)}
                   className={cn(
-                    "relative z-10 rounded-full px-8 py-2.5 text-sm font-bold transition-all duration-300",
+                    "relative z-10 rounded-full px-8 py-2.5 text-[var(--font-sm)] font-bold transition-all duration-300",
                     activeFilter === filter ? "text-white" : "text-gray-500 hover:text-gray-900"
                   )}
                 >
@@ -61,7 +59,7 @@ export default function ProductsPage() {
             </div>
           </div>
 
-          <div className="mt-24 grid gap-8 md:grid-cols-3 pb-32">
+          <div className="mt-24 grid gap-[var(--container-gap)] md:grid-cols-3 pb-[var(--section-padding)]">
             <AnimatePresence mode="popLayout">
               {filteredProducts.map((product, index) => (
                 <motion.div
@@ -77,12 +75,10 @@ export default function ProductsPage() {
                       <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-gray-50">
                         <div className="absolute inset-0 bg-gradient-to-br from-[#1A6B3C]/5 to-[#1B4F8A]/5" />
                         <div className="absolute inset-0 flex items-center justify-center p-12">
-                           {/* Product Illustration / Placeholder */}
                            <div className="text-center">
-                             <p className="text-xs font-bold uppercase tracking-widest text-gray-400">Preview</p>
+                             <p className="text-[var(--font-xs)] font-bold uppercase tracking-widest text-gray-400">Preview</p>
                            </div>
                         </div>
-                        {/* In-stock Badge - Option 7A */}
                         <div className="absolute top-6 left-6 flex items-center gap-2 rounded-full bg-white/90 px-3 py-1.5 backdrop-blur-sm">
                           <div className="h-2 w-2 animate-pulse rounded-full bg-emerald-500" />
                           <span className="text-[10px] font-bold uppercase tracking-widest text-gray-900">Ready to Ship</span>
@@ -90,10 +86,10 @@ export default function ProductsPage() {
                       </div>
 
                       <div className="mt-8 flex flex-col flex-grow">
-                        <h3 className="text-3xl font-bold tracking-tight text-gray-900 transition-colors group-hover:text-[#1A6B3C]">
+                        <h3 className="text-[var(--font-xl)] font-bold tracking-tight text-gray-900 transition-colors group-hover:text-[#1A6B3C]">
                           {product.name}
                         </h3>
-                        <p className="mt-4 line-clamp-2 text-base leading-relaxed text-gray-500">
+                        <p className="mt-4 line-clamp-2 text-[var(--font-base)] leading-relaxed text-gray-500">
                           {product.shortDescription}
                         </p>
                         
@@ -105,7 +101,7 @@ export default function ProductsPage() {
                                </span>
                              ))}
                           </div>
-                          <div className="mt-6 flex items-center gap-2 text-sm font-bold text-gray-900 group-hover:translate-x-2 transition-transform">
+                          <div className="mt-6 flex items-center gap-2 text-[var(--font-sm)] font-bold text-gray-900 group-hover:translate-x-2 transition-transform">
                              View Product <ArrowRight className="h-4 w-4 text-[#1A6B3C]" />
                           </div>
                         </div>
