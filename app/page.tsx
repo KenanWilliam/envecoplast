@@ -27,9 +27,9 @@ export default function HomePage() {
           <Reveal>
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#1A6B3C]">Envecoplast Company Limited</p>
             <h1 className="mt-6 max-w-6xl text-5xl font-bold leading-[1.03] tracking-tight text-gray-900 md:text-6xl lg:text-7xl">
-              {site.description}
+              {site.headline}
             </h1>
-            <p className="mt-8 max-w-3xl text-lg leading-8 text-gray-700">{site.headline}</p>
+            <p className="mt-8 max-w-3xl text-lg leading-8 text-gray-700">{site.description}</p>
 
             <div className="mt-10 flex flex-wrap gap-4">
               <Link
