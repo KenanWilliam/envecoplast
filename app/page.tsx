@@ -204,9 +204,9 @@ export default function HomePage() {
       {/* Process Steps - Option 4A */}
       <section className="section-shell border-y border-gray-100 bg-white">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <SectionHeading eyebrow="The Journey" title="A clear four-step path to durability" />
+          <SectionHeading eyebrow="The Journey" title="A clear five-step path to durability" />
           
-          <div className="mt-24 grid gap-12 lg:grid-cols-4">
+          <div className="mt-24 grid gap-12 lg:grid-cols-5">
             {processSteps.map((step, index) => (
               <Reveal key={step.title} delay={index * 0.1} direction="right">
                 <motion.div 

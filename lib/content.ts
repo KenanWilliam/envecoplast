@@ -38,15 +38,21 @@ export const processSteps = [
   },
   {
     icon: ScanSearch,
-    title: 'Sorting and Processing',
+    title: 'Sorting',
     summary:
-      'Materials are cleaned, sorted by polymer type, and transformed into chips or pellets with consistent quality profiles.',
+      'Materials are carefully sorted by polymer type to ensure the highest purity for downstream processing.',
   },
   {
     icon: Factory,
-    title: 'Compression and Molding',
+    title: 'Processing',
     summary:
-      'Recycled compounds are formed under controlled heat and pressure into interlocking blocks and durable components.',
+      'Quality sorted plastics are crushed into chips with consistent quality profiles for industrial and construction use.',
+  },
+  {
+    icon: Recycle,
+    title: 'Pelleting',
+    summary:
+      'Crushed chips are processed into pellets with consistent quality profiles, ready for advanced manufacturing.',
   },
   {
     icon: ShieldCheck,
