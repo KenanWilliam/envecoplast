@@ -54,11 +54,11 @@ export default function HomePage() {
     offset: ["start start", "end start"]
   });
 
-  // Strict Sequential Fade-out on scroll
-  const eybrowOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
-  const headingOpacity = useTransform(scrollYProgress, [0.15, 0.35], [1, 0]);
-  const subOpacity = useTransform(scrollYProgress, [0.35, 0.55], [1, 0]);
-  const buttonsOpacity = useTransform(scrollYProgress, [0.55, 0.75], [1, 0]);
+  // Sequential Fade-out: Starts LATER so everything is fully visible on page load
+  const eybrowOpacity = useTransform(scrollYProgress, [0.1, 0.25], [1, 0]);
+  const headingOpacity = useTransform(scrollYProgress, [0.2, 0.4], [1, 0]);
+  const subOpacity = useTransform(scrollYProgress, [0.3, 0.55], [1, 0]);
+  const buttonsOpacity = useTransform(scrollYProgress, [0.4, 0.7], [1, 0]);
   
   const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.98]);
 
@@ -76,10 +76,10 @@ export default function HomePage() {
       </motion.div>
 
       {/* Hero Section - Option 2B Refined */}
-      <section ref={heroRef} className="relative flex min-h-[90vh] flex-col items-center justify-center overflow-hidden px-6 pt-40 lg:px-8 lg:pt-48">
+      <section ref={heroRef} className="relative flex min-h-[90vh] flex-col items-center justify-center overflow-hidden px-6 pt-40 lg:px-8">
         <motion.div 
           style={{ scale: heroScale }}
-          className="relative z-10 flex flex-col items-center text-center"
+          className="relative z-10 flex flex-col items-center text-center max-w-7xl mx-auto"
         >
           <motion.div style={{ opacity: eybrowOpacity }}>
             <Reveal delay={0.1}>
@@ -89,7 +89,7 @@ export default function HomePage() {
           
           <motion.div style={{ opacity: headingOpacity }} className="mt-12 mb-8 flex items-center justify-center">
             <Reveal delay={0.3}>
-              <h1 className="max-w-4xl text-3xl font-bold leading-[1.2] tracking-tight text-gray-900 md:text-5xl lg:text-[3.5rem]">
+              <h1 className="max-w-5xl text-3xl font-bold leading-[1.2] tracking-tight text-gray-900 md:text-5xl lg:text-[3.5rem]">
                 {site.description}
               </h1>
             </Reveal>
@@ -97,7 +97,7 @@ export default function HomePage() {
 
           <motion.div style={{ opacity: subOpacity }}>
             <Reveal delay={0.5}>
-              <p className="mt-4 max-w-2xl text-base leading-relaxed text-gray-600 md:text-lg">
+              <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-600 md:text-xl">
                 {site.headline}
               </p>
             </Reveal>
@@ -260,7 +260,7 @@ export default function HomePage() {
           <div className="relative overflow-hidden rounded-[3rem] bg-gradient-to-r from-[#1A6B3C] to-[#1B4F8A] px-10 py-20 text-white md:px-20 md:py-24">
             <div className="relative z-10 flex flex-col items-start gap-8 md:flex-row md:items-center md:justify-between">
               <div>
-                <h2 className="text-4xl font-bold leading-tight md:text-5xl tracking-tight">Build Smarter.<br/>Build Sustainably.</h2>
+                <h2 className="text-4xl font-bold leading-tight md:text-6xl tracking-tight">Build Smarter.<br/>Build Sustainably.</h2>
                 <p className="mt-6 max-w-lg text-lg text-white/80 font-medium">Contact us today to partner or place an order for market-ready recycled materials.</p>
               </div>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
@@ -268,7 +268,7 @@ export default function HomePage() {
                   href="/contact"
                   className="inline-flex items-center gap-2 rounded-full bg-white px-10 py-5 text-lg font-bold text-[#1A6B3C] shadow-apple transition-all hover:bg-gray-100"
                 >
-                  Get In Touch
+                  <span className="text-[#1A6B3C]">Get In Touch</span>
                   <ArrowRight className="h-5 w-5 text-[#1A6B3C]" />
                 </Link>
               </motion.div>
