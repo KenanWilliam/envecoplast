@@ -17,26 +17,26 @@ export type Product = {
 export const products: Product[] = [
   {
     slug: 'interlocking-construction-block',
-    name: 'Interlocking Construction Block',
-    tagline: 'Fast-build blocks for resilient projects',
-    shortDescription: 'No mortar required, weather resistant, and designed for rapid construction.',
+    name: 'Recycled Interlocking Block',
+    tagline: 'High-performance construction from diverted plastic waste',
+    shortDescription: '100% recycled plastic blocks designed for mortar-free, rapid, and sustainable construction.',
     description:
-      'Envecoplast interlocking blocks are engineered to accelerate construction while reducing material waste and site labor. The lock-and-stack format makes installations cleaner, faster, and more predictable across housing, schools, and utility structures.',
+      'Envecoplast recycled interlocking blocks transform post-consumer plastic waste into high-performance structural components. By diverting tonnes of plastic from landfills and oceans, we provide a circular construction solution that is weather-resistant, durable, and significantly faster to install than traditional masonry.',
     category: 'Blocks',
     status: 'In Stock',
     specs: [
+      '100% recycled polymer composition',
       'Interlocking profile for dry-stack assembly',
-      'Weather-resistant recycled polymer blend',
-      'Reduced mortar and labor requirements',
-      'Consistent dimensions for fast site work',
+      'Zero-mortar required for shell works',
+      'Diverts approx. 2.5kg of plastic per block',
     ],
     useCases: [
-      'Real estate developers reducing build timelines',
-      'Contractors executing high-speed shell works',
-      'Institutions building affordable facilities',
+      'Eco-conscious developers building sustainable estates',
+      'NGOs and institutions for rapid-response facilities',
+      'Contractors seeking to reduce carbon footprint and cost',
     ],
-    heroLabel: 'Flagship Block System',
-    imageHint: 'Interlocking block stack on active construction site',
+    heroLabel: 'Circular Construction',
+    imageHint: 'Recycled interlocking block stack on active construction site',
   },
   {
     slug: 'chips',

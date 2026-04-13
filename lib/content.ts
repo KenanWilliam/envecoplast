@@ -65,18 +65,18 @@ export const processSteps = [
 export const whyPanels = [
   {
     icon: ShieldCheck,
-    title: 'Best Quality Materials',
-    body: 'Recycled chips, pellets, and interlocking blocks produced to dependable standards for modern construction.',
+    title: 'Highest-Grade Recycled Materials',
+    body: 'Our chips, pellets, and interlocking blocks are engineered from 100% recycled plastic to meet rigorous structural standards.',
   },
   {
     icon: Wallet,
-    title: 'Lower Construction Costs',
-    body: 'Cut material and labor spend compared to traditional methods while keeping project quality high.',
+    title: 'Sustainable Construction Savings',
+    body: 'Divert plastic from landfills while cutting material and labor spend compared to traditional mortar-based methods.',
   },
   {
     icon: Timer,
-    title: 'Faster Project Completion',
-    body: 'Interlocking systems remove mortar delays and help teams finish shell works in fewer site days.',
+    title: 'Zero-Mortar Speed',
+    body: 'Interlocking recycled blocks remove mortar delays, enabling teams to complete shell works up to 35% faster.',
   },
   {
     icon: Leaf,
