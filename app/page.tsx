@@ -73,13 +73,14 @@ export default function HomePage() {
         />
       </motion.div>
 
-      {/* Hero Section - Optimized Clearance & Centering */}
-      <section ref={heroRef} className="relative flex min-h-[85vh] flex-col items-center justify-center overflow-hidden px-6 pt-24 lg:px-8">
+      {/* Hero Section - Refined Spacing & Arrow Placement */}
+      <section ref={heroRef} className="relative flex min-h-[90vh] flex-col items-center justify-center overflow-hidden px-6 lg:px-8">
         <motion.div 
           style={{ scale: heroScale }}
           className="relative z-10 flex w-full flex-col items-center text-center max-w-7xl mx-auto"
         >
-          <motion.div style={{ opacity: eybrowOpacity }} className="w-full flex justify-center">
+          {/* Spacing Refinement: More space above eyebrow, less between eyebrow and h1 */}
+          <motion.div style={{ opacity: eybrowOpacity }} className="w-full flex justify-center pt-16">
             <Reveal delay={0.1} width="fit-content">
               <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#1A6B3C]">Envecoplast Company Limited</p>
             </Reveal>
@@ -88,7 +89,7 @@ export default function HomePage() {
           <motion.div style={{ opacity: contentOpacity }} className="flex w-full flex-col items-center">
             <Reveal delay={0.25}>
               <div className="flex flex-col items-center">
-                <h1 className="mt-8 max-w-5xl text-3xl font-bold leading-[1.2] tracking-tight text-gray-900 md:text-5xl lg:text-[3.5rem] text-center">
+                <h1 className="mt-4 max-w-5xl text-3xl font-bold leading-[1.2] tracking-tight text-gray-900 md:text-5xl lg:text-[3.5rem] text-center">
                   {site.description}
                 </h1>
                 <p className="mt-6 max-w-3xl text-base leading-relaxed text-gray-600 md:text-lg text-center">
@@ -124,11 +125,13 @@ export default function HomePage() {
            <div className="h-[80vh] w-[80vh] rounded-full border border-[#1A6B3C] blur-3xl" />
         </div>
 
+        {/* Scroll Hint Arrow - Appropriate Bottom Placement */}
         <motion.div 
           style={{ opacity: eybrowOpacity }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         >
-          <ChevronDown className="h-6 w-6 animate-bounce text-gray-400" />
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Scroll</p>
+          <ChevronDown className="h-5 w-5 animate-bounce text-[#1A6B3C]" />
         </motion.div>
       </section>
 

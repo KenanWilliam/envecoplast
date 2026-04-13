@@ -10,8 +10,8 @@ import { Logo } from '@/components/logo';
 import { cn } from '@/lib/utils';
 
 /**
- * Option 13A — The Glass Dock (Refined Width)
- * Refinement: Increased height slightly, reduced overall width.
+ * Option 13A — The Glass Dock (Static Refined)
+ * Refinement: Increased backdrop-blur and adjusted opacity for a stronger glass effect.
  */
 export function Navbar() {
   const pathname = usePathname();
@@ -30,8 +30,9 @@ export function Navbar() {
     <div className="fixed top-0 z-50 flex w-full justify-center px-6 pt-5 transition-all duration-500">
       <header
         className={cn(
-          'relative flex h-14 w-full max-w-5xl items-center justify-between rounded-full border border-gray-200 bg-white/95 px-6 backdrop-blur-md transition-all duration-500 lg:h-16 lg:px-8',
-          scrolled ? 'bg-white/80 shadow-apple' : 'shadow-none'
+          'relative flex h-14 w-full max-w-5xl items-center justify-between rounded-full border border-gray-200 px-6 transition-all duration-500 lg:h-16 lg:px-8',
+          // Refined Glass Effect: bg-white/70 + backdrop-blur-xl
+          scrolled ? 'bg-white/70 shadow-apple backdrop-blur-xl' : 'bg-white/90 shadow-none backdrop-blur-md'
         )}
       >
         <Logo className="h-8 lg:h-10" />
