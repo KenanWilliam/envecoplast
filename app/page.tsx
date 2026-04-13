@@ -73,14 +73,14 @@ export default function HomePage() {
         />
       </motion.div>
 
-      {/* Hero Section - Refined Spacing & Arrow Placement */}
-      <section ref={heroRef} className="relative flex min-h-[90vh] flex-col items-center justify-center overflow-hidden px-6 lg:px-8">
+      {/* Hero Section - Refined Flow & Correct Arrow Placement */}
+      <section ref={heroRef} className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 lg:px-8">
         <motion.div 
           style={{ scale: heroScale }}
           className="relative z-10 flex w-full flex-col items-center text-center max-w-7xl mx-auto"
         >
-          {/* Spacing Refinement: More space above eyebrow, less between eyebrow and h1 */}
-          <motion.div style={{ opacity: eybrowOpacity }} className="w-full flex justify-center pt-16">
+          {/* Top Spacing Above Eyebrow */}
+          <motion.div style={{ opacity: eybrowOpacity }} className="w-full flex justify-center pt-20">
             <Reveal delay={0.1} width="fit-content">
               <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#1A6B3C]">Envecoplast Company Limited</p>
             </Reveal>
@@ -115,24 +115,26 @@ export default function HomePage() {
                     </Link>
                   </motion.div>
                 </div>
+
+                {/* Scroll Hint Arrow - Properly placed BELOW the buttons in the natural flow */}
+                <motion.div 
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1, duration: 1 }}
+                  className="mt-20 flex flex-col items-center gap-2"
+                >
+                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Scroll to Explore</p>
+                  <ChevronDown className="h-5 w-5 animate-bounce text-[#1A6B3C]" />
+                </motion.div>
               </div>
             </Reveal>
           </motion.div>
         </motion.div>
 
-        {/* High-Fidelity Focal - Option 2B */}
+        {/* High-Fidelity Focal Background */}
         <div className="absolute inset-0 z-0 flex items-center justify-center opacity-[0.02]">
            <div className="h-[80vh] w-[80vh] rounded-full border border-[#1A6B3C] blur-3xl" />
         </div>
-
-        {/* Scroll Hint Arrow - Appropriate Bottom Placement */}
-        <motion.div 
-          style={{ opacity: eybrowOpacity }}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-        >
-          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Scroll</p>
-          <ChevronDown className="h-5 w-5 animate-bounce text-[#1A6B3C]" />
-        </motion.div>
       </section>
 
       {/* Stats Bar - Option 3A */}
