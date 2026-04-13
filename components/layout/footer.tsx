@@ -1,84 +1,90 @@
+'use client';
+
 import Link from 'next/link';
-import Image from 'next/image';
+import { motion } from 'framer-motion';
 import { site } from '@/lib/site';
-import { liveProducts } from '@/lib/products';
+import { navLinks } from '@/lib/content';
+import { Logo } from '@/components/logo';
 
-const quickLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
-  { href: '/products', label: 'Products' },
-  { href: '/how-it-works', label: 'How It Works' },
-  { href: '/why-us', label: 'Why Us' },
-  { href: '/contact', label: 'Contact' },
-];
-
+/**
+ * Option 14A — The Columnar Grid
+ * Four perfectly spaced columns with ultra-fine (12px) labels. 
+ * The logo is oversized and monochromatic, serving as a watermark. 
+ * Hovering over links triggers a "slide-right" animation (4px).
+ */
 export function Footer() {
   return (
-    <footer className="mt-24 border-t border-gray-200 bg-white">
-      <div className="mx-auto grid w-full max-w-7xl gap-10 px-6 py-14 lg:grid-cols-[1.1fr_0.8fr_0.8fr_1fr] lg:px-8">
-        <div>
-          <div className="text-gray-900">
-            <Image
-              src="/brand/envecoplast-full-vert.svg"
-              alt="Envecoplast logo"
-              width={220}
-              height={270}
-              className="h-auto w-64"
-            />
+    <footer className="relative overflow-hidden border-t border-gray-100 bg-white pt-24 pb-12">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="grid grid-cols-2 gap-12 md:grid-cols-4 lg:gap-8">
+          {/* Column 1: Brand */}
+          <div className="col-span-2 md:col-span-1">
+            <Logo className="h-10 opacity-80" />
+            <p className="mt-6 max-w-xs text-sm leading-relaxed text-gray-500">
+              {site.tagline}
+            </p>
           </div>
-          <p className="mt-4 max-w-sm text-sm font-semibold leading-relaxed text-[#1A6B3C]">{site.tagline}</p>
-        </div>
 
-        <div>
-          <h3 className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-900">Quick Links</h3>
-          <ul className="mt-4 space-y-2 text-sm text-gray-600">
-            {quickLinks.map((link) => (
-              <li key={link.href}>
-                <Link href={link.href} className="transition hover:text-[#1B4F8A]">
-                  {link.label}
-                </Link>
+          {/* Column 2: Navigation */}
+          <div>
+            <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Navigation</h4>
+            <ul className="mt-6 space-y-4">
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <motion.div whileHover={{ x: 4 }}>
+                    <Link href={link.href} className="text-sm font-medium text-gray-600 transition-colors hover:text-[#1A6B3C]">
+                      {link.label}
+                    </Link>
+                  </motion.div>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 3: Legal */}
+          <div>
+            <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Legal</h4>
+            <ul className="mt-6 space-y-4">
+              <li>
+                <motion.div whileHover={{ x: 4 }}>
+                  <Link href="/privacy-policy" className="text-sm font-medium text-gray-600 transition-colors hover:text-[#1A6B3C]">
+                    Privacy Policy
+                  </Link>
+                </motion.div>
               </li>
-            ))}
-          </ul>
-        </div>
-
-        <div>
-          <h3 className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-900">Products</h3>
-          <ul className="mt-4 space-y-2 text-sm text-gray-600">
-            {liveProducts.map((product) => (
-              <li key={product.slug}>
-                <Link href={`/products/${product.slug}`} className="transition hover:text-[#1B4F8A]">
-                  {product.name}
-                </Link>
+              <li>
+                <motion.div whileHover={{ x: 4 }}>
+                  <Link href="/terms" className="text-sm font-medium text-gray-600 transition-colors hover:text-[#1A6B3C]">
+                    Terms of Service
+                  </Link>
+                </motion.div>
               </li>
-            ))}
-          </ul>
-        </div>
+            </ul>
+          </div>
 
-        <div>
-          <h3 className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-900">Contact</h3>
-          <div className="mt-4 space-y-2 text-sm text-gray-600">
-            <p>{site.location}</p>
-            <a href={`mailto:${site.contact.email}`} className="block transition hover:text-[#1B4F8A]">
-              {site.contact.email}
-            </a>
-            <a href={`tel:${site.contact.phone.replaceAll(' ', '')}`} className="block transition hover:text-[#1B4F8A]">
-              {site.contact.phone}
-            </a>
+          {/* Column 4: Contact */}
+          <div>
+            <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Contact</h4>
+            <ul className="mt-6 space-y-4">
+              <li className="text-sm text-gray-600">{site.location}</li>
+              <li className="text-sm font-bold text-gray-900">{site.contact.email}</li>
+            </ul>
           </div>
         </div>
-      </div>
 
-      <div className="border-t border-gray-200 py-5">
-        <div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-between gap-3 px-6 text-sm text-gray-600 md:flex-row lg:px-8">
-          <p>© {new Date().getFullYear()} Envecoplast Company Limited. All rights reserved.</p>
-          <div className="flex items-center gap-4">
-            <Link href="/privacy-policy" className="hover:text-[#1B4F8A]">
-              Privacy Policy
-            </Link>
-            <Link href="/terms" className="hover:text-[#1B4F8A]">
-              Terms of Service
-            </Link>
+        {/* Oversized Monochromatic Logo Watermark - Option 14A */}
+        <div className="pointer-events-none absolute -bottom-16 -right-16 select-none opacity-[0.03]">
+          <h2 className="text-[20rem] font-bold leading-none tracking-tighter text-gray-900">
+            ENV
+          </h2>
+        </div>
+
+        <div className="mt-24 border-t border-gray-100 pt-12 flex flex-col items-center justify-between gap-6 md:flex-row">
+          <p className="text-xs text-gray-400">
+            © {new Date().getFullYear()} {site.legalName}. All rights reserved.
+          </p>
+          <div className="flex gap-8">
+             {/* Social placeholders could go here */}
           </div>
         </div>
       </div>

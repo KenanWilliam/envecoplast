@@ -1,169 +1,271 @@
-import type { Metadata } from 'next';
+'use client';
+
+import { useRef, useEffect, useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight, ChevronDown } from 'lucide-react';
+import { motion, useScroll, useTransform, useSpring, animate, useMotionValue } from 'framer-motion';
+import { ArrowRight, ChevronDown, Check } from 'lucide-react';
 import { SectionHeading } from '@/components/section-heading';
 import { Reveal } from '@/components/sections/reveal';
 import { homeStats, processSteps, whyPanels } from '@/lib/content';
 import { liveProducts } from '@/lib/products';
 import { site } from '@/lib/site';
+import { cn } from '@/lib/utils';
 
-export const metadata: Metadata = {
-  title: 'Home',
-  description:
-    'Buy traceable recycled plastic chips, pellets, and interlocking construction blocks from Envecoplast Ltd, Kenya\'s leading plastic recycling and construction materials company.',
-  alternates: {
-    canonical: 'https://www.envecoplast.com',
-  },
-};
+/**
+ * Counter Component for Option 3A
+ */
+function Counter({ value, label, qualifier, isLast }: { value: string, label: string, qualifier?: string, isLast: boolean }) {
+  const countRef = useRef(null);
+  const numericValue = parseInt(value.replace(/[^0-9]/g, ''));
+  const suffix = value.replace(/[0-9]/g, '');
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, (latest) => Math.round(latest));
+  const [displayValue, setDisplayValue] = useState("0");
+
+  useEffect(() => {
+    return rounded.onChange((v) => setDisplayValue(v.toString()));
+  }, [rounded]);
+
+  return (
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      onViewportEnter={() => {
+        animate(count, numericValue, { duration: 2, ease: "easeOut" });
+      }}
+      className={cn(
+        "flex flex-col items-center px-8 text-center",
+        !isLast && "border-r border-gray-100"
+      )}
+    >
+      <p className="text-5xl font-bold tracking-tighter text-[#1A6B3C]">
+        {displayValue}{suffix}
+      </p>
+      <p className="mt-2 text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">{label}</p>
+      {qualifier && <p className="mt-1 text-[10px] text-gray-400">{qualifier}</p>}
+    </motion.div>
+  );
+}
 
 export default function HomePage() {
-  return (
-    <main>
-      <section className="relative min-h-[calc(100vh-5rem)] overflow-hidden border-b border-gray-200 bg-white">
-        <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(255,255,255,0.95),rgba(248,250,252,0.9)),url('https://images.unsplash.com/photo-1599707254554-027aeb4deacd?auto=format&fit=crop&w=1900&q=80')] bg-cover bg-center" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_18%,rgba(26,107,60,0.06),transparent_40%)]" />
+  const heroRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"]
+  });
 
-        <div className="relative mx-auto flex w-full max-w-7xl flex-col justify-center px-6 py-24 lg:min-h-[calc(100vh-5rem)] lg:px-8">
-          <Reveal>
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#1A6B3C]">Envecoplast Company Limited</p>
-            <h1 className="mt-6 max-w-6xl text-5xl font-bold leading-[1.03] tracking-tight text-gray-900 md:text-6xl lg:text-7xl">
+  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const progressHeight = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
+
+  return (
+    <main className="bg-white">
+      {/* Scroll Progress Line - Option 2B */}
+      <motion.div 
+        className="fixed right-4 top-1/2 z-50 h-32 w-[1px] -translate-y-1/2 bg-gray-200"
+        style={{ originY: 0 }}
+      >
+        <motion.div 
+          className="h-full w-full bg-[#1A6B3C]" 
+          style={{ scaleY: scrollYProgress }}
+        />
+      </motion.div>
+
+      {/* Hero Section - Option 2B */}
+      <section ref={heroRef} className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pt-20 lg:px-8">
+        <motion.div 
+          style={{ scale: heroScale, opacity: heroOpacity }}
+          className="relative z-10 flex flex-col items-center text-center"
+        >
+          <Reveal delay={0.1}>
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#1A6B3C]">Envecoplast Company Limited</p>
+          </Reveal>
+          
+          <Reveal delay={0.2}>
+            <h1 className="mt-8 max-w-5xl text-6xl font-bold leading-[1.05] tracking-tight text-gray-900 md:text-8xl lg:text-[7rem]">
               {site.headline}
             </h1>
-            <p className="mt-8 max-w-3xl text-lg leading-8 text-gray-700">{site.description}</p>
-
-            <div className="mt-10 flex flex-wrap gap-4">
-              <Link
-                href="/contact?inquiryType=Place%20an%20Order"
-                className="inline-flex items-center gap-2 rounded-full bg-[#1A6B3C] px-7 py-3 text-sm font-semibold text-white transition hover:bg-[#14552f]"
-              >
-                Order Now
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link
-                href="/how-it-works"
-                className="inline-flex items-center rounded-full border border-gray-300 px-7 py-3 text-sm font-semibold text-gray-900 transition hover:bg-gray-50 hover:border-gray-400"
-              >
-                Learn How It Works
-              </Link>
-            </div>
           </Reveal>
 
-          <div className="mt-16 inline-flex w-fit flex-col items-center gap-2 text-[#1A6B3C]">
-            <ChevronDown className="h-6 w-6 animate-bounce" />
-          </div>
-        </div>
-      </section>
+          <Reveal delay={0.3}>
+            <p className="mt-10 max-w-2xl text-xl leading-relaxed text-gray-600">
+              {site.description}
+            </p>
+          </Reveal>
 
-      <section className="border-y border-gray-200 bg-white py-9 text-gray-900">
-        <div className="mx-auto grid w-full max-w-7xl gap-5 px-6 md:grid-cols-4 lg:px-8">
-          {homeStats.map((item) => (
-            <div key={item.label} className="border-l border-gray-200 pl-4 first:border-l-0 first:pl-0">
-              <p className="text-4xl font-bold text-[#F5C400]">{item.value}</p>
-              <p className="mt-1 text-xs uppercase tracking-[0.15em] text-gray-600">{item.label}</p>
-              {item.qualifier && <p className="mt-2 text-xs text-gray-500">{item.qualifier}</p>}
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="section-shell mx-auto w-full max-w-7xl px-6 lg:px-8">
-        <SectionHeading
-          eyebrow="Products Snapshot"
-          title="Engineered materials ready for immediate project impact"
-          body="Our active production line delivers market-ready outputs for developers, contractors, and industrial buyers."
-        />
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {liveProducts.map((product, index) => (
-            <Reveal key={product.slug} delay={index * 0.05}>
-              <article className="glass-card rounded-3xl p-6 transition hover:-translate-y-1 hover:border-[#3f8a5b]">
-                <div className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-gray-200 bg-gradient-to-br from-[#eaf3ef] via-[#dce9f4] to-[#f7f7f7] p-5">
-                  <div className="absolute inset-0 bg-[linear-gradient(150deg,rgba(26,107,60,0.08),transparent_45%)]" />
-                  <p className="relative text-xs font-semibold uppercase tracking-[0.18em] text-[#1A6B3C]">{product.heroLabel}</p>
-                  <h3 className="relative mt-3 text-2xl font-semibold text-gray-900">{product.name}</h3>
-                </div>
-                <p className="mt-5 text-sm leading-7 text-gray-700">{product.shortDescription}</p>
-                {product.specs.length > 0 && (
-                  <p className="mt-3 text-xs font-medium text-gray-700 p-2 bg-gray-50 rounded">
-                    <span className="text-[#1A6B3C] font-semibold">Spec:</span> {product.specs[0]}
-                  </p>
-                )}
-                <Link href={`/products/${product.slug}`} className="mt-5 inline-block text-sm font-semibold text-[#1B4F8A] hover:text-[#1A6B3C]">
-                  View Product
+          <Reveal delay={0.4}>
+            <div className="mt-12 flex flex-wrap justify-center gap-5">
+              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}>
+                <Link
+                  href="/contact?inquiryType=Place%20an%20Order"
+                  className="btn-shimmer relative inline-flex items-center gap-2 rounded-full bg-[#1A6B3C] px-10 py-4 text-sm font-bold text-white shadow-apple transition-all hover:bg-[#14552f] hover:shadow-apple-hover"
+                >
+                  Order Now
+                  <ArrowRight className="h-4 w-4" />
                 </Link>
-              </article>
-            </Reveal>
-          ))}
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}>
+                <Link
+                  href="/how-it-works"
+                  className="inline-flex items-center rounded-full border border-gray-200 bg-white px-10 py-4 text-sm font-bold text-gray-900 shadow-apple transition-all hover:border-gray-300 hover:bg-gray-50"
+                >
+                  Learn How It Works
+                </Link>
+              </motion.div>
+            </div>
+          </Reveal>
+        </motion.div>
+
+        {/* High-Fidelity Focal - Option 2B */}
+        <div className="absolute inset-0 z-0 flex items-center justify-center opacity-[0.03]">
+           <div className="h-[80vh] w-[80vh] rounded-full border border-[#1A6B3C] blur-3xl" />
         </div>
-        <Link
-          href="/products"
-          className="mt-9 inline-flex rounded-full border border-gray-300 px-5 py-2.5 text-sm font-semibold text-gray-900 transition hover:border-[#1A6B3C] hover:text-[#1A6B3C] hover:bg-gray-50"
+
+        <motion.div 
+          style={{ opacity: heroOpacity }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2"
         >
-          Explore Full Catalog
-        </Link>
+          <ChevronDown className="h-6 w-6 animate-bounce text-gray-400" />
+        </motion.div>
       </section>
 
-      <section className="section-shell border-y border-gray-200 bg-gray-50">
-        <div className="mx-auto w-full max-w-7xl px-6 lg:px-8">
-          <SectionHeading eyebrow="How It Works" title="A clear four-step path from discarded plastic to durable construction" />
-          <div className="mt-12 grid gap-6 lg:grid-cols-4">
-            {processSteps.map((step, index) => (
-              <Reveal key={step.title} delay={index * 0.04}>
-                <div className="glass-card h-full rounded-3xl p-6">
-                  <p className="text-5xl font-semibold leading-none text-gray-400">0{index + 1}</p>
-                  <step.icon className="mt-5 h-6 w-6 text-[#1A6B3C]" />
-                  <h3 className="mt-5 text-2xl font-semibold text-gray-900">{step.title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-gray-700">{step.summary}</p>
+      {/* Stats Bar - Option 3A */}
+      <section className="relative z-20 -mt-10 flex justify-center px-6">
+        <div className="glass-card flex w-full max-w-5xl flex-wrap justify-center divide-x divide-gray-100 rounded-[2.5rem] bg-white/80 py-10 shadow-apple backdrop-blur-xl md:flex-nowrap">
+          {homeStats.map((item, index) => (
+            <Counter 
+              key={item.label} 
+              value={item.value} 
+              label={item.label} 
+              qualifier={item.qualifier}
+              isLast={index === homeStats.length - 1}
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* Product Preview Strip - Option 6B */}
+      <section className="section-shell overflow-hidden">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <SectionHeading
+            eyebrow="Market Ready"
+            title="Engineered materials for immediate impact"
+            body="Our active production line delivers market-ready outputs for developers and industrial buyers."
+          />
+        </div>
+
+        <div className="mt-20 flex w-full gap-8 overflow-x-auto pb-12 pl-[calc((100vw-80rem)/2+2rem)] pr-8 scrollbar-hide snap-x">
+          {liveProducts.map((product, index) => (
+            <motion.div
+              key={product.slug}
+              whileHover={{ scale: 1.02 }}
+              className="group relative h-[32rem] w-[24rem] flex-shrink-0 snap-center overflow-hidden rounded-[2.5rem] border border-gray-100 bg-white shadow-apple transition-all hover:shadow-apple-hover"
+            >
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 opacity-0 transition-opacity group-hover:opacity-100" />
+              <div className="flex h-full flex-col p-10">
+                <p className="text-xs font-bold uppercase tracking-widest text-[#1A6B3C]">{product.heroLabel}</p>
+                <h3 className="mt-4 text-4xl font-bold tracking-tight text-gray-900 group-hover:text-white transition-colors">{product.name}</h3>
+                
+                <div className="mt-auto flex flex-col opacity-0 transition-all translate-y-4 group-hover:opacity-100 group-hover:translate-y-0">
+                  <p className="text-sm leading-relaxed text-white/80">{product.shortDescription}</p>
+                  <Link href={`/products/${product.slug}`} className="mt-6 inline-flex items-center gap-2 font-bold text-white underline underline-offset-8">
+                    View Specifications <ArrowRight className="h-4 w-4" />
+                  </Link>
                 </div>
+              </div>
+              <div className="absolute inset-0 -z-10 bg-gray-50/50" />
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Process Steps - Option 4A */}
+      <section className="section-shell border-y border-gray-100 bg-white">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <SectionHeading eyebrow="The Journey" title="A clear four-step path to durability" />
+          
+          <div className="mt-24 grid gap-12 lg:grid-cols-4">
+            {processSteps.map((step, index) => (
+              <Reveal key={step.title} delay={index * 0.1} direction="right">
+                <motion.div 
+                  whileHover={{ rotateX: 5, rotateY: 5 }}
+                  className="relative flex flex-col items-start p-2"
+                >
+                  <span className="absolute -top-12 -left-4 text-9xl font-bold text-gray-50 opacity-50 select-none">
+                    0{index + 1}
+                  </span>
+                  <div className="relative z-10 mt-6 rounded-3xl bg-gray-50 p-4 transition-colors group-hover:bg-[#1A6B3C]/10">
+                    <step.icon className="h-8 w-8 text-[#1A6B3C]" />
+                  </div>
+                  <h3 className="relative z-10 mt-8 text-2xl font-bold text-gray-900">{step.title}</h3>
+                  <p className="relative z-10 mt-4 text-base leading-relaxed text-gray-600">{step.summary}</p>
+                </motion.div>
               </Reveal>
             ))}
           </div>
-          <Link href="/how-it-works" className="mt-9 inline-flex rounded-full bg-[#1B4F8A] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#163f6e] transition">
-            See Full Process
-          </Link>
         </div>
       </section>
 
-      <section className="section-shell mx-auto w-full max-w-7xl px-6 lg:px-8">
-        <SectionHeading eyebrow="Why Choose Us" title="Built for teams that need speed, savings, and measurable impact" />
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {whyPanels.slice(0, 3).map((item, index) => (
-            <Reveal key={item.title} delay={index * 0.05}>
-              <article className="glass-card rounded-3xl p-6 transition hover:-translate-y-1 hover:border-[#356ea8]">
-                <item.icon className="h-7 w-7 text-[#1A6B3C]" />
-                <h3 className="mt-4 text-xl font-semibold text-gray-900">{item.title}</h3>
-                <p className="mt-2 text-sm leading-7 text-gray-700">{item.body}</p>
-              </article>
-            </Reveal>
-          ))}
+      {/* Why Us - Option 5B */}
+      <section className="section-shell relative overflow-hidden bg-white">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <SectionHeading eyebrow="Strategic Edge" title="Built for speed, savings, and measurable impact" />
+          
+          <div className="mt-20 grid gap-8 md:grid-cols-3">
+            {whyPanels.slice(0, 3).map((item, index) => (
+              <Reveal key={item.title} delay={index * 0.1}>
+                <motion.div 
+                  whileHover={{ y: -10 }}
+                  className="group relative overflow-hidden rounded-[2.5rem] border border-gray-100 bg-white p-10 shadow-apple transition-all hover:shadow-apple-hover"
+                >
+                  <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#1A6B3C]/0 to-[#1A6B3C]/0 transition-all duration-500 group-hover:from-[#1A6B3C]/5 group-hover:to-[#1B4F8A]/5" />
+                  <div className="relative z-10">
+                    <item.icon className="h-10 w-10 text-[#1A6B3C]" />
+                    <h3 className="mt-8 text-2xl font-bold text-gray-900">{item.title}</h3>
+                    <p className="mt-4 text-base leading-relaxed text-gray-600">{item.body}</p>
+                  </div>
+                </motion.div>
+              </Reveal>
+            ))}
+          </div>
         </div>
-        <Link
-          href="/why-us"
-          className="mt-9 inline-flex rounded-full border border-gray-300 px-5 py-2.5 text-sm font-semibold text-gray-900 transition hover:border-[#1A6B3C] hover:text-[#1A6B3C] hover:bg-gray-50"
-        >
-          Discover Why Us
-        </Link>
       </section>
 
-      <section className="bg-gradient-to-r from-[#1A6B3C] to-[#1B4F8A] py-24 text-white">
+      {/* Manifesto Strip */}
+      <section className="bg-gray-950 py-32 text-white">
         <div className="mx-auto w-full max-w-5xl px-6 text-center lg:px-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/85 mb-4">Our Manifesto</p>
-          <p className="text-4xl font-bold leading-tight md:text-5xl">We are not just recycling — we are redefining construction.</p>
-          <p className="mt-6 text-base text-white/90 max-w-3xl mx-auto leading-relaxed">By transforming post-consumer plastic waste into durable, certified construction materials, we're proving that sustainability and performance are not trade-offs. They're opportunities.</p>
+          <Reveal>
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-gray-400 mb-8">Our Manifesto</p>
+            <h2 className="text-4xl font-bold leading-tight tracking-tight md:text-7xl">We are not just recycling — we are redefining construction.</h2>
+            <p className="mt-10 text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">By transforming post-consumer plastic waste into certified construction materials, we're proving that sustainability and performance are not trade-offs.</p>
+          </Reveal>
         </div>
       </section>
 
-      <section className="mx-auto w-full max-w-7xl px-6 py-20 lg:px-8">
-        <div className="rounded-[2rem] border border-gray-200 bg-gradient-to-r from-[#1A6B3C] to-[#1B4F8A] p-10 text-white">
-          <p className="text-4xl font-semibold leading-tight md:text-5xl">Build Smarter. Build Faster. Build Sustainably.</p>
-          <p className="mt-3 max-w-2xl text-base text-white/90">Contact us today to partner or place an order.</p>
-          <Link
-            href="/contact"
-            className="mt-7 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-gray-900 transition hover:bg-gray-100"
-          >
-            Get In Touch
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
+      {/* Final CTA */}
+      <section className="section-shell mx-auto w-full max-w-7xl px-6 lg:px-8">
+        <Reveal>
+          <div className="relative overflow-hidden rounded-[3rem] bg-gradient-to-r from-[#1A6B3C] to-[#1B4F8A] px-10 py-20 text-white md:px-20 md:py-24">
+            <div className="relative z-10 flex flex-col items-start gap-8 md:flex-row md:items-center md:justify-between">
+              <div>
+                <h2 className="text-4xl font-bold leading-tight md:text-6xl tracking-tight">Build Smarter.<br/>Build Sustainably.</h2>
+                <p className="mt-6 max-w-lg text-lg text-white/80 font-medium">Contact us today to partner or place an order for market-ready recycled materials.</p>
+              </div>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 rounded-full bg-white px-10 py-5 text-lg font-bold text-gray-900 shadow-apple transition-all hover:bg-gray-100"
+                >
+                  Get In Touch
+                  <ArrowRight className="h-5 w-5" />
+                </Link>
+              </motion.div>
+            </div>
+            {/* Abstract Background Element */}
+            <div className="absolute -right-20 -top-20 h-96 w-96 rounded-full bg-white/10 blur-3xl" />
+          </div>
+        </Reveal>
       </section>
     </main>
   );
