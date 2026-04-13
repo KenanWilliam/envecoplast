@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { SectionHeading } from '@/components/section-heading';
 import { Reveal } from '@/components/sections/reveal';
 import { site } from '@/lib/site';
-import { ArrowRight, CheckCircle2, Send } from 'lucide-react';
+import { ArrowRight, CheckCircle2, ChevronDown, Send } from 'lucide-react';
 
 /**
  * Option 12 Combo — Elastic Precision + Success Bloom
@@ -79,11 +79,16 @@ export default function ContactPage() {
                       
                       <div className="space-y-2">
                          <label className="text-xs font-bold uppercase tracking-widest text-gray-400 px-1">Subject</label>
-                         <select className="input appearance-none bg-white">
-                           <option>General Inquiry</option>
-                           <option>Order Placement</option>
-                           <option>Partnership</option>
-                         </select>
+                         <div className="relative">
+                           <select className="input w-full appearance-none bg-white pr-10">
+                             <option>General Inquiry</option>
+                             <option>Order Placement</option>
+                             <option>Partnership</option>
+                           </select>
+                           <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-400">
+                             <ChevronDown className="h-4 w-4" />
+                           </div>
+                         </div>
                       </div>
 
                       <div className="space-y-2">
