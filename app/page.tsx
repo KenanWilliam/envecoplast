@@ -73,46 +73,47 @@ export default function HomePage() {
         />
       </motion.div>
 
-      {/* Hero Section - Refined for Atomic Load */}
-      <section ref={heroRef} className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pt-20 lg:px-8 lg:pt-32">
+      {/* Hero Section - Optimized Clearance & Centering */}
+      <section ref={heroRef} className="relative flex min-h-[85vh] flex-col items-center justify-center overflow-hidden px-6 pt-24 lg:px-8">
         <motion.div 
           style={{ scale: heroScale }}
-          className="relative z-10 flex flex-col items-center text-center max-w-7xl mx-auto"
+          className="relative z-10 flex w-full flex-col items-center text-center max-w-7xl mx-auto"
         >
-          <motion.div style={{ opacity: eybrowOpacity }}>
-            <Reveal delay={0.1}>
+          <motion.div style={{ opacity: eybrowOpacity }} className="w-full flex justify-center">
+            <Reveal delay={0.1} width="fit-content">
               <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#1A6B3C]">Envecoplast Company Limited</p>
             </Reveal>
           </motion.div>
           
-          {/* Headline, Subtitle, and Buttons now load as a single atomic unit */}
-          <motion.div style={{ opacity: contentOpacity }} className="flex flex-col items-center">
+          <motion.div style={{ opacity: contentOpacity }} className="flex w-full flex-col items-center">
             <Reveal delay={0.25}>
-              <h1 className="mt-10 max-w-5xl text-3xl font-bold leading-[1.2] tracking-tight text-gray-900 md:text-5xl lg:text-[3.5rem]">
-                {site.description}
-              </h1>
-              <p className="mt-6 max-w-3xl text-base leading-relaxed text-gray-600 md:text-lg">
-                {site.headline}
-              </p>
-              
-              <div className="mt-12 flex flex-wrap justify-center gap-5">
-                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}>
-                  <Link
-                    href="/contact?inquiryType=Place%20an%20Order"
-                    className="btn-shimmer relative inline-flex items-center gap-2 rounded-full bg-[#1A6B3C] px-10 py-4 text-sm font-bold text-white shadow-apple transition-all hover:bg-[#14552f] hover:shadow-apple-hover"
-                  >
-                    Order Now
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </motion.div>
-                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}>
-                  <Link
-                    href="/how-it-works"
-                    className="inline-flex items-center rounded-full border border-gray-200 bg-white px-10 py-4 text-sm font-bold text-gray-900 shadow-apple transition-all hover:border-gray-300 hover:bg-gray-50"
-                  >
-                    Learn How It Works
-                  </Link>
-                </motion.div>
+              <div className="flex flex-col items-center">
+                <h1 className="mt-8 max-w-5xl text-3xl font-bold leading-[1.2] tracking-tight text-gray-900 md:text-5xl lg:text-[3.5rem] text-center">
+                  {site.description}
+                </h1>
+                <p className="mt-6 max-w-3xl text-base leading-relaxed text-gray-600 md:text-lg text-center">
+                  {site.headline}
+                </p>
+                
+                <div className="mt-10 flex flex-wrap justify-center gap-5">
+                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}>
+                    <Link
+                      href="/contact?inquiryType=Place%20an%20Order"
+                      className="btn-shimmer relative inline-flex items-center gap-2 rounded-full bg-[#1A6B3C] px-10 py-4 text-sm font-bold text-white shadow-apple transition-all hover:bg-[#14552f] hover:shadow-apple-hover"
+                    >
+                      Order Now
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </motion.div>
+                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}>
+                    <Link
+                      href="/how-it-works"
+                      className="inline-flex items-center rounded-full border border-gray-200 bg-white px-10 py-4 text-sm font-bold text-gray-900 shadow-apple transition-all hover:border-gray-300 hover:bg-gray-50"
+                    >
+                      Learn How It Works
+                    </Link>
+                  </motion.div>
+                </div>
               </div>
             </Reveal>
           </motion.div>
