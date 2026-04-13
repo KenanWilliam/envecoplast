@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 :root {
+  color-scheme: light;
   /* Surfaces */
   --surface-bg: #ffffff;
   --surface-card: #ffffff; /* Apple favors pure white cards */
