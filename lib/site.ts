@@ -2,7 +2,8 @@ export const site = {
   name: 'Envecoplast',
   legalName: 'Envecoplast Company Limited',
   tagline: 'Turning waste into worth - building a greener future',
-  description: 'Turning waste into worth - building a greener future',
+  description:
+    'Envecoplast Ltd is a forward-thinking plastic recycling and manufacturing company that sells traceable pre-processed, recycled plastics from the environment and further transforms it into high-quality construction materials.',
   headline:
     'Envecoplast Ltd sells traceable pre-processed recycled plastics from the land fills and transforms them into high quality plastic chips and pellets',
   location: 'Nairobi, Kenya',

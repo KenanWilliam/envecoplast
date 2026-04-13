@@ -95,19 +95,19 @@ export default function HomePage() {
             </Reveal>
           </motion.div>
           
-          <motion.div style={{ opacity: headingOpacity }}>
+          <motion.div style={{ opacity: headingOpacity }} className="mt-[2vh] mb-[1vh]">
             <Reveal delay={0.2}>
-              <p className="max-w-3xl text-[clamp(0.9rem,2.2vh,1.125rem)] leading-relaxed text-gray-600 text-center">
-                {site.description}
-              </p>
-            </Reveal>
-          </motion.div>
-
-          <motion.div style={{ opacity: subOpacity }} className="mt-[2vh] mb-[1vh]">
-            <Reveal delay={0.3}>
               <h1 className="max-w-5xl text-[clamp(2rem,8vh,3.5rem)] font-bold leading-[1.15] tracking-tight text-gray-900 text-center">
                 {site.headline}
               </h1>
+            </Reveal>
+          </motion.div>
+
+          <motion.div style={{ opacity: subOpacity }}>
+            <Reveal delay={0.3}>
+              <p className="max-w-3xl text-[clamp(0.9rem,2.2vh,1.125rem)] leading-relaxed text-gray-600 text-center">
+                {site.description}
+              </p>
             </Reveal>
           </motion.div>
 
