@@ -54,11 +54,11 @@ export default function HomePage() {
     offset: ["start start", "end start"]
   });
 
-  // Sequential Fade-out: Starts LATER so everything is fully visible on page load
+  // Strict Sequential Fade-out on scroll
   const eybrowOpacity = useTransform(scrollYProgress, [0.1, 0.25], [1, 0]);
   const headingOpacity = useTransform(scrollYProgress, [0.2, 0.4], [1, 0]);
   const subOpacity = useTransform(scrollYProgress, [0.3, 0.55], [1, 0]);
-  const buttonsOpacity = useTransform(scrollYProgress, [0.4, 0.7], [1, 0]);
+  const buttonsOpacity = useTransform(scrollYProgress, [0.4, 0.75], [1, 0]);
   
   const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.98]);
 
@@ -75,8 +75,8 @@ export default function HomePage() {
         />
       </motion.div>
 
-      {/* Hero Section - Option 2B Refined */}
-      <section ref={heroRef} className="relative flex min-h-[90vh] flex-col items-center justify-center overflow-hidden px-6 pt-40 lg:px-8">
+      {/* Hero Section - View at Once Refined */}
+      <section ref={heroRef} className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pt-24 lg:px-8">
         <motion.div 
           style={{ scale: heroScale }}
           className="relative z-10 flex flex-col items-center text-center max-w-7xl mx-auto"
@@ -87,8 +87,8 @@ export default function HomePage() {
             </Reveal>
           </motion.div>
           
-          <motion.div style={{ opacity: headingOpacity }} className="mt-12 mb-8 flex items-center justify-center">
-            <Reveal delay={0.3}>
+          <motion.div style={{ opacity: headingOpacity }} className="mt-10 mb-6 flex items-center justify-center">
+            <Reveal delay={0.2}>
               <h1 className="max-w-5xl text-3xl font-bold leading-[1.2] tracking-tight text-gray-900 md:text-5xl lg:text-[3.5rem]">
                 {site.description}
               </h1>
@@ -96,16 +96,16 @@ export default function HomePage() {
           </motion.div>
 
           <motion.div style={{ opacity: subOpacity }}>
-            <Reveal delay={0.5}>
-              <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-600 md:text-xl">
+            <Reveal delay={0.3}>
+              <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-600 md:text-lg">
                 {site.headline}
               </p>
             </Reveal>
           </motion.div>
 
           <motion.div style={{ opacity: buttonsOpacity }}>
-            <Reveal delay={0.7}>
-              <div className="mt-12 flex flex-wrap justify-center gap-5">
+            <Reveal delay={0.4}>
+              <div className="mt-10 flex flex-wrap justify-center gap-5">
                 <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}>
                   <Link
                     href="/contact?inquiryType=Place%20an%20Order"
@@ -135,14 +135,14 @@ export default function HomePage() {
 
         <motion.div 
           style={{ opacity: eybrowOpacity }}
-          className="absolute bottom-20 left-1/2 -translate-x-1/2"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2"
         >
           <ChevronDown className="h-6 w-6 animate-bounce text-gray-400" />
         </motion.div>
       </section>
 
       {/* Stats Bar - Option 3A */}
-      <section className="relative z-20 mt-20 mb-20 flex justify-center px-6">
+      <section className="relative z-20 mt-12 mb-32 flex justify-center px-6">
         <div className="glass-card flex w-full max-w-5xl flex-wrap justify-center divide-x divide-gray-100 rounded-[2.5rem] bg-white/80 py-10 shadow-apple backdrop-blur-xl md:flex-nowrap">
           {homeStats.map((item, index) => (
             <Counter 
