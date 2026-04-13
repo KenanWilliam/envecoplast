@@ -24,9 +24,9 @@ export const navLinks = [
 
 export const homeStats = [
   { label: 'Tonnes of Plastic Diverted', value: '4,200+', qualifier: 'as of Q1 2026' },
-  { label: 'Projects Completed', value: '185+', qualifier: 'as of Q1 2026' },
-  { label: 'Faster Construction Cycles', value: '35%', qualifier: 'average reduction' },
-  { label: 'Counties Served', value: '21', qualifier: 'in Kenya' },
+  { label: 'Industrial Capacity', value: '500T+', qualifier: 'monthly throughput' },
+  { label: 'Reliable Lead-time', value: '72hr', qualifier: 'average dispatch' },
+  { label: 'Counties Served', value: '21', qualifier: 'across Kenya' },
 ] as const;
 
 export const processSteps = [
@@ -46,7 +46,7 @@ export const processSteps = [
     icon: Factory,
     title: 'Processing',
     summary:
-      'Quality sorted plastics are crushed into chips with consistent quality profiles for industrial and construction use.',
+      'Quality sorted plastics are crushed into chips with consistent quality profiles for industrial and manufacturing use.',
   },
   {
     icon: Recycle,
@@ -58,40 +58,40 @@ export const processSteps = [
     icon: ShieldCheck,
     title: 'Quality Check and Dispatch',
     summary:
-      'Each batch is tested for consistency, durability, and readiness before dispatch to active project sites.',
+      'Each batch is tested for consistency, purity, and readiness before dispatch to industrial partners.',
   },
 ] as const;
 
 export const whyPanels = [
   {
+    icon: ScanSearch,
+    title: 'Traceable Supply Chain',
+    body: 'We provide full visibility into our material sourcing, ensuring every tonne of plastic is ethically and transparently recovered.',
+  },
+  {
     icon: ShieldCheck,
-    title: 'High-Purity Recycled Input',
-    body: 'Our chips and pellets are precision-sorted and processed to provide high-quality recycled feedstock for manufacturing.',
-  },
-  {
-    icon: Wallet,
-    title: 'Industrial Supply Stability',
-    body: 'Access a dependable stream of recycled plastic materials to replace virgin polymers and reduce production costs.',
-  },
-  {
-    icon: Recycle,
-    title: 'Circular Economy Partner',
-    body: 'We help manufacturers close the loop by providing production-ready recycled materials for scalable impact.',
-  },
-  {
-    icon: Leaf,
-    title: 'Sustainable Resource Recovery',
-    body: 'Every tonne of chips and pellets supplied diverts post-consumer plastic from landfills into useful value.',
+    title: 'Quality Material Standards',
+    body: 'Our chips and pellets undergo rigorous testing to ensure consistent polymer purity and industrial performance.',
   },
   {
     icon: Factory,
-    title: 'Engineered for Industry',
-    body: 'Optimized for extrusion and molding, our recycled pellets integrate seamlessly into existing production lines.',
+    title: 'High-Volume Capacity',
+    body: 'Equipped with industrial-scale processing lines, we meet the high-volume feedstock demands of large-scale manufacturers.',
   },
   {
-    icon: Building2,
-    title: 'Durable Circular Products',
-    body: 'Beyond raw materials, our interlocking blocks offer a structural application for recovered plastic waste.',
+    icon: Timer,
+    title: 'Fast Lead-time',
+    body: 'Optimized logistics and inventory management ensure rapid fulfillment and reliable delivery to your production site.',
+  },
+  {
+    icon: Recycle,
+    title: 'Circular Economy Champion',
+    body: 'Leading Kenya’s shift from waste to worth by closing the loop for the manufacturing and industrial sectors.',
+  },
+  {
+    icon: Handshake,
+    title: 'Reliability & Partnership',
+    body: 'We act as a dependable extension of your supply chain, providing consistent feedstock quality and volume year-round.',
   },
 ] as const;
 
@@ -104,26 +104,24 @@ export type BuyerPersona = {
 
 export const buyerPersonas: BuyerPersona[] = [
   {
+    icon: Factory,
+    title: 'Industrial Manufacturer',
+    body: 'Secure consistent, high-purity recycled plastic feedstock (chips/pellets) to replace virgin polymers in your production lines.',
+  },
+  {
     icon: Landmark,
     title: 'Real Estate Developer',
-    ageRange: '30-70',
-    body: 'Reduce cost, compress timelines, and increase delivery predictability across multi-unit projects.',
+    body: 'Enhance project ESG ratings and reduce environmental footprint by sourcing certified, high-performance recycled materials.',
   },
   {
-    icon: Hammer,
-    title: 'Contractor / Fundi',
-    ageRange: '25-60',
-    body: 'Simplify site execution and build faster with fewer bottlenecks and reduced mortar dependency.',
+    icon: Recycle,
+    title: 'Circular Economy Partner',
+    body: 'Collaborate on large-scale resource recovery initiatives and close the loop on post-consumer plastic waste.',
   },
   {
-    icon: Building2,
-    title: 'Institutions: Schools, NGOs, Gov',
-    body: 'Access affordable and sustainable materials for classrooms, clinics, and public-use construction.',
-  },
-  {
-    icon: Handshake,
-    title: 'Eco-Conscious Investor / Partner',
-    body: 'Back measurable environmental impact with strong commercial relevance and long-term demand.',
+    icon: Truck,
+    title: 'Supply Chain Manager',
+    body: 'Ensure production continuity with a reliable, high-capacity supplier offering fast lead-times and traceable sourcing.',
   },
 ] as const;
 

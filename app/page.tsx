@@ -204,7 +204,7 @@ export default function HomePage() {
       {/* Process Steps - Option 4A */}
       <section className="section-shell border-y border-gray-100 bg-white">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <SectionHeading eyebrow="The Journey" title="A clear five-step path to durability" />
+          <SectionHeading eyebrow="The Journey" title="A clear five-step path to industrial excellence" />
           
           <div className="mt-24 grid gap-12 lg:grid-cols-5">
             {processSteps.map((step, index) => (
@@ -231,7 +231,7 @@ export default function HomePage() {
       {/* Why Us - Option 5B */}
       <section className="section-shell relative overflow-hidden bg-white">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <SectionHeading eyebrow="Strategic Edge" title="Built for speed, savings, and measurable impact" />
+          <SectionHeading eyebrow="Strategic Edge" title="Built for scale, quality, and measurable impact" />
           
           <div className="mt-20 grid gap-8 md:grid-cols-3">
             {whyPanels.slice(0, 3).map((item, index) => (
@@ -258,8 +258,8 @@ export default function HomePage() {
         <div className="mx-auto w-full max-w-5xl px-6 text-center lg:px-8">
           <Reveal>
             <p className="text-xs font-bold uppercase tracking-[0.3em] text-gray-400 mb-8">Our Manifesto</p>
-            <h2 className="text-4xl font-bold leading-tight tracking-tight md:text-6xl">We are not just recycling — we are redefining construction.</h2>
-            <p className="mt-10 text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">By transforming post-consumer plastic waste into certified construction materials, we're proving that sustainability and performance are not trade-offs.</p>
+            <h2 className="text-4xl font-bold leading-tight tracking-tight md:text-6xl">We are not just recycling — we are redefining industrial supply.</h2>
+            <p className="mt-10 text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">By transforming post-consumer plastic waste into high-performance industrial raw materials, we're proving that sustainability and industrial excellence are not trade-offs.</p>
           </Reveal>
         </div>
       </section>
@@ -270,8 +270,8 @@ export default function HomePage() {
           <div className="relative overflow-hidden rounded-[3rem] bg-gradient-to-r from-[#1A6B3C] to-[#1B4F8A] px-10 py-20 text-white md:px-20 md:py-24">
             <div className="relative z-10 flex flex-col items-start gap-8 md:flex-row md:items-center md:justify-between">
               <div>
-                <h2 className="text-4xl font-bold leading-tight md:text-6xl tracking-tight">Build Smarter.<br/>Build Sustainably.</h2>
-                <p className="mt-6 max-w-lg text-lg text-white/80 font-medium">Contact us today to partner or place an order for market-ready recycled materials.</p>
+                <h2 className="text-4xl font-bold leading-tight md:text-6xl tracking-tight">Scale Smarter.<br/>Source Sustainably.</h2>
+                <p className="mt-6 max-w-lg text-lg text-white/80 font-medium">Contact us today to secure high-volume, traceable recycled feedstock for your industrial production line.</p>
               </div>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Link

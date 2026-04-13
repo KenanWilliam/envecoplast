@@ -13,12 +13,12 @@ import { Check, X } from 'lucide-react';
  */
 export default function WhyUsPage() {
   const comparison = [
-    { feature: 'Eco-Certification', envecoplast: true, traditional: false },
     { feature: 'Traceable Supply Chain', envecoplast: true, traditional: false },
-    { feature: 'Thermal Insulation', envecoplast: true, traditional: false },
-    { feature: 'Weight Reduction', envecoplast: '20% Lighter', traditional: 'Standard' },
-    { feature: 'Cost per Cycle', envecoplast: 'Lower', traditional: 'Market Rate' },
-    { feature: 'Installation Speed', envecoplast: '30% Faster', traditional: 'Baseline' },
+    { feature: 'Quality Material Certification', envecoplast: true, traditional: false },
+    { feature: 'Polymer Purity', envecoplast: '99%+', traditional: 'Variable' },
+    { feature: 'Monthly Capacity', envecoplast: '500T+', traditional: 'Limited' },
+    { feature: 'Fulfillment Lead-time', envecoplast: '72 Hours', traditional: '7-14 Days' },
+    { feature: 'Industrial Reliability', envecoplast: 'Consistent', traditional: 'Baseline' },
   ];
 
   return (
@@ -28,7 +28,7 @@ export default function WhyUsPage() {
           <Reveal>
             <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#1A6B3C]">Why Us</p>
             <h1 className="mt-8 text-5xl font-bold leading-tight tracking-tight text-gray-900 md:text-8xl">
-              Performance Without Compromise.
+              Industrial Reliability. Circular Excellence.
             </h1>
           </Reveal>
         </div>
