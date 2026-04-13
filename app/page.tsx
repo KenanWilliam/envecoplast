@@ -54,11 +54,11 @@ export default function HomePage() {
     offset: ["start start", "end start"]
   });
 
-  // Refined Sequential Fade: Slower and more visible
-  const eybrowOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
-  const headingOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const subOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
-  const buttonsOpacity = useTransform(scrollYProgress, [0, 0.9], [1, 0]);
+  // Strict Sequential Fade-out on scroll
+  const eybrowOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
+  const headingOpacity = useTransform(scrollYProgress, [0.15, 0.35], [1, 0]);
+  const subOpacity = useTransform(scrollYProgress, [0.35, 0.55], [1, 0]);
+  const buttonsOpacity = useTransform(scrollYProgress, [0.55, 0.75], [1, 0]);
   
   const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.98]);
 
@@ -76,7 +76,7 @@ export default function HomePage() {
       </motion.div>
 
       {/* Hero Section - Option 2B Refined */}
-      <section ref={heroRef} className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pt-20 lg:px-8">
+      <section ref={heroRef} className="relative flex min-h-[90vh] flex-col items-center justify-center overflow-hidden px-6 pt-40 lg:px-8 lg:pt-48">
         <motion.div 
           style={{ scale: heroScale }}
           className="relative z-10 flex flex-col items-center text-center"
@@ -87,24 +87,24 @@ export default function HomePage() {
             </Reveal>
           </motion.div>
           
-          <motion.div style={{ opacity: headingOpacity }} className="min-h-[35vh] flex items-center justify-center">
-            <Reveal delay={0.2}>
-              <h1 className="max-w-6xl text-5xl font-bold leading-[1.1] tracking-tight text-gray-900 md:text-7xl lg:text-[6.5rem]">
+          <motion.div style={{ opacity: headingOpacity }} className="mt-12 mb-8 flex items-center justify-center">
+            <Reveal delay={0.3}>
+              <h1 className="max-w-4xl text-3xl font-bold leading-[1.2] tracking-tight text-gray-900 md:text-5xl lg:text-[3.5rem]">
                 {site.description}
               </h1>
             </Reveal>
           </motion.div>
 
           <motion.div style={{ opacity: subOpacity }}>
-            <Reveal delay={0.3}>
-              <p className="mt-8 max-w-2xl text-lg leading-relaxed text-gray-600 md:text-xl">
+            <Reveal delay={0.5}>
+              <p className="mt-4 max-w-2xl text-base leading-relaxed text-gray-600 md:text-lg">
                 {site.headline}
               </p>
             </Reveal>
           </motion.div>
 
           <motion.div style={{ opacity: buttonsOpacity }}>
-            <Reveal delay={0.4}>
+            <Reveal delay={0.7}>
               <div className="mt-12 flex flex-wrap justify-center gap-5">
                 <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}>
                   <Link
@@ -129,20 +129,20 @@ export default function HomePage() {
         </motion.div>
 
         {/* High-Fidelity Focal - Option 2B */}
-        <div className="absolute inset-0 z-0 flex items-center justify-center opacity-[0.03]">
+        <div className="absolute inset-0 z-0 flex items-center justify-center opacity-[0.02]">
            <div className="h-[80vh] w-[80vh] rounded-full border border-[#1A6B3C] blur-3xl" />
         </div>
 
         <motion.div 
           style={{ opacity: eybrowOpacity }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
+          className="absolute bottom-20 left-1/2 -translate-x-1/2"
         >
           <ChevronDown className="h-6 w-6 animate-bounce text-gray-400" />
         </motion.div>
       </section>
 
       {/* Stats Bar - Option 3A */}
-      <section className="relative z-20 -mt-10 flex justify-center px-6">
+      <section className="relative z-20 mt-20 mb-20 flex justify-center px-6">
         <div className="glass-card flex w-full max-w-5xl flex-wrap justify-center divide-x divide-gray-100 rounded-[2.5rem] bg-white/80 py-10 shadow-apple backdrop-blur-xl md:flex-nowrap">
           {homeStats.map((item, index) => (
             <Counter 
