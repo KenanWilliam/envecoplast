@@ -54,9 +54,13 @@ export default function HomePage() {
     offset: ["start start", "end start"]
   });
 
-  // Strict Sequential Fade-out on scroll
-  const eybrowOpacity = useTransform(scrollYProgress, [0.1, 0.25], [1, 0]);
-  const contentOpacity = useTransform(scrollYProgress, [0.2, 0.6], [1, 0]);
+  // Dynamic Content Scaling & Sequential Scroll-Fade
+  // Eyebrow exits first, then Heading, then Subtext, then Buttons
+  const eybrowOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
+  const headingOpacity = useTransform(scrollYProgress, [0.1, 0.3], [1, 0]);
+  const subOpacity = useTransform(scrollYProgress, [0.2, 0.45], [1, 0]);
+  const buttonsOpacity = useTransform(scrollYProgress, [0.3, 0.6], [1, 0]);
+  const hintOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
   
   const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.98]);
 
@@ -73,62 +77,72 @@ export default function HomePage() {
         />
       </motion.div>
 
-      {/* Hero Section - Refined Flow & Correct Arrow Placement */}
-      <section ref={heroRef} className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 lg:px-8">
+      {/* Hero Section - Perfectly Centered & Dynamic */}
+      <section ref={heroRef} className="relative flex min-h-screen flex-col overflow-hidden px-6 lg:px-8">
+        {/* 1. Nav Spacer - Defines the top boundary */}
+        <div className="h-20 md:h-24 lg:h-32" />
+
+        {/* 2. Main Content Area - Equally centered in remaining space */}
         <motion.div 
           style={{ scale: heroScale }}
-          className="relative z-10 flex w-full flex-col items-center text-center max-w-7xl mx-auto"
+          className="relative z-10 flex flex-1 flex-col items-center justify-center text-center max-w-7xl mx-auto w-full"
         >
-          {/* Top Spacing Above Eyebrow */}
-          <motion.div style={{ opacity: eybrowOpacity }} className="w-full flex justify-center pt-20">
-            <Reveal delay={0.1} width="fit-content">
-              <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#1A6B3C]">Envecoplast Company Limited</p>
+          <motion.div style={{ opacity: eybrowOpacity }}>
+            <Reveal delay={0.1}>
+              <p className="text-[clamp(0.6rem,1.5vh,0.75rem)] font-bold uppercase tracking-[0.3em] text-[#1A6B3C]">
+                Envecoplast Company Limited
+              </p>
             </Reveal>
           </motion.div>
           
-          <motion.div style={{ opacity: contentOpacity }} className="flex w-full flex-col items-center">
-            <Reveal delay={0.25}>
-              <div className="flex flex-col items-center">
-                <h1 className="mt-4 max-w-5xl text-3xl font-bold leading-[1.2] tracking-tight text-gray-900 md:text-5xl lg:text-[3.5rem] text-center">
-                  {site.description}
-                </h1>
-                <p className="mt-6 max-w-3xl text-base leading-relaxed text-gray-600 md:text-lg text-center">
-                  {site.headline}
-                </p>
-                
-                <div className="mt-10 flex flex-wrap justify-center gap-5">
-                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}>
-                    <Link
-                      href="/contact?inquiryType=Place%20an%20Order"
-                      className="btn-shimmer relative inline-flex items-center gap-2 rounded-full bg-[#1A6B3C] px-10 py-4 text-sm font-bold text-white shadow-apple transition-all hover:bg-[#14552f] hover:shadow-apple-hover"
-                    >
-                      Order Now
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  </motion.div>
-                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}>
-                    <Link
-                      href="/how-it-works"
-                      className="inline-flex items-center rounded-full border border-gray-200 bg-white px-10 py-4 text-sm font-bold text-gray-900 shadow-apple transition-all hover:border-gray-300 hover:bg-gray-50"
-                    >
-                      Learn How It Works
-                    </Link>
-                  </motion.div>
-                </div>
+          <motion.div style={{ opacity: headingOpacity }} className="mt-[2vh] mb-[1vh]">
+            <Reveal delay={0.2}>
+              <h1 className="max-w-5xl text-[clamp(2rem,8vh,3.5rem)] font-bold leading-[1.15] tracking-tight text-gray-900 text-center">
+                {site.description}
+              </h1>
+            </Reveal>
+          </motion.div>
 
-                {/* Scroll Hint Arrow - Properly placed BELOW the buttons in the natural flow */}
-                <motion.div 
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1, duration: 1 }}
-                  className="mt-20 flex flex-col items-center gap-2"
-                >
-                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Scroll to Explore</p>
-                  <ChevronDown className="h-5 w-5 animate-bounce text-[#1A6B3C]" />
+          <motion.div style={{ opacity: subOpacity }}>
+            <Reveal delay={0.3}>
+              <p className="max-w-3xl text-[clamp(0.9rem,2.2vh,1.125rem)] leading-relaxed text-gray-600 text-center">
+                {site.headline}
+              </p>
+            </Reveal>
+          </motion.div>
+
+          <motion.div style={{ opacity: buttonsOpacity }} className="mt-[4vh]">
+            <Reveal delay={0.4}>
+              <div className="flex flex-wrap justify-center gap-5">
+                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}>
+                  <Link
+                    href="/contact?inquiryType=Place%20an%20Order"
+                    className="btn-shimmer relative inline-flex items-center gap-2 rounded-full bg-[#1A6B3C] px-10 py-4 text-sm font-bold text-white shadow-apple transition-all hover:bg-[#14552f] hover:shadow-apple-hover"
+                  >
+                    Order Now
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </motion.div>
+                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}>
+                  <Link
+                    href="/how-it-works"
+                    className="inline-flex items-center rounded-full border border-gray-200 bg-white px-10 py-4 text-sm font-bold text-gray-900 shadow-apple transition-all hover:border-gray-300 hover:bg-gray-50"
+                  >
+                    Learn How It Works
+                  </Link>
                 </motion.div>
               </div>
             </Reveal>
           </motion.div>
+        </motion.div>
+
+        {/* 3. Bottom Spacer & Scroll Hint */}
+        <motion.div 
+          style={{ opacity: hintOpacity }}
+          className="relative z-10 pb-12 flex flex-col items-center gap-2"
+        >
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Explore</p>
+          <ChevronDown className="h-5 w-5 animate-bounce text-[#1A6B3C]" />
         </motion.div>
 
         {/* High-Fidelity Focal Background */}
