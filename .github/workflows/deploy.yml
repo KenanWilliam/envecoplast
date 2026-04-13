@@ -28,9 +28,11 @@ jobs:
           cp -r .next/static .next/standalone/.next/static
           cp -r public .next/standalone/public
 
-          # Rename server.js to app.js within standalone for cPanel
-          mv .next/standalone/server.js .next/standalone/app.js
+          # Create a wrapper app.js with shebang (required by some cPanel setups)
+          echo "#!/usr/bin/env node" > .next/standalone/app.js
+          echo "require('./server.js');" >> .next/standalone/app.js
           chmod 755 .next/standalone/app.js
+          chmod 755 .next/standalone/server.js
 
           # Inject the correct absolute path into .htaccess
           sed -i "s|REPLACE_ME_APP_ROOT|${{ secrets.SPACESHIP_APP_PATH }}|g" .htaccess
@@ -71,8 +73,6 @@ jobs:
           EOF
 
           # Deploy via rsync
-          # CRITICAL: We DO NOT exclude node_modules here because .next/standalone/node_modules 
-          # contains the specific production dependencies required for the app to run.
           echo "🚀 Starting rsync deployment..."
           rsync -avz --delete \
             --exclude '.git' \
@@ -87,14 +87,16 @@ jobs:
           ssh -p ${{ secrets.SPACESHIP_SSH_PORT }} -o StrictHostKeyChecking=no ${{ secrets.SPACESHIP_USERNAME }}@${{ secrets.SPACESHIP_HOST }} << 'EOF'
           ROOT_DIR=$(dirname ${{ secrets.SPACESHIP_APP_PATH }})
           
-          # Ensure directories are accessible
+          # Ensure directories and scripts are accessible/executable
           chmod 755 ${{ secrets.SPACESHIP_APP_PATH }}
+          chmod 755 ${{ secrets.SPACESHIP_APP_PATH }}/app.js
+          chmod 755 ${{ secrets.SPACESHIP_APP_PATH }}/server.js
           
           # Copy .htaccess to public_html and ensure it's readable
           cp ${{ secrets.SPACESHIP_APP_PATH }}/.htaccess $ROOT_DIR/public_html/.htaccess
           chmod 644 $ROOT_DIR/public_html/.htaccess
           
-          # Create symlinks for static assets so Apache can serve them directly
+          # Create symlinks for static assets
           mkdir -p $ROOT_DIR/public_html/_next
           ln -sfn ${{ secrets.SPACESHIP_APP_PATH }}/.next/static $ROOT_DIR/public_html/_next/static
           ln -sfn ${{ secrets.SPACESHIP_APP_PATH }}/public $ROOT_DIR/public_html/public
