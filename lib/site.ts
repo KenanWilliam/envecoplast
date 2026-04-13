@@ -7,7 +7,7 @@ export const site = {
   headline:
     'Envecoplast Ltd sells traceable pre-processed recycled plastics from the land fills and transforms them into high quality plastic chips and pellets',
   location: 'Nairobi, Kenya',
-  locationDetailed: 'Industrial Area, Nairobi, Kenya',
+  locationDetailed: 'P.O. Box 12559-00100, Njiru Area, Nairobi, Kenya',
   formspreeEndpoint: process.env.NEXT_PUBLIC_FORM_ENDPOINT || 'https://formspree.io/f/xblypvvz',
   contact: {
     email: 'hello@envecoplast.com',

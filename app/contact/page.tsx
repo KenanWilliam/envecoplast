@@ -35,7 +35,7 @@ export default function ContactPage() {
               <Reveal>
                 <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#1A6B3C]">Get in Touch</p>
                 <h1 className="mt-8 text-5xl font-bold leading-tight tracking-tight text-gray-900 md:text-8xl">
-                  Let's Build Together.
+                  Lets Recycle Together
                 </h1>
                 <p className="mt-10 text-xl leading-relaxed text-gray-500 max-w-lg">
                   Whether you're placing an order or looking for a strategic partner, our team is ready to assist.

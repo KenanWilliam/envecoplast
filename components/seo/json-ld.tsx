@@ -16,6 +16,8 @@ export function OrganizationJsonLd() {
     },
     address: {
       '@type': 'PostalAddress',
+      streetAddress: 'Njiru Area',
+      postOfficeBoxNumber: '12559-00100',
       addressLocality: 'Nairobi',
       addressCountry: 'KE',
     },
