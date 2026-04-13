@@ -34,15 +34,15 @@ function Counter({ value, label, qualifier, isLast }: { value: string, label: st
         animate(count, numericValue, { duration: 2, ease: "easeOut" });
       }}
       className={cn(
-        "flex flex-col items-center px-[var(--container-gap)] text-center",
+        "flex flex-col items-center px-8 text-center",
         !isLast && "border-r border-gray-100"
       )}
     >
-      <p className="text-[var(--font-3xl)] font-bold tracking-tighter text-[#1A6B3C]">
+      <p className="text-4xl font-bold tracking-tighter text-[#1A6B3C] md:text-5xl">
         {displayValue}{suffix}
       </p>
-      <p className="mt-2 text-[var(--font-xs)] font-bold uppercase tracking-[0.2em] text-gray-500">{label}</p>
-      {qualifier && <p className="mt-1 text-[clamp(0.5rem,0.7vw,0.65rem)] text-gray-400">{qualifier}</p>}
+      <p className="mt-2 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500">{label}</p>
+      {qualifier && <p className="mt-1 text-[9px] text-gray-400">{qualifier}</p>}
     </motion.div>
   );
 }
@@ -54,9 +54,12 @@ export default function HomePage() {
     offset: ["start start", "end start"]
   });
 
-  // Strict Sequential Fade-out on scroll
+  // Dynamic Content Scaling & Sequential Scroll-Fade
+  // Eyebrow exits first, then Heading, then Subtext, then Buttons
   const eybrowOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
-  const contentOpacity = useTransform(scrollYProgress, [0.1, 0.3], [1, 0]);
+  const headingOpacity = useTransform(scrollYProgress, [0.1, 0.3], [1, 0]);
+  const subOpacity = useTransform(scrollYProgress, [0.2, 0.45], [1, 0]);
+  const buttonsOpacity = useTransform(scrollYProgress, [0.3, 0.6], [1, 0]);
   const hintOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
   
   const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.98]);
@@ -76,37 +79,39 @@ export default function HomePage() {
 
       {/* Hero Section - Perfectly Centered & Dynamic */}
       <section ref={heroRef} className="relative flex min-h-screen flex-col overflow-hidden px-6 lg:px-8">
+        {/* 1. Nav Spacer - Defines the top boundary */}
         <div className="h-20 md:h-24 lg:h-32" />
 
+        {/* 2. Main Content Area - Equally centered in remaining space */}
         <motion.div 
           style={{ scale: heroScale }}
           className="relative z-10 flex flex-1 flex-col items-center justify-center text-center max-w-7xl mx-auto w-full"
         >
           <motion.div style={{ opacity: eybrowOpacity }}>
             <Reveal delay={0.1}>
-              <p className="text-[var(--font-xs)] font-bold uppercase tracking-[0.3em] text-[#1A6B3C]">
+              <p className="text-[clamp(0.6rem,1.5vh,0.75rem)] font-bold uppercase tracking-[0.3em] text-[#1A6B3C]">
                 Envecoplast Company Limited
               </p>
             </Reveal>
           </motion.div>
           
-          <motion.div style={{ opacity: contentOpacity }} className="mt-[2vh] mb-[1vh]">
+          <motion.div style={{ opacity: headingOpacity }} className="mt-[2vh] mb-[1vh]">
             <Reveal delay={0.2}>
-              <h1 className="max-w-5xl font-bold tracking-tight text-gray-900 text-center">
+              <h1 className="max-w-5xl text-[clamp(2rem,8vh,3.5rem)] font-bold leading-[1.15] tracking-tight text-gray-900 text-center">
                 {site.description}
               </h1>
             </Reveal>
           </motion.div>
 
-          <motion.div style={{ opacity: contentOpacity }}>
+          <motion.div style={{ opacity: subOpacity }}>
             <Reveal delay={0.3}>
-              <p className="max-w-3xl text-[var(--font-base)] leading-relaxed text-gray-600 text-center">
+              <p className="max-w-3xl text-[clamp(0.9rem,2.2vh,1.125rem)] leading-relaxed text-gray-600 text-center">
                 {site.headline}
               </p>
             </Reveal>
           </motion.div>
 
-          <motion.div style={{ opacity: contentOpacity }} className="mt-[4vh]">
+          <motion.div style={{ opacity: buttonsOpacity }} className="mt-[4vh]">
             <Reveal delay={0.4}>
               <div className="flex flex-wrap justify-center gap-5">
                 <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}>
@@ -131,6 +136,7 @@ export default function HomePage() {
           </motion.div>
         </motion.div>
 
+        {/* 3. Bottom Spacer & Scroll Hint */}
         <motion.div 
           style={{ opacity: hintOpacity }}
           className="relative z-10 pb-12 flex flex-col items-center gap-2"
@@ -139,13 +145,14 @@ export default function HomePage() {
           <ChevronDown className="h-5 w-5 animate-bounce text-[#1A6B3C]" />
         </motion.div>
 
+        {/* High-Fidelity Focal Background */}
         <div className="absolute inset-0 z-0 flex items-center justify-center opacity-[0.02]">
            <div className="h-[80vh] w-[80vh] rounded-full border border-[#1A6B3C] blur-3xl" />
         </div>
       </section>
 
-      {/* Stats Bar - Fluid Spacing */}
-      <section className="relative z-20 mt-[var(--section-padding)] mb-[var(--section-padding)] flex justify-center px-6">
+      {/* Stats Bar - Option 3A */}
+      <section className="relative z-20 mt-12 mb-32 flex justify-center px-6">
         <div className="glass-card flex w-full max-w-5xl flex-wrap justify-center divide-x divide-gray-100 rounded-[2.5rem] bg-white/80 py-10 shadow-apple backdrop-blur-xl md:flex-nowrap">
           {homeStats.map((item, index) => (
             <Counter 
@@ -159,7 +166,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Product Preview Strip */}
+      {/* Product Preview Strip - Option 6B */}
       <section className="section-shell overflow-hidden">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <SectionHeading
@@ -178,8 +185,8 @@ export default function HomePage() {
             >
               <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 opacity-0 transition-opacity group-hover:opacity-100" />
               <div className="flex h-full flex-col p-10">
-                <p className="text-[var(--font-xs)] font-bold uppercase tracking-widest text-[#1A6B3C]">{product.heroLabel}</p>
-                <h3 className="mt-4 text-[var(--font-2xl)] font-bold tracking-tight text-gray-900 group-hover:text-white transition-colors">{product.name}</h3>
+                <p className="text-xs font-bold uppercase tracking-widest text-[#1A6B3C]">{product.heroLabel}</p>
+                <h3 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 group-hover:text-white transition-colors">{product.name}</h3>
                 
                 <div className="mt-auto flex flex-col opacity-0 transition-all translate-y-4 group-hover:opacity-100 group-hover:translate-y-0">
                   <p className="text-sm leading-relaxed text-white/80">{product.shortDescription}</p>
@@ -194,7 +201,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Process Steps */}
+      {/* Process Steps - Option 4A */}
       <section className="section-shell border-y border-gray-100 bg-white">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <SectionHeading eyebrow="The Journey" title="A clear four-step path to durability" />
@@ -212,8 +219,8 @@ export default function HomePage() {
                   <div className="relative z-10 mt-6 rounded-3xl bg-gray-50 p-4 transition-colors group-hover:bg-[#1A6B3C]/10">
                     <step.icon className="h-8 w-8 text-[#1A6B3C]" />
                   </div>
-                  <h3 className="relative z-10 mt-8 text-[var(--font-xl)] font-bold text-gray-900">{step.title}</h3>
-                  <p className="relative z-10 mt-4 text-[var(--font-base)] leading-relaxed text-gray-600">{step.summary}</p>
+                  <h3 className="relative z-10 mt-8 text-2xl font-bold text-gray-900">{step.title}</h3>
+                  <p className="relative z-10 mt-4 text-base leading-relaxed text-gray-600">{step.summary}</p>
                 </motion.div>
               </Reveal>
             ))}
@@ -221,7 +228,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Why Us */}
+      {/* Why Us - Option 5B */}
       <section className="section-shell relative overflow-hidden bg-white">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <SectionHeading eyebrow="Strategic Edge" title="Built for speed, savings, and measurable impact" />
@@ -233,11 +240,11 @@ export default function HomePage() {
                   whileHover={{ y: -10 }}
                   className="group relative overflow-hidden rounded-[2.5rem] border border-gray-100 bg-white p-10 shadow-apple transition-all hover:shadow-apple-hover"
                 >
-                  <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#1A6B3C]/5 to-[#1B4F8A]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#1A6B3C]/0 to-[#1A6B3C]/0 transition-all duration-500 group-hover:from-[#1A6B3C]/5 group-hover:to-[#1B4F8A]/5" />
                   <div className="relative z-10">
                     <item.icon className="h-10 w-10 text-[#1A6B3C]" />
-                    <h3 className="mt-8 text-[var(--font-xl)] font-bold text-gray-900">{item.title}</h3>
-                    <p className="mt-4 text-[var(--font-base)] leading-relaxed text-gray-600">{item.body}</p>
+                    <h3 className="mt-8 text-2xl font-bold text-gray-900">{item.title}</h3>
+                    <p className="mt-4 text-base leading-relaxed text-gray-600">{item.body}</p>
                   </div>
                 </motion.div>
               </Reveal>
@@ -250,9 +257,9 @@ export default function HomePage() {
       <section className="bg-gray-950 py-32 text-white">
         <div className="mx-auto w-full max-w-5xl px-6 text-center lg:px-8">
           <Reveal>
-            <p className="text-[var(--font-xs)] font-bold uppercase tracking-[0.3em] text-gray-400 mb-8">Our Manifesto</p>
-            <h2 className="font-bold leading-tight tracking-tight">We are not just recycling — we are redefining construction.</h2>
-            <p className="mt-10 text-[var(--font-lg)] text-gray-400 max-w-3xl mx-auto leading-relaxed">By transforming post-consumer plastic waste into certified construction materials, we're proving that sustainability and performance are not trade-offs.</p>
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-gray-400 mb-8">Our Manifesto</p>
+            <h2 className="text-4xl font-bold leading-tight tracking-tight md:text-6xl">We are not just recycling — we are redefining construction.</h2>
+            <p className="mt-10 text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">By transforming post-consumer plastic waste into certified construction materials, we're proving that sustainability and performance are not trade-offs.</p>
           </Reveal>
         </div>
       </section>
@@ -263,8 +270,8 @@ export default function HomePage() {
           <div className="relative overflow-hidden rounded-[3rem] bg-gradient-to-r from-[#1A6B3C] to-[#1B4F8A] px-10 py-20 text-white md:px-20 md:py-24">
             <div className="relative z-10 flex flex-col items-start gap-8 md:flex-row md:items-center md:justify-between">
               <div>
-                <h2 className="font-bold leading-tight tracking-tight">Build Smarter.<br/>Build Sustainably.</h2>
-                <p className="mt-6 max-w-lg text-[var(--font-lg)] text-white/80 font-medium">Contact us today to partner or place an order for market-ready recycled materials.</p>
+                <h2 className="text-4xl font-bold leading-tight md:text-6xl tracking-tight">Build Smarter.<br/>Build Sustainably.</h2>
+                <p className="mt-6 max-w-lg text-lg text-white/80 font-medium">Contact us today to partner or place an order for market-ready recycled materials.</p>
               </div>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Link
@@ -276,6 +283,7 @@ export default function HomePage() {
                 </Link>
               </motion.div>
             </div>
+            {/* Abstract Background Element */}
             <div className="absolute -right-20 -top-20 h-96 w-96 rounded-full bg-white/10 blur-3xl" />
           </div>
         </Reveal>
