@@ -7,7 +7,7 @@ module.exports = {
   apps: [
     {
       name: 'envecoplast',
-      script: './server.js',
+      script: './app.js',
       instances: 1,
       exec_mode: 'cluster',
       env: {

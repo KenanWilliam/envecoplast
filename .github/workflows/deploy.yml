@@ -32,6 +32,9 @@ jobs:
           mv .next/standalone/server.js .next/standalone/app.js
           chmod 755 .next/standalone/app.js
 
+          # Inject the correct absolute path into .htaccess
+          sed -i "s|REPLACE_ME_APP_ROOT|${{ secrets.SPACESHIP_APP_PATH }}|g" .htaccess
+          
           # Copy package.json for reference
           cp package.json .next/standalone/package.json
 
@@ -59,17 +62,19 @@ jobs:
           # AGGRESSIVE CLEANUP: Remove cPanel default files and conflicting folders
           echo "🧹 Cleaning up potential conflicting files and folders..."
           ssh -p ${{ secrets.SPACESHIP_SSH_PORT }} -o StrictHostKeyChecking=no ${{ secrets.SPACESHIP_USERNAME }}@${{ secrets.SPACESHIP_HOST }} << 'EOF'
-          rm -f /home/dufoopqjnr/envecoplast/index.html /home/dufoopqjnr/envecoplast/index.php
-          rm -f /home/dufoopqjnr/envecoplast.com/index.html /home/dufoopqjnr/envecoplast.com/index.php
-          rm -f /home/dufoopqjnr/public_html/index.html /home/dufoopqjnr/public_html/index.php
+          # Use relative paths from home directory to avoid hardcoded usernames
+          cd ~
+          ROOT_DIR=$(dirname ${{ secrets.SPACESHIP_APP_PATH }})
+          
+          rm -f ${{ secrets.SPACESHIP_APP_PATH }}/index.html ${{ secrets.SPACESHIP_APP_PATH }}/index.php
+          rm -f $ROOT_DIR/public_html/index.html $ROOT_DIR/public_html/index.php
+          rm -f $ROOT_DIR/public_html/default.php $ROOT_DIR/public_html/DefaultHome.php
           
           # Force delete old .next folders
-          rm -rf /home/dufoopqjnr/envecoplast/.next
-          rm -rf /home/dufoopqjnr/envecoplast.com/.next
+          rm -rf ${{ secrets.SPACESHIP_APP_PATH }}/.next
           
           # CloudLinux demands node_modules be a symlink
-          rm -rf /home/dufoopqjnr/envecoplast/node_modules
-          rm -rf /home/dufoopqjnr/envecoplast.com/node_modules
+          rm -rf ${{ secrets.SPACESHIP_APP_PATH }}/node_modules
           EOF
 
           # Deploy via rsync (excluding .git and node_modules)
@@ -84,7 +89,11 @@ jobs:
             .next/standalone/ ${{ secrets.SPACESHIP_USERNAME }}@${{ secrets.SPACESHIP_HOST }}:${{ secrets.SPACESHIP_APP_PATH }}/
 
           # CRITICAL: Copy .htaccess to public_html so Apache finds the app
-          ssh -p ${{ secrets.SPACESHIP_SSH_PORT }} -o StrictHostKeyChecking=no ${{ secrets.SPACESHIP_USERNAME }}@${{ secrets.SPACESHIP_HOST }} "cp ${{ secrets.SPACESHIP_APP_PATH }}/.htaccess /home/dufoopqjnr/public_html/.htaccess"
+          ssh -p ${{ secrets.SPACESHIP_SSH_PORT }} -o StrictHostKeyChecking=no ${{ secrets.SPACESHIP_USERNAME }}@${{ secrets.SPACESHIP_HOST }} << 'EOF'
+          ROOT_DIR=$(dirname ${{ secrets.SPACESHIP_APP_PATH }})
+          cp ${{ secrets.SPACESHIP_APP_PATH }}/.htaccess $ROOT_DIR/public_html/.htaccess
+          chmod 644 $ROOT_DIR/public_html/.htaccess
+          EOF
 
           # Cleanup
           rm -f ~/.ssh/deploy_key
@@ -117,8 +126,9 @@ jobs:
           touch ${{ secrets.SPACESHIP_APP_PATH }}/tmp/restart.txt
           
           # Force clean public_html again just in case
-          rm -f /home/dufoopqjnr/public_html/index.html
-          rm -f /home/dufoopqjnr/public_html/index.php
+          ROOT_DIR=$(dirname ${{ secrets.SPACESHIP_APP_PATH }})
+          rm -f $ROOT_DIR/public_html/index.html
+          rm -f $ROOT_DIR/public_html/index.php
           
           echo "✅ App restart initiated"
           EOF

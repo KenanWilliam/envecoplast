@@ -6,7 +6,7 @@ Options -Indexes
 PassengerEnabled on
 PassengerAppType node
 PassengerStartupFile app.js
-PassengerAppRoot "/home/dufoopqjnr/envecoplast.com"
+PassengerAppRoot "REPLACE_ME_APP_ROOT"
 
 # 3. STATIC FILES REDIRECT
 # This allows styles and images to work
