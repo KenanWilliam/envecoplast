@@ -35,7 +35,7 @@ export function Navbar() {
           scrolled ? 'bg-white/70 shadow-apple backdrop-blur-xl' : 'bg-white/90 shadow-none backdrop-blur-md'
         )}
       >
-        <Logo className="h-7 lg:h-10" />
+        <Logo className="h-9 lg:h-10" />
 
         <nav className="hidden items-center gap-1 lg:flex">
           {navLinks.map((link) => {

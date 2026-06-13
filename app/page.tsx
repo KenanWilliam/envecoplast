@@ -83,7 +83,7 @@ export default function HomePage() {
           
           <div className="mt-[2vh] mb-[1vh]">
             <Reveal delay={0.2}>
-              <h1 className="max-w-5xl text-[clamp(2rem,8vh,3.5rem)] font-bold leading-[1.15] tracking-tight text-gray-900 text-center">
+              <h1 className="max-w-5xl text-[clamp(1rem,8vh,3.5rem)] font-bold leading-[1.15] tracking-tight text-gray-900 text-center">
                 {site.headline}
               </h1>
             </Reveal>
