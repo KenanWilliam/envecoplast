@@ -48,7 +48,7 @@ export default function HomePage() {
   const heroRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
-    offset: ["start start", "end start"]
+    offset: ["start start", "center start"]
   });
 
   return (
@@ -65,13 +65,13 @@ export default function HomePage() {
       </motion.div>
 
       {/* Hero Section - Perfectly Centered & Dynamic */}
-      <section ref={heroRef} className="relative flex flex-col overflow-hidden page-shell pb-12 md:pb-16">
+      <section ref={heroRef} className="relative flex flex-col overflow-hidden page-shell h-[100dvh] max-h-[100dvh]">
         {/* 1. Nav Spacer - Defines the top boundary */}
-        <div className="h-16 md:h-20 lg:h-24" />
+        <div className="h-16 md:h-20 lg:h-24 shrink-0" />
 
         {/* 2. Main Content Area - Equally centered in remaining space */}
         <div 
-          className="relative z-10 flex flex-1 flex-col items-center justify-center text-center max-w-7xl mx-auto w-full mt-10 md:mt-16"
+          className="relative z-10 flex flex-1 flex-col items-center justify-center text-center max-w-7xl mx-auto w-full"
         >
           <div>
             <Reveal delay={0.1}>
@@ -81,9 +81,9 @@ export default function HomePage() {
             </Reveal>
           </div>
           
-          <div className="mt-[2vh] mb-[1vh]">
+          <div className="mt-[1.5vh] mb-[0.75vh]">
             <Reveal delay={0.2}>
-              <h1 className="max-w-5xl text-[clamp(1rem,8vh,3.5rem)] font-bold leading-[1.15] tracking-tight text-gray-900 text-center">
+              <h1 className="max-w-5xl text-[clamp(0.5rem,4vh,1.75rem)] font-bold leading-[1.15] tracking-tight text-gray-900 text-center">
                 {site.headline}
               </h1>
             </Reveal>
@@ -91,19 +91,19 @@ export default function HomePage() {
 
           <div>
             <Reveal delay={0.3}>
-              <p className="max-w-3xl text-[clamp(0.9rem,2.2vh,1.125rem)] leading-relaxed text-gray-600 text-center">
+              <p className="max-w-3xl text-[clamp(0.75rem,1.8vh,1rem)] leading-relaxed text-gray-600 text-center">
                 {site.description}
               </p>
             </Reveal>
           </div>
 
-          <div className="mt-[4vh]">
+          <div className="mt-[3vh]">
             <Reveal delay={0.4}>
-              <div className="flex flex-wrap justify-center gap-5">
+              <div className="flex flex-wrap justify-center gap-4">
                 <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}>
                   <Link
                     href="/contact?inquiryType=Place%20an%20Order"
-                    className="btn-shimmer relative inline-flex items-center gap-2 rounded-full bg-[#1A6B3C] px-10 py-4 text-sm font-bold text-white shadow-apple transition-all hover:bg-[#14552f] hover:shadow-apple-hover"
+                    className="btn-shimmer relative inline-flex items-center gap-2 rounded-full bg-[#1A6B3C] px-8 py-3 text-sm font-bold text-white shadow-apple transition-all hover:bg-[#14552f] hover:shadow-apple-hover"
                   >
                     Order Now
                     <ArrowRight className="h-4 w-4" />
@@ -112,7 +112,7 @@ export default function HomePage() {
                 <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}>
                   <Link
                     href="/how-it-works"
-                    className="inline-flex items-center rounded-full border border-gray-200 bg-white px-10 py-4 text-sm font-bold text-gray-900 shadow-apple transition-all hover:border-gray-300 hover:bg-gray-50"
+                    className="inline-flex items-center rounded-full border border-gray-200 bg-white px-8 py-3 text-sm font-bold text-gray-900 shadow-apple transition-all hover:border-gray-300 hover:bg-gray-50"
                   >
                     Learn How It Works
                   </Link>
@@ -124,7 +124,7 @@ export default function HomePage() {
 
         {/* 3. Bottom Spacer & Scroll Hint */}
         <div 
-          className="relative z-10 pb-12 mt-12 flex flex-col items-center gap-2"
+          className="relative z-10 pb-6 shrink-0 flex flex-col items-center gap-1"
         >
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Explore</p>
           <ChevronDown className="h-5 w-5 animate-bounce text-[#1A6B3C]" />
