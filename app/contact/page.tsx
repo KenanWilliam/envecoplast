@@ -28,29 +28,29 @@ export default function ContactPage() {
 
   return (
     <main className="bg-white">
-      <section className="px-6 pt-32 lg:px-8">
+      <section className="page-shell pt-[clamp(7rem,10vw,9rem)]">
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-20 lg:grid-cols-2">
             <div>
               <Reveal>
-                <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#1A6B3C]">Get in Touch</p>
-                <h1 className="mt-8 text-5xl font-bold leading-tight tracking-tight text-gray-900 md:text-8xl">
+                <p className="fluid-eyebrow font-bold text-[#1A6B3C]">Get in Touch</p>
+                <h1 className="mt-6 fluid-display-title font-bold tracking-tight text-gray-900">
                   Lets Recycle Together
                 </h1>
-                <p className="mt-10 text-xl leading-relaxed text-gray-500 max-w-lg">
+                <p className="mt-8 max-w-lg fluid-body text-gray-500">
                   Whether you're placing an order or looking for a strategic partner, our team is ready to assist.
                 </p>
               </Reveal>
 
-              <div className="mt-20 space-y-12">
+              <div className="mt-16 space-y-10">
                  <Reveal delay={0.1}>
-                    <h3 className="text-xs font-bold uppercase tracking-widest text-gray-400">Direct Contact</h3>
-                    <p className="mt-4 text-3xl font-bold text-gray-900">{site.contact.email}</p>
-                    <p className="mt-2 text-xl font-medium text-gray-600">{site.contact.phone}</p>
+                    <h3 className="fluid-small font-bold uppercase tracking-widest text-gray-400">Direct Contact</h3>
+                    <p className="mt-4 fluid-card-title font-bold text-gray-900">{site.contact.email}</p>
+                    <p className="mt-2 fluid-body font-medium text-gray-600">{site.contact.phone}</p>
                  </Reveal>
                  <Reveal delay={0.2}>
-                    <h3 className="text-xs font-bold uppercase tracking-widest text-gray-400">Location</h3>
-                    <p className="mt-4 text-xl font-medium text-gray-900">{site.locationDetailed}</p>
+                    <h3 className="fluid-small font-bold uppercase tracking-widest text-gray-400">Location</h3>
+                    <p className="mt-4 fluid-body font-medium text-gray-900">{site.locationDetailed}</p>
                  </Reveal>
               </div>
             </div>
@@ -63,22 +63,22 @@ export default function ContactPage() {
                     initial={{ opacity: 1 }}
                     exit={{ opacity: 0, filter: 'blur(20px)', scale: 0.95 }}
                     transition={{ duration: 0.8 }}
-                    className="glass-card rounded-[3rem] border border-gray-100 p-10 shadow-apple md:p-16"
+                    className="glass-card rounded-[3rem] border border-gray-100 p-8 shadow-apple md:p-12"
                   >
-                    <form onSubmit={handleSubmit} className="space-y-8">
-                      <div className="grid gap-8 md:grid-cols-2">
+                    <form onSubmit={handleSubmit} className="space-y-6 md:space-y-7">
+                      <div className="grid gap-6 md:grid-cols-2">
                         <div className="space-y-2">
-                          <label className="text-xs font-bold uppercase tracking-widest text-gray-400 px-1">Name</label>
+                          <label className="fluid-small font-bold uppercase tracking-widest text-gray-400 px-1">Name</label>
                           <input required className="input" placeholder="Jane Doe" type="text" />
                         </div>
                         <div className="space-y-2">
-                          <label className="text-xs font-bold uppercase tracking-widest text-gray-400 px-1">Email</label>
+                          <label className="fluid-small font-bold uppercase tracking-widest text-gray-400 px-1">Email</label>
                           <input required className="input" placeholder="jane@company.com" type="email" />
                         </div>
                       </div>
                       
                       <div className="space-y-2">
-                         <label className="text-xs font-bold uppercase tracking-widest text-gray-400 px-1">Subject</label>
+                         <label className="fluid-small font-bold uppercase tracking-widest text-gray-400 px-1">Subject</label>
                          <div className="relative">
                            <select className="input w-full appearance-none bg-white pr-10">
                              <option>General Inquiry</option>
@@ -92,7 +92,7 @@ export default function ContactPage() {
                       </div>
 
                       <div className="space-y-2">
-                        <label className="text-xs font-bold uppercase tracking-widest text-gray-400 px-1">Message</label>
+                        <label className="fluid-small font-bold uppercase tracking-widest text-gray-400 px-1">Message</label>
                         <textarea required className="input min-h-[150px] resize-none" placeholder="Tell us about your project..." />
                       </div>
 
@@ -101,7 +101,7 @@ export default function ContactPage() {
                         whileTap={{ scale: 0.97 }}
                         type="submit"
                         disabled={isSubmitting}
-                        className="btn-shimmer relative flex w-full items-center justify-center gap-3 rounded-full bg-[#1A6B3C] py-5 text-lg font-bold text-white shadow-apple hover:bg-[#14552f] transition-all disabled:opacity-50"
+                        className="btn-shimmer relative flex w-full items-center justify-center gap-3 rounded-full bg-[#1A6B3C] py-4 fluid-small font-bold text-white shadow-apple hover:bg-[#14552f] transition-all disabled:opacity-50"
                       >
                         {isSubmitting ? (
                           <div className="h-6 w-6 animate-spin rounded-full border-2 border-white/20 border-t-white" />
@@ -119,7 +119,7 @@ export default function ContactPage() {
                     key="success"
                     initial={{ opacity: 0, scale: 0.9, filter: 'blur(20px)' }}
                     animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-                    className="flex min-h-[500px] flex-col items-center justify-center rounded-[3rem] border border-gray-100 bg-white p-16 text-center shadow-apple-hover"
+                    className="flex min-h-[500px] flex-col items-center justify-center rounded-[3rem] border border-gray-100 bg-white p-10 text-center shadow-apple-hover md:p-12"
                   >
                     <div className="relative mb-10">
                        <motion.div 
@@ -139,8 +139,8 @@ export default function ContactPage() {
                        </motion.div>
                        <CheckCircle2 className="h-32 w-32 text-[#1A6B3C]" />
                     </div>
-                    <h2 className="text-4xl font-bold text-gray-900">Message Received.</h2>
-                    <p className="mt-6 text-xl text-gray-500 leading-relaxed">
+                    <h2 className="fluid-section-title font-bold text-gray-900">Message Received.</h2>
+                    <p className="mt-6 fluid-body text-gray-500">
                       Thank you for reaching out. A representative will contact you within 24 hours.
                     </p>
                     <button 
@@ -156,7 +156,7 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
-      <div className="h-32" />
+      <div className="h-20" />
     </main>
   );
 }

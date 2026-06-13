@@ -16,14 +16,14 @@ export function Navbar() {
         <a href="#top" className="flex items-center gap-3">
           <img src="/images/logos/envecoplast-wm-nav.svg" alt={`${site.name} logo`} className="h-12 w-auto" />
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-white">{site.name}</p>
-            <p className="text-xs text-slate-200">Waste to worth construction materials</p>
+            <p className="fluid-small font-semibold uppercase tracking-[0.24em] text-white">{site.name}</p>
+            <p className="fluid-small text-slate-200">Waste to worth construction materials</p>
           </div>
         </a>
 
         <nav className="hidden items-center gap-8 lg:flex">
           {navItems.map((item) => (
-            <a key={item.href} href={item.href} className="text-sm text-slate-200 transition hover:text-white">
+            <a key={item.href} href={item.href} className="fluid-small text-slate-200 transition hover:text-white">
               {item.label}
             </a>
           ))}
@@ -31,7 +31,7 @@ export function Navbar() {
 
         <a
           href="#contact"
-          className="inline-flex items-center rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400"
+          className="inline-flex items-center rounded-full bg-emerald-500 px-4 py-2 fluid-small font-semibold text-slate-950 transition hover:bg-emerald-400"
         >
           Place an order
         </a>

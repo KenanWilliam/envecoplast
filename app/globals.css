@@ -50,8 +50,27 @@
   --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
   
   /* Spacing */
-  --section-padding-desktop: 10rem;
-  --section-padding-mobile: 5rem;
+  --section-padding-desktop: clamp(2rem, 3.5vw, 3rem);
+  --section-padding-mobile: clamp(1.5rem, 3vw, 2.25rem);
+
+  /* Responsive layout rhythm */
+  --page-gutter-mobile: clamp(1rem, 3vw, 1.25rem);
+  --page-gutter-tablet: clamp(1.5rem, 2.5vw, 2rem);
+  --page-gutter-laptop: clamp(2.5rem, 3.5vw, 4rem);
+  --page-gutter-xl: clamp(3rem, 4vw, 5rem);
+  --page-gutter-2xl: clamp(4rem, 4.5vw, 6rem);
+  --stack-tight: clamp(1rem, 1.5vw, 1.25rem);
+  --stack-default: clamp(1.5rem, 2vw, 2rem);
+  --stack-section: clamp(1.25rem, 2.5vw, 2rem);
+
+  /* Fluid typography */
+  --fluid-eyebrow: clamp(0.68rem, 0.55vw, 0.78rem);
+  --fluid-body: clamp(1rem, 0.22vw + 0.95rem, 1.125rem);
+  --fluid-small: clamp(0.78rem, 0.15vw + 0.73rem, 0.88rem);
+  --fluid-card-title: clamp(1.2rem, 1vw + 1rem, 1.75rem);
+  --fluid-section-title: clamp(1.9rem, 2.8vw, 3.4rem);
+  --fluid-page-title: clamp(2.35rem, 4vw, 4.6rem);
+  --fluid-display-title: clamp(2.6rem, 5vw, 5.6rem);
 }
 
 * {
@@ -62,6 +81,7 @@
 
 html {
   scroll-behavior: smooth;
+  font-size: clamp(15px, 0.35vw + 13.5px, 17px);
 }
 
 body {
@@ -69,7 +89,8 @@ body {
   background: var(--surface-bg);
   color: var(--text-primary);
   font-family: var(--font-sans);
-  line-height: 1.75; /* Relaxed editorial line-height (Option 1B) */
+  font-size: var(--fluid-body);
+  line-height: 1.65;
   text-rendering: optimizeLegibility;
   min-height: 100vh;
 }
@@ -119,6 +140,80 @@ textarea:focus-visible {
     padding-top: var(--section-padding-desktop);
     padding-bottom: var(--section-padding-desktop);
   }
+}
+
+.page-shell {
+  padding-left: var(--page-gutter-mobile);
+  padding-right: var(--page-gutter-mobile);
+}
+
+@media (min-width: 640px) {
+  .page-shell {
+    padding-left: var(--page-gutter-tablet);
+    padding-right: var(--page-gutter-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  .page-shell {
+    padding-left: var(--page-gutter-laptop);
+    padding-right: var(--page-gutter-laptop);
+  }
+}
+
+@media (min-width: 1280px) {
+  .page-shell {
+    padding-left: var(--page-gutter-xl);
+    padding-right: var(--page-gutter-xl);
+  }
+}
+
+@media (min-width: 1536px) {
+  .page-shell {
+    padding-left: var(--page-gutter-2xl);
+    padding-right: var(--page-gutter-2xl);
+  }
+}
+
+.fluid-eyebrow {
+  font-size: var(--fluid-eyebrow);
+  line-height: 1.2;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.fluid-body {
+  font-size: var(--fluid-body);
+  line-height: 1.7;
+}
+
+.fluid-small {
+  font-size: var(--fluid-small);
+  line-height: 1.5;
+}
+
+.fluid-card-title {
+  font-size: var(--fluid-card-title);
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
+.fluid-section-title {
+  font-size: var(--fluid-section-title);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+}
+
+.fluid-page-title {
+  font-size: var(--fluid-page-title);
+  line-height: 1.04;
+  letter-spacing: -0.05em;
+}
+
+.fluid-display-title {
+  font-size: var(--fluid-display-title);
+  line-height: 0.98;
+  letter-spacing: -0.05em;
 }
 
 .glass-card {

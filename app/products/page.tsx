@@ -27,24 +27,24 @@ export default function ProductsPage() {
 
   return (
     <main className="bg-white">
-      <section className="px-6 pt-32 lg:px-8">
+      <section className="page-shell pt-[clamp(7rem,10vw,9rem)]">
         <div className="mx-auto max-w-7xl">
            <Reveal>
-            <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#1A6B3C]">Our Catalog</p>
-            <h1 className="mt-8 max-w-5xl text-5xl font-bold leading-tight tracking-tight text-gray-900 md:text-8xl">
+            <p className="fluid-eyebrow font-bold text-[#1A6B3C]">Our Catalog</p>
+            <h1 className="mt-6 max-w-5xl fluid-display-title font-bold tracking-tight text-gray-900">
               Engineered for Sustainability.
             </h1>
           </Reveal>
 
           {/* Segmented Control - Option 7A */}
-          <div className="mt-20 flex justify-center">
-            <div className="relative flex rounded-full bg-gray-50 p-1">
+          <div className="mt-16 flex justify-center max-w-full px-4">
+            <div className="relative flex rounded-full bg-gray-50 p-1 overflow-x-auto whitespace-nowrap scrollbar-hide max-w-full">
               {filters.map((filter) => (
                 <button
                   key={filter}
                   onClick={() => setActiveFilter(filter)}
                   className={cn(
-                    "relative z-10 rounded-full px-8 py-2.5 text-sm font-bold transition-all duration-300",
+                    "relative z-10 rounded-full px-3 py-2 sm:px-6 sm:py-2.5 fluid-small font-bold transition-all duration-300",
                     activeFilter === filter ? "text-white" : "text-gray-500 hover:text-gray-900"
                   )}
                 >
@@ -61,7 +61,7 @@ export default function ProductsPage() {
             </div>
           </div>
 
-          <div className="mt-24 grid gap-8 md:grid-cols-3 pb-32">
+          <div className="mt-16 grid gap-8 md:grid-cols-3 pb-20">
             <AnimatePresence mode="popLayout">
               {filteredProducts.map((product, index) => (
                 <motion.div
@@ -73,7 +73,7 @@ export default function ProductsPage() {
                   transition={{ duration: 0.4 }}
                 >
                   <Link href={`/products/${product.slug}`} className="group block h-full">
-                    <article className="glass-card flex h-full flex-col overflow-hidden rounded-[2.5rem] border border-gray-100 p-8 transition-all duration-500 hover:border-[#1A6B3C]/40 hover:shadow-apple-hover">
+                    <article className="glass-card flex h-full flex-col overflow-hidden rounded-[2.5rem] border border-gray-200 bg-white p-8 shadow-apple transition-all duration-500 hover:border-[#1A6B3C]/40 hover:shadow-apple-hover">
                       <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-gray-50">
                         <div className="absolute inset-0 bg-gradient-to-br from-[#1A6B3C]/5 to-[#1B4F8A]/5" />
                         <div className="absolute inset-0 flex items-center justify-center p-12">
@@ -90,22 +90,22 @@ export default function ProductsPage() {
                       </div>
 
                       <div className="mt-8 flex flex-col flex-grow">
-                        <h3 className="text-3xl font-bold tracking-tight text-gray-900 transition-colors group-hover:text-[#1A6B3C]">
+                        <h3 className="fluid-card-title font-bold tracking-tight text-gray-900 transition-colors group-hover:text-[#1A6B3C]">
                           {product.name}
                         </h3>
-                        <p className="mt-4 line-clamp-2 text-base leading-relaxed text-gray-500">
+                        <p className="mt-4 line-clamp-2 fluid-body text-gray-500">
                           {product.shortDescription}
                         </p>
                         
                         <div className="mt-auto pt-8">
                           <div className="flex flex-wrap gap-2">
                              {product.specs.slice(0, 2).map(spec => (
-                               <span key={spec} className="rounded-full bg-gray-50 px-3 py-1 text-[10px] font-bold text-gray-500">
+                               <span key={spec} className="rounded-full bg-gray-50 px-3 py-1 fluid-small font-bold text-gray-500">
                                  {spec}
                                </span>
                              ))}
                           </div>
-                          <div className="mt-6 flex items-center gap-2 text-sm font-bold text-gray-900 group-hover:translate-x-2 transition-transform">
+                          <div className="mt-6 flex items-center gap-2 fluid-small font-bold text-gray-900 group-hover:translate-x-2 transition-transform">
                              View Product <ArrowRight className="h-4 w-4 text-[#1A6B3C]" />
                           </div>
                         </div>

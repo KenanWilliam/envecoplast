@@ -33,12 +33,9 @@ function Counter({ value, label, qualifier, isLast }: { value: string, label: st
       onViewportEnter={() => {
         animate(count, numericValue, { duration: 2, ease: "easeOut" });
       }}
-      className={cn(
-        "flex flex-col items-center px-8 text-center",
-        !isLast && "border-r border-gray-100"
-      )}
+      className="flex flex-col items-center px-8 py-6 md:py-0 text-center w-full md:w-1/3"
     >
-      <p className="text-4xl font-bold tracking-tighter text-[#1A6B3C] md:text-5xl">
+      <p className="fluid-card-title font-bold tracking-tighter text-[#1A6B3C]">
         {displayValue}{suffix}
       </p>
       <p className="mt-2 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500">{label}</p>
@@ -54,16 +51,6 @@ export default function HomePage() {
     offset: ["start start", "end start"]
   });
 
-  // Dynamic Content Scaling & Sequential Scroll-Fade
-  // Eyebrow exits first, then Heading, then Subtext, then Buttons
-  const eybrowOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
-  const headingOpacity = useTransform(scrollYProgress, [0.1, 0.3], [1, 0]);
-  const subOpacity = useTransform(scrollYProgress, [0.2, 0.45], [1, 0]);
-  const buttonsOpacity = useTransform(scrollYProgress, [0.3, 0.6], [1, 0]);
-  const hintOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
-  
-  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.98]);
-
   return (
     <main className="bg-white">
       {/* Scroll Progress Line - Option 2B */}
@@ -78,40 +65,39 @@ export default function HomePage() {
       </motion.div>
 
       {/* Hero Section - Perfectly Centered & Dynamic */}
-      <section ref={heroRef} className="relative flex min-h-screen flex-col overflow-hidden px-6 lg:px-8">
+      <section ref={heroRef} className="relative flex flex-col overflow-hidden page-shell pb-12 md:pb-16">
         {/* 1. Nav Spacer - Defines the top boundary */}
-        <div className="h-20 md:h-24 lg:h-32" />
+        <div className="h-16 md:h-20 lg:h-24" />
 
         {/* 2. Main Content Area - Equally centered in remaining space */}
-        <motion.div 
-          style={{ scale: heroScale }}
-          className="relative z-10 flex flex-1 flex-col items-center justify-center text-center max-w-7xl mx-auto w-full"
+        <div 
+          className="relative z-10 flex flex-1 flex-col items-center justify-center text-center max-w-7xl mx-auto w-full mt-10 md:mt-16"
         >
-          <motion.div style={{ opacity: eybrowOpacity }}>
+          <div>
             <Reveal delay={0.1}>
               <p className="text-[clamp(0.6rem,1.5vh,0.75rem)] font-bold uppercase tracking-[0.3em] text-[#1A6B3C]">
                 Envecoplast Company Limited
               </p>
             </Reveal>
-          </motion.div>
+          </div>
           
-          <motion.div style={{ opacity: headingOpacity }} className="mt-[2vh] mb-[1vh]">
+          <div className="mt-[2vh] mb-[1vh]">
             <Reveal delay={0.2}>
               <h1 className="max-w-5xl text-[clamp(2rem,8vh,3.5rem)] font-bold leading-[1.15] tracking-tight text-gray-900 text-center">
                 {site.headline}
               </h1>
             </Reveal>
-          </motion.div>
+          </div>
 
-          <motion.div style={{ opacity: subOpacity }}>
+          <div>
             <Reveal delay={0.3}>
               <p className="max-w-3xl text-[clamp(0.9rem,2.2vh,1.125rem)] leading-relaxed text-gray-600 text-center">
                 {site.description}
               </p>
             </Reveal>
-          </motion.div>
+          </div>
 
-          <motion.div style={{ opacity: buttonsOpacity }} className="mt-[4vh]">
+          <div className="mt-[4vh]">
             <Reveal delay={0.4}>
               <div className="flex flex-wrap justify-center gap-5">
                 <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}>
@@ -133,27 +119,26 @@ export default function HomePage() {
                 </motion.div>
               </div>
             </Reveal>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
         {/* 3. Bottom Spacer & Scroll Hint */}
-        <motion.div 
-          style={{ opacity: hintOpacity }}
-          className="relative z-10 pb-12 flex flex-col items-center gap-2"
+        <div 
+          className="relative z-10 pb-12 mt-12 flex flex-col items-center gap-2"
         >
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Explore</p>
           <ChevronDown className="h-5 w-5 animate-bounce text-[#1A6B3C]" />
-        </motion.div>
+        </div>
 
         {/* High-Fidelity Focal Background */}
-        <div className="absolute inset-0 z-0 flex items-center justify-center opacity-[0.02]">
-           <div className="h-[80vh] w-[80vh] rounded-full border border-[#1A6B3C] blur-3xl" />
+        <div className="absolute inset-0 z-0 flex items-center justify-center opacity-[0.02] overflow-hidden">
+           <div className="h-[min(80vh,80vw)] w-[min(80vh,80vw)] rounded-full border border-[#1A6B3C] blur-3xl" />
         </div>
       </section>
 
       {/* Stats Bar - Option 3A */}
-      <section className="relative z-20 mt-12 mb-32 flex justify-center px-6">
-        <div className="glass-card flex w-full max-w-5xl flex-wrap justify-center divide-x divide-gray-100 rounded-[2.5rem] bg-white/80 py-10 shadow-apple backdrop-blur-xl md:flex-nowrap">
+      <section className="relative z-20 mt-0 mb-8 flex justify-center page-shell">
+        <div className="glass-card flex w-full max-w-5xl flex-wrap justify-center divide-y divide-gray-100 md:divide-y-0 md:divide-x divide-gray-100 rounded-[2.5rem] bg-white/80 py-8 shadow-apple backdrop-blur-xl md:flex-nowrap">
           {homeStats.map((item, index) => (
             <Counter 
               key={item.label} 
@@ -167,60 +152,60 @@ export default function HomePage() {
       </section>
 
       {/* Product Preview Strip - Option 6B */}
-      <section className="section-shell overflow-hidden">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <section className="section-shell">
+        <div className="mx-auto max-w-7xl page-shell">
           <SectionHeading
             eyebrow="Market Ready"
-            title="Engineered materials for immediate impact"
+            title="Recycled materials for immediate manufacturing"
             body="Our active production line delivers market-ready outputs for developers and industrial buyers."
           />
-        </div>
 
-        <div className="mt-20 flex w-full gap-8 overflow-x-auto pb-12 pl-[calc((100vw-80rem)/2+2rem)] pr-8 scrollbar-hide snap-x">
-          {liveProducts.map((product, index) => (
-            <motion.div
-              key={product.slug}
-              whileHover={{ scale: 1.02 }}
-              className="group relative h-[32rem] w-[24rem] flex-shrink-0 snap-center overflow-hidden rounded-[2.5rem] border border-gray-100 bg-white shadow-apple transition-all hover:shadow-apple-hover"
-            >
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 opacity-0 transition-opacity group-hover:opacity-100" />
-              <div className="flex h-full flex-col p-10">
-                <p className="text-xs font-bold uppercase tracking-widest text-[#1A6B3C]">{product.heroLabel}</p>
-                <h3 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 group-hover:text-white transition-colors">{product.name}</h3>
-                
-                <div className="mt-auto flex flex-col opacity-0 transition-all translate-y-4 group-hover:opacity-100 group-hover:translate-y-0">
-                  <p className="text-sm leading-relaxed text-white/80">{product.shortDescription}</p>
-                  <Link href={`/products/${product.slug}`} className="mt-6 inline-flex items-center gap-2 font-bold text-white underline underline-offset-8">
-                    View Specifications <ArrowRight className="h-4 w-4" />
-                  </Link>
+          <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {liveProducts.map((product, index) => (
+              <motion.div
+                key={product.slug}
+                whileHover={{ scale: 1.02 }}
+                className="group relative h-[28rem] sm:h-[32rem] w-full overflow-hidden rounded-[2.5rem] border border-gray-100 bg-white shadow-apple transition-all hover:shadow-apple-hover"
+              >
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 opacity-0 transition-opacity group-hover:opacity-100" />
+                <div className="flex h-full flex-col p-10">
+                  <p className="fluid-small font-bold uppercase tracking-widest text-[#1A6B3C]">{product.heroLabel}</p>
+                  <h3 className="mt-4 fluid-card-title font-bold tracking-tight text-gray-900 group-hover:text-white transition-colors">{product.name}</h3>
+                  
+                  <div className="mt-auto flex flex-col opacity-0 transition-all translate-y-4 group-hover:opacity-100 group-hover:translate-y-0">
+                    <p className="fluid-body text-white/80">{product.shortDescription}</p>
+                    <Link href={`/products/${product.slug}`} className="mt-6 inline-flex items-center gap-2 fluid-small font-bold text-white underline underline-offset-8">
+                      View Specifications <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </div>
                 </div>
-              </div>
-              <div className="absolute inset-0 -z-10 bg-gray-50/50" />
-            </motion.div>
-          ))}
+                <div className="absolute inset-0 -z-10 bg-gray-50/50" />
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Process Steps - Option 4A */}
-      <section className="section-shell border-y border-gray-100 bg-white">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <section className="section-shell border-y border-gray-100 bg-white overflow-hidden">
+        <div className="mx-auto max-w-7xl page-shell">
           <SectionHeading eyebrow="The Journey" title="A clear five-step path to industrial excellence" />
           
-          <div className="mt-24 grid gap-12 lg:grid-cols-5">
+          <div className="mt-8 grid gap-10 lg:grid-cols-5">
             {processSteps.map((step, index) => (
               <Reveal key={step.title} delay={index * 0.1} direction="right">
                 <motion.div 
                   whileHover={{ rotateX: 5, rotateY: 5 }}
                   className="relative flex flex-col items-start p-2"
                 >
-                  <span className="absolute -top-12 -left-4 text-9xl font-bold text-gray-50 opacity-50 select-none">
+                  <span className="absolute -top-12 -left-4 text-[clamp(4.5rem,10vw,7rem)] font-bold text-gray-50 opacity-50 select-none">
                     0{index + 1}
                   </span>
                   <div className="relative z-10 mt-6 rounded-3xl bg-gray-50 p-4 transition-colors group-hover:bg-[#1A6B3C]/10">
                     <step.icon className="h-8 w-8 text-[#1A6B3C]" />
                   </div>
-                  <h3 className="relative z-10 mt-8 text-2xl font-bold text-gray-900">{step.title}</h3>
-                  <p className="relative z-10 mt-4 text-base leading-relaxed text-gray-600">{step.summary}</p>
+                  <h3 className="relative z-10 mt-8 text-base font-bold text-gray-900">{step.title}</h3>
+                  <p className="relative z-10 mt-2 text-sm text-gray-500">{step.summary}</p>
                 </motion.div>
               </Reveal>
             ))}
@@ -230,10 +215,10 @@ export default function HomePage() {
 
       {/* Why Us - Option 5B */}
       <section className="section-shell relative overflow-hidden bg-white">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl page-shell">
           <SectionHeading eyebrow="Strategic Edge" title="Built for scale, quality, and measurable impact" />
           
-          <div className="mt-20 grid gap-8 md:grid-cols-3">
+          <div className="mt-8 grid gap-8 md:grid-cols-3">
             {whyPanels.slice(0, 3).map((item, index) => (
               <Reveal key={item.title} delay={index * 0.1}>
                 <motion.div 
@@ -243,8 +228,8 @@ export default function HomePage() {
                   <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#1A6B3C]/0 to-[#1A6B3C]/0 transition-all duration-500 group-hover:from-[#1A6B3C]/5 group-hover:to-[#1B4F8A]/5" />
                   <div className="relative z-10">
                     <item.icon className="h-10 w-10 text-[#1A6B3C]" />
-                    <h3 className="mt-8 text-2xl font-bold text-gray-900">{item.title}</h3>
-                    <p className="mt-4 text-base leading-relaxed text-gray-600">{item.body}</p>
+                    <h3 className="mt-8 text-base font-bold text-gray-900">{item.title}</h3>
+                    <p className="mt-2 text-sm text-gray-500">{item.body}</p>
                   </div>
                 </motion.div>
               </Reveal>
@@ -254,29 +239,29 @@ export default function HomePage() {
       </section>
 
       {/* Manifesto Strip */}
-      <section className="bg-gray-950 py-32 text-white">
+      <section className="bg-gray-950 py-24 text-white">
         <div className="mx-auto w-full max-w-5xl px-6 text-center lg:px-8">
           <Reveal>
-            <p className="text-xs font-bold uppercase tracking-[0.3em] text-gray-400 mb-8">Our Manifesto</p>
-            <h2 className="text-4xl font-bold leading-tight tracking-tight md:text-6xl">We are not just recycling — we are redefining industrial supply.</h2>
-            <p className="mt-10 text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">By transforming post-consumer plastic waste into high-performance industrial raw materials, we're proving that sustainability and industrial excellence are not trade-offs.</p>
+            <p className="mb-6 fluid-eyebrow font-bold text-gray-400">Our Manifesto</p>
+            <h2 className="fluid-section-title font-bold tracking-tight">We are not just recycling — we are redefining industrial supply.</h2>
+            <p className="mx-auto mt-8 max-w-3xl fluid-body text-gray-400">By transforming post-consumer plastic waste into high-performance industrial raw materials, we're proving that sustainability and industrial excellence are not trade-offs.</p>
           </Reveal>
         </div>
       </section>
 
       {/* Final CTA */}
-      <section className="section-shell mx-auto w-full max-w-7xl px-6 lg:px-8">
+      <section className="section-shell mx-auto w-full max-w-7xl page-shell">
         <Reveal>
-          <div className="relative overflow-hidden rounded-[3rem] bg-gradient-to-r from-[#1A6B3C] to-[#1B4F8A] px-10 py-20 text-white md:px-20 md:py-24">
+          <div className="relative overflow-hidden rounded-[3rem] bg-gradient-to-r from-[#1A6B3C] to-[#1B4F8A] px-8 py-16 text-white md:px-16 md:py-20">
             <div className="relative z-10 flex flex-col items-start gap-8 md:flex-row md:items-center md:justify-between">
               <div>
-                <h2 className="text-4xl font-bold leading-tight md:text-6xl tracking-tight">Scale Smarter.<br/>Source Sustainably.</h2>
-                <p className="mt-6 max-w-lg text-lg text-white/80 font-medium">Contact us today to secure high-volume, traceable recycled feedstock for your industrial production line.</p>
+                <h2 className="fluid-section-title font-bold tracking-tight text-white">Scale Smarter.<br/>Source Sustainably.</h2>
+                <p className="mt-6 max-w-lg fluid-body font-medium text-white/80">Contact us today to secure high-volume, traceable recycled feedstock for your industrial production line.</p>
               </div>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 rounded-full bg-white px-10 py-5 text-lg font-bold text-[#1A6B3C] shadow-apple transition-all hover:bg-gray-100"
+                  className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 fluid-small font-bold text-[#1A6B3C] shadow-apple transition-all hover:bg-gray-100"
                 >
                   <span className="text-[#1A6B3C]">Get In Touch</span>
                   <ArrowRight className="h-5 w-5 text-[#1A6B3C]" />
@@ -284,7 +269,7 @@ export default function HomePage() {
               </motion.div>
             </div>
             {/* Abstract Background Element */}
-            <div className="absolute -right-20 -top-20 h-96 w-96 rounded-full bg-white/10 blur-3xl" />
+            <div className="absolute -right-10 -top-10 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
           </div>
         </Reveal>
       </section>

@@ -27,15 +27,15 @@ export function Navbar() {
   }, []);
 
   return (
-    <div className="fixed top-0 z-50 flex w-full justify-center px-6 pt-5 transition-all duration-500">
+    <div className="fixed top-0 z-50 flex w-full justify-center page-shell pt-4 transition-all duration-500">
       <header
         className={cn(
-          'relative flex h-14 w-full max-w-5xl items-center justify-between rounded-full border border-gray-200 px-6 transition-all duration-500 lg:h-16 lg:px-8',
+          'relative flex h-14 w-full max-w-5xl items-center justify-between rounded-full border border-gray-200 px-5 transition-all duration-500 lg:h-16 lg:px-8',
           // Refined Glass Effect: bg-white/70 + backdrop-blur-xl
           scrolled ? 'bg-white/70 shadow-apple backdrop-blur-xl' : 'bg-white/90 shadow-none backdrop-blur-md'
         )}
       >
-        <Logo className="h-8 lg:h-10" />
+        <Logo className="h-7 lg:h-10" />
 
         <nav className="hidden items-center gap-1 lg:flex">
           {navLinks.map((link) => {
@@ -65,7 +65,7 @@ export function Navbar() {
         <div className="flex items-center gap-3">
           <Link
             href="/contact?inquiryType=Place%20an%20Order"
-            className="hidden rounded-full bg-[#1A6B3C] px-6 py-2.5 text-sm font-bold text-white transition-all hover:bg-[#14552f] hover:shadow-apple-hover md:inline-flex items-center justify-center"
+            className="hidden rounded-full bg-[#1A6B3C] px-5 py-2.5 text-sm font-bold text-white transition-all hover:bg-[#14552f] hover:shadow-apple-hover md:inline-flex items-center justify-center"
           >
             Order Now
           </Link>
@@ -87,15 +87,15 @@ export function Navbar() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: -20 }}
               transition={{ type: 'spring', duration: 0.5 }}
-              className="absolute top-20 left-0 right-0 overflow-hidden rounded-[2.5rem] border border-gray-200 bg-white shadow-apple-hover lg:hidden"
+              className="absolute top-[4.5rem] left-0 right-0 overflow-hidden rounded-[2.5rem] border border-gray-200 bg-white shadow-apple-hover lg:hidden"
             >
-              <nav className="flex flex-col p-8">
+              <nav className="flex flex-col p-6 sm:p-8">
                 {navLinks.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
                     onClick={() => setOpen(false)}
-                    className="rounded-2xl px-5 py-4 text-xl font-medium text-gray-900 transition hover:bg-gray-50 hover:text-[#1A6B3C]"
+                    className="rounded-2xl px-5 py-4 text-[clamp(1rem,2.6vw,1.25rem)] font-medium text-gray-900 transition hover:bg-gray-50 hover:text-[#1A6B3C]"
                   >
                     {link.label}
                   </Link>
@@ -103,7 +103,7 @@ export function Navbar() {
                 <Link
                   href="/contact?inquiryType=Place%20an%20Order"
                   onClick={() => setOpen(false)}
-                  className="mt-6 flex justify-center rounded-full bg-[#1A6B3C] py-5 text-lg font-bold text-white shadow-apple"
+                  className="mt-6 flex justify-center rounded-full bg-[#1A6B3C] py-4 text-[clamp(1rem,2.2vw,1.1rem)] font-bold text-white shadow-apple"
                 >
                   Order Now
                 </Link>

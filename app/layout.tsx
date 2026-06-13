@@ -12,7 +12,7 @@ const sora = Sora({ subsets: ['latin'], variable: '--font-display' });
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.envecoplast.com'),
   title: {
-    default: 'Envecoplast Ltd — Recycled Plastic Construction Materials | Kenya',
+    default: 'Envecoplast Ltd | Recycled Plastic Construction Materials | Kenya',
     template: '%s | Envecoplast Ltd',
   },
   description:
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     locale: 'en_KE',
     url: 'https://www.envecoplast.com',
     siteName: 'Envecoplast Ltd',
-    title: 'Envecoplast Ltd — Recycled Plastic Construction Materials | Kenya',
+    title: 'Envecoplast Ltd | Recycled Plastic Construction Materials | Kenya',
     description:
       'High-purity recycled plastic chips and pellets for industrial manufacturing. Transforming waste into value with sustainable raw materials and circular building solutions.',
     images: [
@@ -45,13 +45,13 @@ export const metadata: Metadata = {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Envecoplast Ltd — Recycled Plastic Construction Materials',
+        alt: 'Envecoplast Ltd | Recycled Plastic Construction Materials',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Envecoplast Ltd — Recycled Construction Materials | Kenya',
+    title: 'Envecoplast Ltd | Recycled Construction Materials | Kenya',
     description:
       'Recycled plastic chips, pellets, and interlocking blocks for fast, affordable, sustainable construction.',
     images: ['/og-image.png'],
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${sora.variable} bg-white text-gray-900 antialiased`}>
+      <body suppressHydrationWarning className={`${inter.variable} ${sora.variable} bg-white text-gray-900 antialiased`}>
         <OrganizationJsonLd />
         <Navbar />
         {children}

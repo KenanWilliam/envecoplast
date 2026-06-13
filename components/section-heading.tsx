@@ -22,22 +22,22 @@ export function SectionHeading({
     <div className={cn('max-w-3xl', align === 'center' && 'mx-auto text-center', className)}>
       {eyebrow && (
         <Reveal>
-          <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#1A6B3C]">
+          <p className="fluid-eyebrow font-bold text-[#1A6B3C]">
             {eyebrow}
           </p>
         </Reveal>
       )}
       <Reveal delay={0.1}>
         <h2 className={cn(
-          "mt-6 font-bold tracking-tight text-gray-900 md:text-6xl",
-          eyebrow ? "text-4xl" : "text-5xl"
+          "mt-6 font-bold tracking-tight text-gray-900",
+          eyebrow ? "fluid-section-title" : "fluid-page-title"
         )}>
           {title}
         </h2>
       </Reveal>
       {body && (
         <Reveal delay={0.2}>
-          <p className="mt-6 text-lg leading-relaxed text-gray-600">
+          <p className="mt-6 fluid-body text-gray-600">
             {body}
           </p>
         </Reveal>

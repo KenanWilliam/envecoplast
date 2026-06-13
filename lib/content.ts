@@ -23,10 +23,10 @@ export const navLinks = [
 ] as const;
 
 export const homeStats = [
-  { label: 'Tonnes of Plastic Diverted', value: '4,200+', qualifier: 'as of Q1 2026' },
-  { label: 'Industrial Capacity', value: '500T+', qualifier: 'monthly throughput' },
-  { label: 'Reliable Lead-time', value: '72hr', qualifier: 'average dispatch' },
-  { label: 'Counties Served', value: '21', qualifier: 'across Kenya' },
+  { label: 'Tonnes of Plastic Diverted', value: '12000+', qualifier: 'as of Q1 2026' },
+  { label: 'Industrial Capacity', value: '  100T+', qualifier: 'monthly throughput' },
+  { label: 'Reliable Lead-time', value: '24hr', qualifier: 'average dispatch' },
+  { label: 'Countries Served', value: '5', qualifier: 'across Kenya' },
 ] as const;
 
 export const processSteps = [
@@ -46,7 +46,7 @@ export const processSteps = [
     icon: Factory,
     title: 'Processing',
     summary:
-      'Quality sorted plastics are crushed into chips with consistent quality profiles for industrial and manufacturing use.',
+      'Quality sorted plastics are crushed, washed, and dried into chips with consistent quality profiles for industrial and manufacturing use.',
   },
   {
     icon: Recycle,
@@ -86,7 +86,7 @@ export const whyPanels = [
   {
     icon: Recycle,
     title: 'Circular Economy Champion',
-    body: 'Leading Kenya’s shift from waste to worth by closing the loop for the manufacturing and industrial sectors.',
+    body: 'Leading Africa’s shift from waste to worth by closing the loop for the manufacturing and industrial sectors.',
   },
   {
     icon: Handshake,
