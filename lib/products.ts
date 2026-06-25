@@ -12,6 +12,8 @@ export type Product = {
   useCases: string[];
   heroLabel: string;
   imageHint: string;
+  image?: string;
+  detailedImage?: string;
 };
 
 export const products: Product[] = [
@@ -37,6 +39,8 @@ export const products: Product[] = [
     ],
     heroLabel: 'Industrial Grade',
     imageHint: 'Sorted recycled chips in industrial processing trays',
+    image: '/images/chips.png',
+    detailedImage: '/images/chips-detailed.png',
   },
   {
     slug: 'pellets',
@@ -60,6 +64,8 @@ export const products: Product[] = [
     ],
     heroLabel: 'Manufacturing Grade',
     imageHint: 'Consistent recycled pellets prepared for bulk dispatch',
+    image: '/images/pellets.png',
+    detailedImage: '/images/pellets-detailed.png',
   },
   {
     slug: 'interlocking-construction-block',
@@ -83,6 +89,7 @@ export const products: Product[] = [
     ],
     heroLabel: 'Circular Output',
     imageHint: 'Interlocking block stack on active construction site',
+    image: '/images/blocks.png',
   },
   {
     slug: 'pavers',

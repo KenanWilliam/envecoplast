@@ -75,13 +75,19 @@ export default function ProductsPage() {
                   <Link href={`/products/${product.slug}`} className="group block h-full">
                     <article className="glass-card flex h-full flex-col overflow-hidden rounded-[2.5rem] border border-gray-200 bg-white p-8 shadow-apple transition-all duration-500 hover:border-[#1A6B3C]/40 hover:shadow-apple-hover">
                       <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-gray-50">
-                        <div className="absolute inset-0 bg-gradient-to-br from-[#1A6B3C]/5 to-[#1B4F8A]/5" />
-                        <div className="absolute inset-0 flex items-center justify-center p-12">
-                           {/* Product Illustration / Placeholder */}
-                           <div className="text-center">
-                             <p className="text-xs font-bold uppercase tracking-widest text-gray-400">Preview</p>
-                           </div>
-                        </div>
+                        {product.image ? (
+                          <img src={product.image} alt={product.name} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                        ) : (
+                          <>
+                            <div className="absolute inset-0 bg-gradient-to-br from-[#1A6B3C]/5 to-[#1B4F8A]/5" />
+                            <div className="absolute inset-0 flex items-center justify-center p-12">
+                              {/* Product Illustration / Placeholder */}
+                              <div className="text-center">
+                                <p className="text-xs font-bold uppercase tracking-widest text-gray-400">Preview</p>
+                              </div>
+                            </div>
+                          </>
+                        )}
                         {/* In-stock Badge - Option 7A */}
                         <div className="absolute top-6 left-6 flex items-center gap-2 rounded-full bg-white/90 px-3 py-1.5 backdrop-blur-sm">
                           <div className="h-2 w-2 animate-pulse rounded-full bg-emerald-500" />

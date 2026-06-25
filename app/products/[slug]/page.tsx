@@ -41,12 +41,18 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
 
         <div className="lg:flex lg:gap-24">
           {/* Left Side: Sticky Image - Option 8A */}
-          <div className="lg:sticky lg:top-32 lg:h-[calc(100vh-10rem)] lg:w-1/2">
+          <div className="lg:sticky lg:top-24 lg:h-[calc(100vh-6rem)] lg:w-1/2 lg:flex lg:flex-col lg:justify-center">
             <Reveal>
-              <div className="relative aspect-square overflow-hidden rounded-[3rem] bg-gray-50 p-12 lg:h-full">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#1A6B3C]/5 to-[#1B4F8A]/5" />
-                <div className="relative h-full w-full rounded-3xl border border-gray-100 bg-white/50 shadow-apple backdrop-blur-sm" />
-                <p className="absolute top-12 left-12 fluid-eyebrow font-bold text-[#1A6B3C]">
+              <div className="relative w-full aspect-square max-h-[calc(100vh-8rem)] overflow-hidden rounded-[3rem] bg-gray-50">
+                {product.detailedImage || product.image ? (
+                  <img src={product.detailedImage || product.image} alt={product.name} className="absolute inset-0 h-full w-full object-cover" />
+                ) : (
+                  <>
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#1A6B3C]/5 to-[#1B4F8A]/5" />
+                    <div className="absolute inset-12 rounded-3xl border border-gray-100 bg-white/50 shadow-apple backdrop-blur-sm" />
+                  </>
+                )}
+                <p className="absolute top-12 left-12 fluid-eyebrow font-bold text-[#1A6B3C] bg-white/80 px-4 py-2 rounded-full backdrop-blur-md shadow-sm">
                   {product.heroLabel}
                 </p>
               </div>

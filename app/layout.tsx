@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter, Sora } from 'next/font/google';
 import './globals.css';
 import { site } from '@/lib/site';
@@ -8,6 +8,12 @@ import { OrganizationJsonLd } from '@/components/seo/json-ld';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 const sora = Sora({ subsets: ['latin'], variable: '--font-display' });
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.envecoplast.com'),

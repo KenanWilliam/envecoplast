@@ -162,25 +162,37 @@ export default function HomePage() {
 
           <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {liveProducts.map((product, index) => (
-              <motion.div
-                key={product.slug}
-                whileHover={{ scale: 1.02 }}
-                className="group relative h-[28rem] sm:h-[32rem] w-full overflow-hidden rounded-[2.5rem] border border-gray-100 bg-white shadow-apple transition-all hover:shadow-apple-hover"
-              >
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 opacity-0 transition-opacity group-hover:opacity-100" />
-                <div className="flex h-full flex-col p-10">
-                  <p className="fluid-small font-bold uppercase tracking-widest text-[#1A6B3C]">{product.heroLabel}</p>
-                  <h3 className="mt-4 fluid-card-title font-bold tracking-tight text-gray-900 group-hover:text-white transition-colors">{product.name}</h3>
-                  
-                  <div className="mt-auto flex flex-col opacity-0 transition-all translate-y-4 group-hover:opacity-100 group-hover:translate-y-0">
-                    <p className="fluid-body text-white/80">{product.shortDescription}</p>
-                    <Link href={`/products/${product.slug}`} className="mt-6 inline-flex items-center gap-2 fluid-small font-bold text-white underline underline-offset-8">
-                      View Specifications <ArrowRight className="h-4 w-4" />
-                    </Link>
+              <Link key={product.slug} href={`/products/${product.slug}`} className="block w-full">
+                <motion.div
+                  whileHover={{ y: -5 }}
+                  className="group relative flex flex-col h-[28rem] sm:h-[32rem] w-full overflow-hidden rounded-[2.5rem] border border-gray-100 bg-white shadow-apple transition-all hover:shadow-apple-hover"
+                >
+                  {/* Image Section (Top half) */}
+                  <div className="relative h-1/2 w-full overflow-hidden bg-gray-50 shrink-0">
+                    {product.image ? (
+                      <img src={product.image} alt={product.name} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#1A6B3C]/5 to-[#1B4F8A]/5">
+                        <p className="text-xs font-bold uppercase tracking-widest text-gray-400">Preview</p>
+                      </div>
+                    )}
                   </div>
-                </div>
-                <div className="absolute inset-0 -z-10 bg-gray-50/50" />
-              </motion.div>
+
+                  {/* Text Section (Bottom half) */}
+                  <div className="relative flex flex-1 flex-col p-8 z-10 bg-white">
+                    <p className="fluid-small font-bold uppercase tracking-widest text-[#1A6B3C]">{product.heroLabel}</p>
+                    <h3 className="mt-2 fluid-card-title font-bold tracking-tight text-gray-900">{product.name}</h3>
+                    
+                    <p className="mt-4 fluid-body text-gray-500 line-clamp-3">{product.shortDescription}</p>
+                    
+                    <div className="mt-auto pt-4">
+                      <div className="inline-flex items-center gap-2 fluid-small font-bold text-[#1A6B3C] group-hover:translate-x-2 transition-transform">
+                        View Specifications <ArrowRight className="h-4 w-4" />
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </Link>
             ))}
           </div>
         </div>
