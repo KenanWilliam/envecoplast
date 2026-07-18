@@ -46,7 +46,9 @@ export default function ContactPage() {
                  <Reveal delay={0.1}>
                     <h3 className="fluid-small font-bold uppercase tracking-widest text-gray-400">Direct Contact</h3>
                     <p className="mt-4 fluid-card-title font-bold text-gray-900">{site.contact.email}</p>
-                    <p className="mt-2 fluid-body font-medium text-gray-600">{site.contact.phone}</p>
+                    {site.contact.phones.map((phone, i) => (
+                      <p key={i} className="mt-2 fluid-body font-medium text-gray-600">{phone}</p>
+                    ))}
                  </Reveal>
                  <Reveal delay={0.2}>
                     <h3 className="fluid-small font-bold uppercase tracking-widest text-gray-400">Location</h3>

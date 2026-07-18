@@ -26,7 +26,7 @@ export const homeStats = [
   { label: 'Tonnes of Plastic Diverted', value: '12000+', qualifier: 'as of Q1 2026' },
   { label: 'Industrial Capacity', value: '  100T+', qualifier: 'monthly throughput' },
   { label: 'Reliable Lead-time', value: '24hr', qualifier: 'average dispatch' },
-  { label: 'Countries Served', value: '5', qualifier: 'across Kenya' },
+  { label: 'Countries Served', value: '5', qualifier: 'across East Africa' },
 ] as const;
 
 export const processSteps = [
@@ -60,6 +60,12 @@ export const processSteps = [
     summary:
       'Each batch is tested for consistency, purity, and readiness before dispatch to industrial partners.',
   },
+  {
+    icon: Hammer,
+    title: 'Block Manufacturing',
+    summary:
+      'A portion of our processed plastics is transformed into durable, interlocking construction blocks for sustainable building.',
+  },
 ] as const;
 
 export const whyPanels = [
@@ -70,8 +76,13 @@ export const whyPanels = [
   },
   {
     icon: ShieldCheck,
-    title: 'Quality Material Standards',
+    title: 'SUPERIOR QUALITY STANDARD',
     body: 'Our chips and pellets undergo rigorous testing to ensure consistent polymer purity and industrial performance.',
+  },
+  {
+    icon: Wallet,
+    title: 'Financial Flexibility',
+    body: 'We understand suppliers and clients have different financial demands and we can adjust; providing fast payments to suppliers and flexible conditions for clients.',
   },
   {
     icon: Factory,
@@ -111,7 +122,7 @@ export const buyerPersonas: BuyerPersona[] = [
   {
     icon: Landmark,
     title: 'Real Estate Developer',
-    body: 'Enhance project ESG ratings and reduce environmental footprint by sourcing certified, high-performance recycled materials.',
+    body: 'Enhance project ESG ratings and reduce environmental footprint by sourcing premium, high-performance recycled materials.',
   },
   {
     icon: Recycle,
@@ -128,11 +139,11 @@ export const buyerPersonas: BuyerPersona[] = [
 export const missionValues = [
   {
     title: 'Mission',
-    body: 'To transform traceable post-consumer plastic waste from landfills into high performance, certified materials bridging the gap between environmental responsibility and industrial excellence.',
+    body: 'To transform traceable post-consumer plastic waste from landfills into high-performance materials bridging the gap between environmental responsibility and industrial excellence.',
   },
   {
     title: 'Vision',
-    body: 'Lead Africa in circular manufacturing for affordable, high-performance sustainable building materials.',
+    body: 'We see a world in which sustainable construction materials derived from plastic waste and innovative recycling practices create a circular economy, driving sustainable urban development and a greener planet for generations to come.',
   },
   {
     title: 'Values',

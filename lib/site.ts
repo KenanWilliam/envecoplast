@@ -3,15 +3,15 @@ export const site = {
   legalName: 'Envecoplast Company Limited',
   tagline: 'Turning waste into worth - building a greener future',
   description:
-    'We are a forward-thinking recycling company that removes waste plastic from landfills and transforms it into high-quality raw materials.',
+    'We believe that high quality recycled products go hand in hand with creating jobs and protecting the planet from too much pollution.',
   headline:
-    'Envecoplast transforms traceable waste plastics into high quality chips and pellets for industrial use',
+    'Envecoplast transforms traceable waste plastics into high quality chips, pellets, and bricks for industrial use',
   location: 'Nairobi, Kenya',
   locationDetailed: 'P.O. Box 12559-00100, Njiru Area, Nairobi, Kenya',
   formspreeEndpoint: process.env.NEXT_PUBLIC_FORM_ENDPOINT || 'https://formspree.io/f/xblypvvz',
   contact: {
     email: 'hello@envecoplast.com',
-    phone: '+254 700 000 000',
+    phones: ['+254 714 485 999', '+254 743 052 002'],
   },
   colors: {
     green: '#1A6B3C',

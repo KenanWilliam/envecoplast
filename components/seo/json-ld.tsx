@@ -9,7 +9,7 @@ export function OrganizationJsonLd() {
     logo: 'https://www.envecoplast.com/brand/envecoplast-logo.svg',
     contactPoint: {
       '@type': 'ContactPoint',
-      telephone: '+254700000000',
+      telephone: '+254714485999',
       email: 'hello@envecoplast.com',
       contactType: 'customer service',
       areaServed: 'KE',

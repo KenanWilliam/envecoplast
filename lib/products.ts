@@ -46,7 +46,7 @@ export const products: Product[] = [
     slug: 'pellets',
     name: 'Plastic Pellets',
     tagline: 'Production-ready recycled pellets for scalable manufacturing',
-    shortDescription: 'Uniform recycled pellets optimized for extrusion and molding workflows.',
+    shortDescription: 'Uniform recycled pellets optimized for extrusion and molding workflows. (Operational Q4 2026/Q1 2027)',
     description:
       'Envecoplast recycled pellets deliver a stable, uniform material for advanced manufacturing. By processing crushed chips into high-quality pellets, we enable factories to seamlessly integrate recycled content into their existing production lines without compromising on quality.',
     category: 'Raw Materials',
@@ -71,7 +71,7 @@ export const products: Product[] = [
     slug: 'interlocking-construction-block',
     name: 'Interlocking Construction Block',
     tagline: 'Sustainable building through circular recycling',
-    shortDescription: 'Mortar-free blocks manufactured from 100% recycled plastic waste.',
+    shortDescription: 'Mortar-free blocks manufactured from 100% recycled plastic waste. (Operational Q4 2026/Q1 2027)',
     description:
       'Envecoplast interlocking blocks represent the final stage of our recycling value chain. By transforming processed plastic waste into durable structural components, we provide a circular construction solution that diverts waste from landfills while offering a faster, more sustainable building method.',
     category: 'Blocks',

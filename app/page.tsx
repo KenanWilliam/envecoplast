@@ -66,16 +66,29 @@ export default function HomePage() {
 
       {/* Hero Section - Perfectly Centered & Dynamic */}
       <section ref={heroRef} className="relative flex flex-col overflow-hidden page-shell h-[100dvh] max-h-[100dvh]">
+        {/* Background Video */}
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          playsInline 
+          className="absolute inset-0 h-full w-full object-cover z-0"
+        >
+          <source src="/videos/pellets.mp4" type="video/mp4" />
+        </video>
+        {/* Overlay for text readability while keeping video clear */}
+        <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-black/70 via-black/40 to-transparent" />
+
         {/* 1. Nav Spacer - Defines the top boundary */}
-        <div className="h-16 md:h-20 lg:h-24 shrink-0" />
+        <div className="relative z-10 h-16 md:h-20 lg:h-24 shrink-0" />
 
         {/* 2. Main Content Area - Equally centered in remaining space */}
         <div 
-          className="relative z-10 flex flex-1 flex-col items-center justify-center text-center max-w-7xl mx-auto w-full"
+          className="relative z-10 flex flex-1 flex-col items-center justify-center text-center max-w-7xl mx-auto w-full px-4"
         >
           <div>
             <Reveal delay={0.1}>
-              <p className="text-[clamp(0.6rem,1.5vh,0.75rem)] font-bold uppercase tracking-[0.3em] text-[#1A6B3C]">
+              <p className="text-[clamp(0.6rem,1.5vh,0.75rem)] font-bold uppercase tracking-[0.3em] text-[#4ade80] drop-shadow-md">
                 Envecoplast Company Limited
               </p>
             </Reveal>
@@ -83,7 +96,7 @@ export default function HomePage() {
           
           <div className="mt-[1.5vh] mb-[0.75vh]">
             <Reveal delay={0.2}>
-              <h1 className="max-w-5xl text-[clamp(0.5rem,4vh,1.75rem)] font-bold leading-[1.15] tracking-tight text-gray-900 text-center">
+              <h1 className="max-w-5xl text-[clamp(0.5rem,4vh,1.75rem)] font-bold leading-[1.15] tracking-tight text-white drop-shadow-lg text-center">
                 {site.headline}
               </h1>
             </Reveal>
@@ -91,7 +104,7 @@ export default function HomePage() {
 
           <div>
             <Reveal delay={0.3}>
-              <p className="max-w-3xl text-[clamp(0.75rem,1.8vh,1rem)] leading-relaxed text-gray-600 text-center">
+              <p className="max-w-3xl text-[clamp(0.75rem,1.8vh,1rem)] leading-relaxed text-white/90 drop-shadow-md text-center">
                 {site.description}
               </p>
             </Reveal>
@@ -201,9 +214,8 @@ export default function HomePage() {
       {/* Process Steps - Option 4A */}
       <section className="section-shell border-y border-gray-100 bg-white overflow-hidden">
         <div className="mx-auto max-w-7xl page-shell">
-          <SectionHeading eyebrow="The Journey" title="A clear five-step path to industrial excellence" />
-          
-          <div className="mt-8 grid gap-10 lg:grid-cols-5">
+          <SectionHeading eyebrow="The Journey" title="A clear six-step path to industrial excellence" />
+          <div className="mt-8 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
             {processSteps.map((step, index) => (
               <Reveal key={step.title} delay={index * 0.1} direction="right">
                 <motion.div 
