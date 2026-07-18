@@ -71,7 +71,7 @@ export default function AboutPage() {
                       <h3 className="fluid-card-title font-bold text-gray-900">Grace Adera</h3>
                       <p className="mb-4 fluid-small font-bold text-[#1A6B3C]">Partner</p>
                       <p className="fluid-small text-gray-500">
-                        Grace Adera is a serial entrepreneur with decades of experience in business management. She brings extensive management expertise in operations, partner relations, emerging market infrastructure, and strategic planning across diverse sectors, including FMCG, the circular economy (renewable energy and plastic recycling), and agriculture.
+                        Grace Adera is a serial entrepreneur with decades of experience in business management. She brings extensive management expertise in operations, partner relations, emerging market infrastructure, and strategic planning across diverse sectors, including FMCG, renewable energy, plastic recycling, and agriculture.
                       </p>
                     </div>
                   </motion.div>
