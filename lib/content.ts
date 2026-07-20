@@ -15,8 +15,8 @@ import {
 
 export const navLinks = [
   { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
   { href: '/why-us', label: 'Why Us' },
+  { href: '/about', label: 'About' },
   { href: '/products', label: 'Products' },
   { href: '/how-it-works', label: 'How It Works' },
   { href: '/contact', label: 'Contact' },
@@ -52,7 +52,13 @@ export const processSteps = [
     icon: Recycle,
     title: 'Pelleting',
     summary:
-      'Crushed chips are processed into pellets with consistent quality profiles, ready for advanced manufacturing.',
+      'Crushed chips are processed into pellets with consistent quality profiles, ready for advanced manufacturing. (Operational Q4 of 2026/Q1 2027)',
+  },
+  {
+    icon: Hammer,
+    title: 'Block Manufacturing',
+    summary:
+      'Our processed plastics are transformed into durable, interlocking construction blocks for sustainable building. (Operational Q4 of 2026/Q1 2027)',
   },
   {
     icon: ShieldCheck,
@@ -60,15 +66,14 @@ export const processSteps = [
     summary:
       'Each batch is tested for consistency, purity, and readiness before dispatch to industrial partners.',
   },
-  {
-    icon: Hammer,
-    title: 'Block Manufacturing',
-    summary:
-      'A portion of our processed plastics is transformed into durable, interlocking construction blocks for sustainable building.',
-  },
 ] as const;
 
 export const whyPanels = [
+  {
+    icon: Wallet,
+    title: 'Financial Flexibility',
+    body: 'We understand suppliers and clients have different financial demands and we can adjust; providing fast payments to suppliers and flexible conditions for clients.',
+  },
   {
     icon: ScanSearch,
     title: 'Traceable Supply Chain',
@@ -76,13 +81,8 @@ export const whyPanels = [
   },
   {
     icon: ShieldCheck,
-    title: 'SUPERIOR QUALITY STANDARD',
+    title: 'Superior Quality Standards',
     body: 'Our chips and pellets undergo rigorous testing to ensure consistent polymer purity and industrial performance.',
-  },
-  {
-    icon: Wallet,
-    title: 'Financial Flexibility',
-    body: 'We understand suppliers and clients have different financial demands and we can adjust; providing fast payments to suppliers and flexible conditions for clients.',
   },
   {
     icon: Factory,

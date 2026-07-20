@@ -101,18 +101,13 @@ export default function AboutPage() {
              </div>
 
              {/* Advisory Board Section */}
-             <div className="mt-16 text-center">
-               <Reveal>
-                 <h2 className="fluid-display-title font-bold tracking-tight text-gray-900">Advisory Board</h2>
-               </Reveal>
-             </div>
              <div className="mt-8">
                <Reveal delay={0.1}>
                  <motion.div 
                    whileHover={{ scale: 1.01 }}
                    className="flex flex-col md:flex-row gap-8 rounded-[2.5rem] border border-gray-100 bg-white p-8 md:p-12 shadow-apple"
                  >
-                   <div className="w-full max-w-[16rem] shrink-0 rounded-3xl bg-gray-100 overflow-hidden aspect-[3/4] md:aspect-auto md:h-80 lg:h-[22rem]">
+                   <div className="w-full max-w-[16rem] shrink-0 rounded-3xl bg-gray-100 overflow-hidden aspect-square">
                      <img 
                        src="/images/theo.jpeg" 
                        alt="Theo Kocken" 
@@ -120,8 +115,7 @@ export default function AboutPage() {
                      />
                    </div>
                    <div className="flex-1 flex flex-col justify-center">
-                     <h3 className="fluid-card-title font-bold text-gray-900">Theo Kocken</h3>
-                     <p className="mb-6 fluid-small font-bold text-[#1A6B3C]">Advisor</p>
+                     <h3 className="fluid-card-title font-bold text-gray-900">Theo Kocken (Advisory board)</h3>
                      <div className="space-y-4 fluid-small text-gray-500">
                        <p>
                          Theo Kocken (1964) is an entrepreneur in Development Finance and professor of Financial Risk Management at the VU University Amsterdam in The Netherlands and Extraordinary professor at North West University in South Africa. As an entrepreneur he founded Cardano in 2000, a specialized financial risk and investment firm.

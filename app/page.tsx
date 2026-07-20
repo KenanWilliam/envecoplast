@@ -164,6 +164,31 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Why Us - Option 5B */}
+      <section className="section-shell relative overflow-hidden bg-white">
+        <div className="mx-auto max-w-7xl page-shell">
+          <SectionHeading eyebrow="Strategic Edge" title="Built for scale, quality, and measurable impact" />
+          
+          <div className="mt-8 grid gap-8 md:grid-cols-3">
+            {whyPanels.slice(0, 3).map((item, index) => (
+              <Reveal key={item.title} delay={index * 0.1}>
+                <motion.div 
+                  whileHover={{ y: -10 }}
+                  className="group relative overflow-hidden rounded-[2.5rem] border border-gray-100 bg-white p-10 shadow-apple transition-all hover:shadow-apple-hover"
+                >
+                  <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#1A6B3C]/0 to-[#1A6B3C]/0 transition-all duration-500 group-hover:from-[#1A6B3C]/5 group-hover:to-[#1B4F8A]/5" />
+                  <div className="relative z-10">
+                    <item.icon className="h-10 w-10 text-[#1A6B3C]" />
+                    <h3 className="mt-8 text-base font-bold text-gray-900">{item.title}</h3>
+                    <p className="mt-2 text-sm text-gray-500">{item.body}</p>
+                  </div>
+                </motion.div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Product Preview Strip - Option 6B */}
       <section className="section-shell">
         <div className="mx-auto max-w-7xl page-shell">
@@ -230,31 +255,6 @@ export default function HomePage() {
                   </div>
                   <h3 className="relative z-10 mt-8 text-base font-bold text-gray-900">{step.title}</h3>
                   <p className="relative z-10 mt-2 text-sm text-gray-500">{step.summary}</p>
-                </motion.div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Why Us - Option 5B */}
-      <section className="section-shell relative overflow-hidden bg-white">
-        <div className="mx-auto max-w-7xl page-shell">
-          <SectionHeading eyebrow="Strategic Edge" title="Built for scale, quality, and measurable impact" />
-          
-          <div className="mt-8 grid gap-8 md:grid-cols-3">
-            {whyPanels.slice(0, 3).map((item, index) => (
-              <Reveal key={item.title} delay={index * 0.1}>
-                <motion.div 
-                  whileHover={{ y: -10 }}
-                  className="group relative overflow-hidden rounded-[2.5rem] border border-gray-100 bg-white p-10 shadow-apple transition-all hover:shadow-apple-hover"
-                >
-                  <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#1A6B3C]/0 to-[#1A6B3C]/0 transition-all duration-500 group-hover:from-[#1A6B3C]/5 group-hover:to-[#1B4F8A]/5" />
-                  <div className="relative z-10">
-                    <item.icon className="h-10 w-10 text-[#1A6B3C]" />
-                    <h3 className="mt-8 text-base font-bold text-gray-900">{item.title}</h3>
-                    <p className="mt-2 text-sm text-gray-500">{item.body}</p>
-                  </div>
                 </motion.div>
               </Reveal>
             ))}
