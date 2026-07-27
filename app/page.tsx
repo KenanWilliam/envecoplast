@@ -74,7 +74,7 @@ export default function HomePage() {
           playsInline 
           className="absolute inset-0 h-full w-full object-cover z-0"
         >
-          <source src="/videos/pellets.mp4" type="video/mp4" />
+          <source src="/videos/pellets2.mp4" type="video/mp4" />
         </video>
         {/* Overlay for text readability while keeping video clear */}
         <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-black/70 via-black/40 to-transparent" />

@@ -1,18 +1,17 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { SectionHeading } from '@/components/section-heading';
 import { Reveal } from '@/components/sections/reveal';
 import { whyPanels } from '@/lib/content';
 import { Check, X } from 'lucide-react';
 
 /**
- * Option 11A — The Comparison Table
- * An ultra-clean, Apple-style comparison grid (Our Blocks vs. Traditional). 
- * Features "Checkmarks" that animate in with a "pop" physics effect.
+ * Why Us Page
+ * Features an Apple-style comparison grid with key parameters including Financial Flexibility.
  */
 export default function WhyUsPage() {
   const comparison = [
+    { feature: 'Financial Flexibility', envecoplast: 'Flexible & Fast Payouts', traditional: 'Rigid & Delayed' },
     { feature: 'Traceable Supply Chain', envecoplast: true, traditional: false },
     { feature: 'Quality Material Certification', envecoplast: true, traditional: false },
     { feature: 'Polymer Purity', envecoplast: '99%+', traditional: 'Variable' },
@@ -23,6 +22,7 @@ export default function WhyUsPage() {
 
   return (
     <main className="bg-white">
+      {/* Hero Header */}
       <section className="page-shell pt-[clamp(7rem,10vw,9rem)]">
         <div className="mx-auto max-w-7xl text-center">
           <Reveal>
@@ -34,7 +34,7 @@ export default function WhyUsPage() {
         </div>
       </section>
 
-      {/* Comparison Grid - Option 11A */}
+      {/* Comparison Grid */}
       <section className="section-shell">
         <div className="mx-auto max-w-5xl page-shell">
           <Reveal>
@@ -86,7 +86,7 @@ export default function WhyUsPage() {
         </div>
       </section>
 
-      {/* Why Us Cards (Redux) */}
+      {/* Why Us Cards Grid */}
       <section className="section-shell bg-gray-50/50">
         <div className="mx-auto max-w-7xl page-shell">
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -105,3 +105,4 @@ export default function WhyUsPage() {
     </main>
   );
 }
+
